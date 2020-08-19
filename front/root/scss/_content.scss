@@ -1,0 +1,20 @@
+.content {
+    display: flex;
+    width: 100%;
+    background-color: $white;
+    min-height:700px;
+}
+
+.border {
+    height: 100px;
+    width: 10%;
+}
+
+.border + .border {
+    margin-left: 2%;
+}
+
+.content-center {
+    flex-grow: 1;
+    background-color: $light-gray;
+}
