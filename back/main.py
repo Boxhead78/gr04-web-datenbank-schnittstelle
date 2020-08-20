@@ -14,18 +14,21 @@ app = Flask(__name__)
 
 
 sql_con = mysql.connector.connect(
-    host="localhost",
+    host="127.0.0.1",
+    port="1337",
     user="root",
-    password="",
-    database="baufuchs"
+    database="baufuchsos"
 )
 sql_cur = sql_con.cursor(buffered=True)
+
 '''
 sql_cur.execute("SELECT * FROM items")
-for result in sql_cur:
+data = sql_cur.fetchone()
+for result in data:
     print(result)
 sql_cur.close()
 '''
+
 
 # routes
 # for quick return tests
