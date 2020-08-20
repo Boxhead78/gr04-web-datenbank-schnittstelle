@@ -1,10 +1,12 @@
 @import "_menu";
 @import "_header";
 @import "_colors";
+@import "side-bar";
 
 * {
     margin: 0;
     padding: 0;
+    font-family: "Segoe UI Light", sans-serif;
 }
 
 html, body {

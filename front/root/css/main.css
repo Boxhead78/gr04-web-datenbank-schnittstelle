@@ -87,9 +87,37 @@ input[type=suche]:focus {
   font-family: "Segoe UI Light", sans-serif;
 }
 
+.sideBar ul {
+  list-style-type: none;
+  margin: 3px 0 0 0;
+  padding: 5px;
+  width: 20%;
+  background-color: #f1f1f1;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+}
+
+.sideBar li a {
+  display: block;
+  color: #000;
+  padding: 15px;
+  text-decoration: none;
+  border-bottom: 2px solid #e1e1e1;
+  border-top: 2px solid #e1e1e1;
+  margin: 3px 10px 3px 10px;
+}
+
+/* Change the link color on hover */
+.sideBar li a:hover {
+  background: #ebeaea;
+  color: black;
+}
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Segoe UI Light", sans-serif;
 }
 
 html, body {
