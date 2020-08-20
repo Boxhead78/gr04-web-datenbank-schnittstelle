@@ -1,140 +1,90 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500");
-.content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #f1f1f1;
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+  font-family: "Segoe UI Light", sans-serif;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  background-color: white;
-  min-height: 700px;
+  height: 100%;
+  text-align: right;
+  border-bottom: 2px solid #e1e1e1;
+  overflow: hidden;
 }
 
-.border {
-  height: 100px;
-  width: 10%;
-}
-
-.border + .border {
-  margin-left: 2%;
-}
-
-.content-center {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  background-color: #c4c3c3;
-}
-
-@font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url("/front/root/fonts/montserrat.woff2") format("woff2");
-}
-
-.footer {
-  position: relative;
-  /*bottom: 0;*/
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  width: 100%;
-  background-color: #24252A;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  color: #edf0f1;
-  z-index: 10;
-}
-
-header li, a, button {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #edf0f1;
-  text-decoration: none;
-}
-
-header {
-  background-color: #24252A;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 30px 10%;
-}
-
-.logo {
-  cursor: pointer;
-  height: 50px;
-}
-
-header button {
-  padding: 9px 25px;
-  background-color: #0088a9;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-header button:hover {
-  background-color: rgba(0, 136, 169, 0.8);
-}
-
-.nav__links {
-  list-style: none;
-}
-
-.nav__links li {
+.menu li {
   display: inline-block;
-  padding: 0px 20px;
+  height: 100%;
 }
 
-.nav__links li a {
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+.menu li a {
+  text-decoration: none;
+  color: black;
+  width: 100px;
+  display: block;
+  padding: 15px;
+  border-right: 2px solid #e1e1e1;
+  border-left: 2px solid #e1e1e1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.nav__links li a:hover {
-  color: #0088a9;
+.menu li a:hover {
+  background: #ebeaea;
 }
 
-.nav__container {
-  background-color: #535561;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 10px 10%;
+.menu li a.active {
+  background: #ebeaea;
 }
 
-.side-nav__search {
-  width: 15%;
-  z-index: 1;
-  background-color: #535561;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
+input[type=suche] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  margin-right: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
-  color: #edf0f1;
-  font-family: "Montserrat";
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 20px;
 }
 
-.side-nav__search-criteria {
-  padding: 10px 20px;
+input[type=suche]:focus {
+  width: 400px;
+}
+
+.header {
+  background-image: url("/front/root/images/DSC_5590.jpg");
+  background-color: #cccccc;
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.header-text {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: white;
+  font-variant: small-caps;
+  text-shadow: 0 0 0.2em #000000;
+  font-family: "Segoe UI Light", sans-serif;
 }
 
 * {

@@ -1,35 +1,12 @@
-body{
-    width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI Light", sans-serif;
-}
-.header {
-    background-image: url('./root/images/DSC_5590.jpg');
-    background-color: #cccccc;
-    height: 100px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.header-text {
-    position: absolute;
-    top: 50%;
-    left: 100px;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-variant: small-caps;
-    text-shadow: 0 0 0.2em #000000;
-}
+@import "_colors";
 
 .menu {
     position: sticky;
     top: 0;
-    background: white;
+    background: $background-color-gray;
     opacity: 0.85;
     filter: alpha(opacity=85);
+    font-family: "Segoe UI Light", sans-serif;
 }
 
 .menu ul {
@@ -39,7 +16,7 @@ body{
     width: 100%;
     height: 100%;
     text-align: right;
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 2px solid $border-color;
     overflow: hidden;
 }
 .menu li {
@@ -52,8 +29,8 @@ body{
     width: 100px;
     display: block;
     padding: 15px;
-    border-right: 2px solid #e1e1e1;
-    border-left: 2px solid #e1e1e1;
+    border-right: 2px solid $border-color;
+    border-left: 2px solid $border-color;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -61,10 +38,10 @@ body{
 
 
 .menu li a:hover {
-    background: #F7F8FB;
+    background: $hover-link;
 }
 .menu li a.active {
-    background: #F7F8FB;
+    background: $hover-link;
 }
 
 input[type=suche] {
@@ -74,11 +51,11 @@ input[type=suche] {
     margin-right:  10px;
 
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid $border-input;
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px; 
+    background-color: $white;
+    background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
 }
@@ -86,8 +63,3 @@ input[type=suche] {
 input[type=suche]:focus {
     width: 400px;
 }
-
-
-
-
-

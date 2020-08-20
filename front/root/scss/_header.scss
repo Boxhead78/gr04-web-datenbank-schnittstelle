@@ -1,0 +1,19 @@
+.header {
+    background-image: url('/front/root/images/DSC_5590.jpg');
+    background-color: $background-header;
+    height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.header-text {
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-variant: small-caps;
+    text-shadow: 0 0 0.2em #000000;
+    font-family: "Segoe UI Light", sans-serif;
+}
