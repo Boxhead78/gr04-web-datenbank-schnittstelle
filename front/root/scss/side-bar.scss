@@ -1,12 +1,10 @@
+@import "_colors";
 
 .sideBar ul {
     list-style-type: none;
     margin: 3px 0 0 0;
     padding: 5px;
-    width: 20%;
-    background-color: #f1f1f1;
-    height: 100%;
-    position: fixed;
+    background-color: $background-color-gray;
     overflow: auto;
   }
   
@@ -15,8 +13,8 @@
     color: #000;
     padding: 15px;
     text-decoration: none;
-    border-bottom: 2px solid #e1e1e1;
-    border-top: 2px solid #e1e1e1;
+    border-bottom: 2px solid $border-color;
+    border-top: 2px solid $border-color;
     margin: 3px 10px 3px 10px;
   }
   
@@ -24,4 +22,44 @@
   .sideBar li a:hover {
     background:#ebeaea;
     color: black;
+  }
+
+  section {
+    display: -webkit-flex;
+    display: flex;
+    margin: 3px 0 0 0;
+    background-color: $background-color-gray;
+  }
+  
+  nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+  }
+  
+  .PageContent {
+    padding: 10px;
+    background-color: white;
+  }
+
+  footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
   }

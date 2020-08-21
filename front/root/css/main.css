@@ -91,10 +91,7 @@ input[type=suche]:focus {
   list-style-type: none;
   margin: 3px 0 0 0;
   padding: 5px;
-  width: 20%;
   background-color: #f1f1f1;
-  height: 100%;
-  position: fixed;
   overflow: auto;
 }
 
@@ -112,6 +109,48 @@ input[type=suche]:focus {
 .sideBar li a:hover {
   background: #ebeaea;
   color: black;
+}
+
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 3px 0 0 0;
+  background-color: #f1f1f1;
+}
+
+nav {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+
+article {
+  -ms-flex: 3;
+  -webkit-box-flex: 3;
+          flex: 3;
+}
+
+.PageContent {
+  padding: 10px;
+  background-color: white;
+}
+
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 * {
