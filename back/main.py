@@ -27,16 +27,6 @@ sql_buffered = True
 
 '''
 sql_con = mysql.connector.connect(
-<<<<<<< HEAD
-    host=str(),
-    user=str(),
-    password=str(),
-    database=str()
-)
-sql_cur = sql_con.cursor(buffered=bool(sql_buffer))
-'''
-
-=======
     host="127.0.0.1",
     port="1337",
     user="root",
@@ -50,12 +40,10 @@ data = sql_cur.fetchone()
 for result in data:
     print(result)
 sql_cur.close()
-'''
 
 
 # routes
 # for quick return tests
->>>>>>> 5a27ce7da3b09efdca5f87e7d7687160247d8980
 
 
 
