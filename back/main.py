@@ -9,11 +9,20 @@ Modules: Flask, mysql-connector-python
 
 # importing modules
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import mysql.connector
 
 
 # setting session vars
+# enableCorss Origin Resource Sharing (CORS) for HTTPRequests
+
 app = Flask(__name__)
+CORS(app)
+cors =CORS(app, resources= {
+    r"/*": {
+        "origins": "*"
+    }
+})
 app_host = "localhost"
 app_port = "5000"
 sql_host = "localhost"
@@ -34,13 +43,13 @@ sql_con = mysql.connector.connect(
 )
 sql_cur = sql_con.cursor(buffered=True)
 
-'''
+
 sql_cur.execute("SELECT * FROM items")
 data = sql_cur.fetchone()
 for result in data:
     print(result)
 sql_cur.close()
-
+'''
 
 # routes
 # for quick return tests
