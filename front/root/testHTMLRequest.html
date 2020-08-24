@@ -15,7 +15,15 @@
     <body>
 
 
-        <button onclick="makeRequest()" style="background-color: black; color: white">hier für Dummy get klicken</button>
+        <button onclick="testRequest()" style="background-color: black; color: white">hier für Dummy get klicken</button>
+        <script>
+            function testRequest() {
+                x = makeRequest();
+                document.getElementById('test').innerHTML = x;
+            }
+        </script>
+
+
         <div id="test">DummyTestForHTTP-Request</div>
     </body>
 </html>
