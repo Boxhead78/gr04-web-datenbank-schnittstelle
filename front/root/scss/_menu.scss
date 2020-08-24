@@ -44,12 +44,10 @@
     background: $hover-link;
 }
 
-input[type=suche] {
+input[type=search-input] {
     width: 130px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-    margin-right:  10px;
-
     box-sizing: border-box;
     border: 2px solid $border-input;
     border-radius: 4px;
@@ -60,6 +58,26 @@ input[type=suche] {
     padding: 12px 20px 12px 20px;
 }
 
-input[type=suche]:focus {
+input[type=search-input]:focus {
     width: 400px;
 }
+
+form.search button {
+    margin-left: -3px;
+    background: $background-footer;
+    color: $white;
+    font-size: 17px;
+    border: 2px solid $background-footer;
+    border-left: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-right: 20px;
+    height:48px;
+    width:48px;
+  }
+  
+  form.search button:hover {
+    background: $search-button-hover;
+    border: 2px solid $search-button-hover;
+  }

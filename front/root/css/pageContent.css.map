@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEE,AAAA,YAAY,CAAC;EACX,OAAO,EAAE,IAAI;EACb,gBAAgB,EAAE,KAAK;CACxB",
+    "sources": [
+        "../scss/pageContent.scss",
+        "../scss/_colors.scss"
+    ],
+    "names": [],
+    "file": "pageContent.css"
+}

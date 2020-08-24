@@ -1,5 +1,7 @@
+@import "_colors";
+
 footer {
-    background-color: #777;
+    background-color: $background-footer;
     text-align: center;
     color: white;
     box-sizing: border-box;
