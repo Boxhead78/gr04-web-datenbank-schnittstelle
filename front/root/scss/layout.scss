@@ -1,0 +1,29 @@
+@import "_colors";
+
+  section {
+    display: -webkit-flex;
+    display: flex;
+    margin: 3px 0 0 0;
+    background-color: $background-color-gray;
+  }
+  
+  nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: white;
+  }
+  
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }

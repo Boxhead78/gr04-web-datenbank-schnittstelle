@@ -78,13 +78,49 @@ input[type=suche]:focus {
 .header-text {
   position: absolute;
   top: 50%;
-  left: 100px;
+  left: 150px;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   color: white;
   font-variant: small-caps;
   text-shadow: 0 0 0.2em #000000;
   font-family: "Segoe UI Light", sans-serif;
+}
+
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 3px 0 0 0;
+  background-color: #f1f1f1;
+}
+
+nav {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+
+article {
+  -ms-flex: 3;
+  -webkit-box-flex: 3;
+          flex: 3;
+  background-color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.PageContent {
+  padding: 10px;
+  background-color: white;
 }
 
 .sideBar ul {
@@ -111,46 +147,27 @@ input[type=suche]:focus {
   color: black;
 }
 
-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 3px 0 0 0;
-  background-color: #f1f1f1;
-}
-
-nav {
-  -ms-flex: 1;
-  -webkit-box-flex: 1;
-          flex: 1;
-}
-
-article {
-  -ms-flex: 3;
-  -webkit-box-flex: 3;
-          flex: 3;
-}
-
-.PageContent {
-  padding: 10px;
-  background-color: white;
-}
-
 footer {
   background-color: #777;
-  padding: 10px;
   text-align: center;
   color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
-@media (max-width: 600px) {
-  section {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
+footer .column {
+  float: left;
+  width: 32%;
+  padding: 10px;
+  margin: 0;
+}
+
+footer .row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 * {
