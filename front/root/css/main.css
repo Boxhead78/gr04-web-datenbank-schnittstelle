@@ -211,6 +211,162 @@ footer .row:after {
   clear: both;
 }
 
+.filter-wrapper {
+  border-bottom: 2px solid #e1e1e1;
+}
+
+.filter-headline {
+  background-color: #525252;
+  color: white;
+  padding: 10px;
+}
+
+.filter-content ul {
+  list-style-type: none;
+  margin: 0 0 0 10px;
+  padding: 15px;
+  overflow: auto;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark, .checkmark-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+}
+
+/* Style the color of the custom checkbox */
+.checkmark {
+  background-color: #777;
+}
+
+/* Colors: Style the color of the custom checkbox*/
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.pink {
+  background-color: #ff00aa;
+}
+
+.bunt {
+  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0.05, #1167cf), color-stop(0.15, #ef00bf), color-stop(0.25, #000291), color-stop(0.45, #00ebd7), color-stop(0.55, #00b539), color-stop(0.75, #f9fd00), color-stop(1, red));
+}
+
+.black {
+  background-color: #000;
+}
+
+.white {
+  background-color: white;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #525252;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #525252;
+}
+
+/* Colors: On mouse-over, add a grey shadow*/
+.container:hover input ~ .checkmark-color {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Colors: Create the checkmark/indicator (hidden when not checked)*/
+.checkmark-color:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Colors: Show the checkmark when checked*/
+.container input:checked ~ .checkmark-color:after {
+  display: block;
+}
+
+/* Colors: Style the color of the checkmark/indicator*/
+.container .checkmark-color:after {
+  border: solid white;
+}
+
+/* Colors: Style the color of the checkmark/indicator for white*/
+.container .white:after {
+  border: solid #777;
+}
+
+/* Colors: Style the checkmark/indicator*/
+.container .checkmark-color:after, .white:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 * {
   margin: 0;
   padding: 0;
