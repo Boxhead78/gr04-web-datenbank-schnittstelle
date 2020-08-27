@@ -34,12 +34,14 @@ sql_buffered = True
 
 
 
-'''
+
 sql_con = mysql.connector.connect(
-    host="127.0.0.1",
-    port="1337",
-    user="root",
-    database="baufuchsos"
+    host="sql7.freesqldatabase.com",
+    port="3306",
+    user="sql7361613",
+    password="",
+    database="sql7361613",
+    #connection_timeout=180
 )
 sql_cur = sql_con.cursor(buffered=True)
 
@@ -48,8 +50,8 @@ sql_cur.execute("SELECT * FROM items")
 data = sql_cur.fetchone()
 for result in data:
     print(result)
-sql_cur.close()
-'''
+#sql_cur.close()
+
 
 # routes
 # for quick return tests
