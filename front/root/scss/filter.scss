@@ -10,11 +10,17 @@
     padding: 10px;
   }
 
-.filter-content ul {
+  .filter-content ul, .filter-content-horizontal ul {
     list-style-type: none;
     margin: 0 0 0 10px;
     padding: 15px;
     overflow: auto;
+  }
+  
+  .filter-content-horizontal ul {
+    margin: 10px;
+    text-align: center;
+    display: ruby-base;
   }
   
   .container {
@@ -57,7 +63,7 @@
   .blue {background-color: blue}
   .green {background-color: green}
   .pink {background-color: rgb(255, 0, 170)}
-  .bunt {
+  .multicolored {
       background-image: -webkit-gradient(linear,left bottom,right top
       ,color-stop(.05,#1167cf),color-stop(.15,#ef00bf)
       ,color-stop(.25,#000291),color-stop(.45,#00ebd7)
@@ -141,3 +147,92 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  /*Style the input boxes to filter the price*/
+  input[type=checkbox-Price] {
+    width: 80px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border: 2px solid $border-input;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: $white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 15px;
+  }
+
+   /* The container must be positioned relative: */
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    color: black;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+  .select-selected {
+    background-color: $border-input;
+    border: 2px solid $border-input;
+    // border-radius: 4px;
+    color: $black;
+    padding: 12px 15px;
+  }
+  
+  /* Style the arrow inside the select element: */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 20px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: $black transparent transparent transparent;
+    right: 45px;
+  }
+  
+  /* Point the arrow upwards when the select box is open (active): */
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent $black transparent;
+    top: 13px;
+    right: 45px;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div, .select-selected {
+    cursor: pointer;
+    margin: 10px 30px;
+  }
+
+  /* Style the item */
+  .select-items div {
+      margin: 4px 10px;
+      border-bottom: 2px solid $background-color-gray;
+      border-top: 2px solid $background-color-gray;
+      padding: 8px 16px;
+  }
+  
+  /* Style all items (options): */
+  .select-items {
+    position: absolute;
+    background-color: $white;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    margin: 0 30px 30px 30px;
+    padding: 10px 0;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  } 
