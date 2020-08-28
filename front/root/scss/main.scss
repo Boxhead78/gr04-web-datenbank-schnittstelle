@@ -1,11 +1,12 @@
-@import "_menu";
-@import "_header";
 @import "_colors";
+@import "_fonts";
+@import "_header";
+@import "_menu";
+@import "filter";
+@import "footer";
 @import "layout";
 @import "pageContent";
 @import "side-bar";
-@import "footer";
-@import "filter";
 
 * {
     margin: 0;

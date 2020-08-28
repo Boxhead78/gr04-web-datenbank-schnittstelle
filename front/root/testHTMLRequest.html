@@ -11,17 +11,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script src="js/dummy-endpoint.js"></script>
+
+        <script>
+        var client = new HttpClient();
+        client.get('http://localhost:5000/api/hello', function(response) {
+            document.getElementById("test").innerHTML = response;
+        });
+        </script>
     </head>
     <body>
 
 
-        <button onclick="testRequest()" style="background-color: black; color: white">hier für Dummy get klicken</button>
-        <script>
-            function testRequest() {
-                x = makeRequest();
-                document.getElementById('test').innerHTML = x;
-            }
-        </script>
+        <button onclick="" style="background-color: black; color: white">hier für Dummy get klicken</button>
+
 
 
         <div id="test">DummyTestForHTTP-Request</div>

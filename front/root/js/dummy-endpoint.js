@@ -1,22 +1,22 @@
-function makeRequest() {
-    var xhr = new XMLHttpRequest();
-xhr.open("GET", "http://localhost:5000/api/hello", true);
-xhr.onload = function (e) {
-  if (xhr.readyState === 4) {
-    if (xhr.status === 200) {
-      console.log(xhr.responseText);
+var HttpClient = function() {
+  this.get = function(aUrl, aCallback) {
+  var anHttpRequest = new XMLHttpRequest();
+  anHttpRequest.onreadystatechange = function() {
+      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+          aCallback(anHttpRequest.responseText);
+      }
 
-      response = xhr.responseText;
-
-    } else {
-      console.error(xhr.statusText);
-    }
+  anHttpRequest.open( "GET", aUrl, true );
+  anHttpRequest.send( null );
   }
-};
-xhr.onerror = function (e) {
-  console.error(xhr.statusText);
-};
-xhr.send(null);
+  this.post = function(aUrl, aCallback) {
+    var anHttpRequest = new XMLHttpRequest();
+    anHttpRequest.onreadystatechange = function() {
+        if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+            aCallback(anHttpRequest.responseText);
+        }
 
-return response;
+    anHttpRequest.open( "POST", aUrl, true );
+    anHttpRequest.send( 'test' );
+    }
 }
