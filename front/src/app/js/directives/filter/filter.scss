@@ -1,4 +1,4 @@
-@import "_colors";
+@import "../../../scss/colors";
 
 .filter-wrapper {
     border-bottom: 2px solid $border-color;
@@ -16,13 +16,13 @@
     padding: 15px;
     overflow: auto;
   }
-  
+
   .filter-content-horizontal ul {
     margin: 10px;
     text-align: center;
     display: ruby-base;
   }
-  
+
   .container {
     display: block;
     position: relative;
@@ -34,7 +34,7 @@
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   /* Hide the browser's default checkbox */
    .container input {
      position: absolute;
@@ -43,7 +43,7 @@
      height: 0;
      width: 0;
    }
-  
+
   /* Create a custom checkbox */
   .checkmark, .checkmark-color {
     position: absolute;
@@ -72,13 +72,13 @@
     }
   .black {background-color: $black}
   .white {background-color: $white}
-  
+
   /* On mouse-over, add a grey background color */
   .container:hover input ~ .checkmark {
     background-color: $search-button-hover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  
+
   /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
     background-color: $search-button-hover;
@@ -95,12 +95,12 @@
     position: absolute;
     display: none;
   }
-  
+
   /* Colors: Show the checkmark when checked*/
   .container input:checked ~ .checkmark-color:after {
     display: block;
   }
-  
+
    /* Colors: Style the color of the checkmark/indicator*/
   .container .checkmark-color:after {
     border: solid $white;
@@ -122,19 +122,19 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  
+
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the checkmark when checked */
   .container input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   /* Style the checkmark/indicator */
   .container .checkmark:after {
     left: 9px;
@@ -170,11 +170,11 @@
     font-family: Arial;
     color: black;
   }
-  
+
   .custom-select select {
     display: none; /*hide original SELECT element: */
   }
-  
+
   .select-selected {
     background-color: $border-input;
     border: 2px solid $border-input;
@@ -182,7 +182,7 @@
     color: $black;
     padding: 12px 15px;
   }
-  
+
   /* Style the arrow inside the select element: */
   .select-selected:after {
     position: absolute;
@@ -194,14 +194,14 @@
     border-color: $black transparent transparent transparent;
     right: 45px;
   }
-  
+
   /* Point the arrow upwards when the select box is open (active): */
   .select-selected.select-arrow-active:after {
     border-color: transparent transparent $black transparent;
     top: 13px;
     right: 45px;
   }
-  
+
   /* style the items (options), including the selected item: */
   .select-items div, .select-selected {
     cursor: pointer;
@@ -215,7 +215,7 @@
       border-top: 2px solid $background-color-gray;
       padding: 8px 16px;
   }
-  
+
   /* Style all items (options): */
   .select-items {
     position: absolute;
@@ -227,12 +227,12 @@
     margin: 0 30px 30px 30px;
     padding: 10px 0;
   }
-  
+
   /* Hide the items when the select box is closed: */
   .select-hide {
     display: none;
   }
-  
+
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
-  } 
+  }

@@ -1,21 +1,19 @@
-@import "_colors";
-
-footer {
-    background-color: $background-footer;
+.footer {
+    background-color: #777;
     text-align: center;
     color: white;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
-  
+
   footer .column {
     float: left;
     width: 32%;
     padding: 10px;
     margin: 0;
   }
-  
+
   footer .row:after {
     content: "";
     display: table;

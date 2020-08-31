@@ -48,7 +48,11 @@ sql_cur.execute("SELECT * FROM items")
 data = sql_cur.fetchone()
 for result in data:
     print(result)
+<<<<<<< HEAD
 sql_cur.close()
+=======
+#sql_cur.close()
+>>>>>>> caebba595a1576f4e0d7bce72bd561d5ccd88325
 '''
 
 # routes
