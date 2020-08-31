@@ -30,20 +30,24 @@
     max-width: 300px;
     margin: 10px;
     text-align: center;
-    font-family: arial;
+  }
+
+  h1 {
+    padding: 3px;
   }
   
   .price {
-    color: grey;
+    color: $background-footer;
     font-size: 22px;
+    padding: 3px;
   }
   
   .card button {
     border: none;
     outline: 0;
     padding: 12px;
-    color: white;
-    background-color: #000;
+    color: $white;
+    background-color: $black;
     text-align: center;
     cursor: pointer;
     width: 100%;

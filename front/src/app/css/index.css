@@ -454,12 +454,16 @@ article {
   max-width: 300px;
   margin: 10px;
   text-align: center;
-  font-family: arial;
+}
+
+h1 {
+  padding: 3px;
 }
 
 .price {
-  color: grey;
+  color: #777;
   font-size: 22px;
+  padding: 3px;
 }
 
 .card button {
