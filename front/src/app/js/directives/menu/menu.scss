@@ -1,4 +1,4 @@
-@import "_colors";
+@import "../../../scss/colors";
 
 .menu {
     position: sticky;
@@ -76,7 +76,7 @@ form.search button {
     height:48px;
     width:48px;
   }
-  
+
   form.search button:hover {
     background: $search-button-hover;
     border: 2px solid $search-button-hover;

@@ -34,7 +34,7 @@ sql_buffered = True
 
 
 
-
+'''
 sql_con = mysql.connector.connect(
     host="sql7.freesqldatabase.com",
     port="3306",
@@ -51,7 +51,7 @@ data = sql_cur.fetchone()
 for result in data:
     print(result)
 #sql_cur.close()
-
+'''
 
 # routes
 # for quick return tests

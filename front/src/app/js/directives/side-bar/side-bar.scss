@@ -1,4 +1,4 @@
-@import "_colors";
+@import "../../../scss/colors";
 
 .sideBar ul {
     list-style-type: none;
@@ -7,7 +7,7 @@
     background-color: $background-color-gray;
     overflow: auto;
   }
-  
+
   .sideBar li a {
     display: block;
     color: $black;
@@ -17,7 +17,7 @@
     border-top: 2px solid $border-color;
     margin: 3px 10px 3px 10px;
   }
-  
+
   /* Change the link color on hover */
   .sideBar li a:hover {
     background: $hover-link;
@@ -31,15 +31,15 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
-  
+
   .dropdown-content a {
     background-color: $hover-link;
   }
-  
+
   .navbar a:hover, .dropdown:hover .dropbtn a {
     background-color: $hover-link;
   }
-  
+
   .dropdown .dropdown-content a:hover {
     border-bottom: 2px solid $border-input;
     border-top: 2px solid $border-input;

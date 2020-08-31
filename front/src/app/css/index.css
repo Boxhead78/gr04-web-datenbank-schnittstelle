@@ -5,7 +5,7 @@
 }
 
 .header {
-  background-image: url("/front/root/images/DSC_5590.jpg");
+  background-image: url("/front/src/images/DSC_5590.jpg");
   background-color: #cccccc;
   height: 100px;
   background-position: center;
@@ -364,7 +364,7 @@ input[type=checkbox-Price] {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-footer {
+.footer {
   background-color: #777;
   text-align: center;
   color: white;
@@ -479,4 +479,4 @@ html, body {
   height: 100%;
   position: relative;
 }
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=index.css.map */
