@@ -1,0 +1,28 @@
+@import "../../../scss/colors";
+  
+  .PageColumnBig {
+    float: left;
+    width: 70%;
+  }
+
+  .PageColumnSmall {
+    float: left;
+    width: 30%;
+  }
+
+  .StartPageImg {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+  .PageColumnBig:hover .StartPageImg, .PageColumnSmall:hover .StartPageImg {
+    opacity: 0.3;
+  }
+  
+  .PageColumnBig:hover .ImageOverlay, .PageColumnSmall:hover .ImageOverlay {
+    opacity: 1;
+  }

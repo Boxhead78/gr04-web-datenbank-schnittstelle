@@ -406,9 +406,9 @@ nav {
 }
 
 article {
-  -ms-flex: 3;
-  -webkit-box-flex: 3;
-          flex: 3;
+  -ms-flex: 4;
+  -webkit-box-flex: 4;
+          flex: 4;
   background-color: white;
 }
 
@@ -451,7 +451,6 @@ article {
 .card {
   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
   margin: 10px;
   text-align: center;
 }
@@ -520,6 +519,36 @@ h1 {
   font-size: 16px;
   margin: -40px;
   font-weight: 900;
+}
+
+.PageColumnBig {
+  float: left;
+  width: 70%;
+}
+
+.PageColumnSmall {
+  float: left;
+  width: 30%;
+}
+
+.StartPageImg {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 1;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.PageColumnBig:hover .StartPageImg, .PageColumnSmall:hover .StartPageImg {
+  opacity: 0.3;
+}
+
+.PageColumnBig:hover .ImageOverlay, .PageColumnSmall:hover .ImageOverlay {
+  opacity: 1;
 }
 
 .sideBar ul {
