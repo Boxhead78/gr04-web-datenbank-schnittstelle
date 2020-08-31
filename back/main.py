@@ -18,7 +18,7 @@ import mysql.connector
 
 app = Flask(__name__)
 CORS(app)
-cors =CORS(app, resources= {
+cors = CORS(app, resources= {
     r"/*": {
         "origins": "*"
     }
@@ -34,14 +34,12 @@ sql_buffered = True
 
 
 
-
+'''
 sql_con = mysql.connector.connect(
-    host="sql7.freesqldatabase.com",
-    port="3306",
-    user="sql7361613",
-    password="",
-    database="sql7361613",
-    #connection_timeout=180
+    host="127.0.0.1",
+    port="1337",
+    user="root",
+    database="baufuchsos"
 )
 sql_cur = sql_con.cursor(buffered=True)
 
@@ -50,8 +48,8 @@ sql_cur.execute("SELECT * FROM items")
 data = sql_cur.fetchone()
 for result in data:
     print(result)
-#sql_cur.close()
-
+sql_cur.close()
+'''
 
 # routes
 # for quick return tests
@@ -99,22 +97,30 @@ def api_item_details():
 
 @app.route('/api/item/list', methods=['GET', 'POST'])
 def api_item():
-    request.form.get('term')
-    request.form.get('max_cost')
-    request.form.get('min_cost')
-    request.form.get('category')
+    #get filter information
+    req = request.get_json()
+    #build sql query using WHERE to match above infos
+    sql_cur.execute(str("""SELECT * FROM items LIMIT """ + req.get("amount") + """
+        WHERE name CONTAINS """ + req.get("term") + """
+        WHERE price BETWEEN """ + req.get("costMin") + """ AND """ + req.get("costMax") + """
+        WHERE category EQUALS """ + req.get("cat"))
+        )
+    #fetch all returned items
+    data = sql_cur.fetchall()
+    #loop over each item and build a json object with the general properties
+    for i in data:
+        print(i)
+    #return the json object
 
 # for recieving and applying score reviews from users
 @app.route('/api/item/score', methods=['POST'])
 def api_item_score():
     #get score value etc from request
-    request.form.get('1')
-    request.form.get('2')
-    request.form.get('3')
-    request.form.get('4')
-    request.form.get('5')
+    req = request.get_json()
     #frontend needs to check for user registration
     #add score to score table
+    sql_cur.execute("""INSERT irgendwie * FROM items LIMIT 0, 1
+    WHERE """ + req.get("val"))
     #update score data in item table
 
 
