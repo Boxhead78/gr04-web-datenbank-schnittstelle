@@ -465,7 +465,7 @@ h1 {
   padding: 3px;
 }
 
-.card button {
+.card button, .ItemCard button {
   border: none;
   outline: 0;
   padding: 12px;
@@ -481,9 +481,7 @@ h1 {
   opacity: 0.7;
 }
 
-.PageImg {
-  width: 100%;
-  height: 260px;
+.PageImg, .StartPageImg, .ItemPageImg {
   -o-object-fit: cover;
      object-fit: cover;
   opacity: 1;
@@ -491,6 +489,11 @@ h1 {
   transition: .5s ease;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+}
+
+.PageImg {
+  width: 100%;
+  height: 260px;
 }
 
 .ImageOverlay {
@@ -534,13 +537,6 @@ h1 {
 .StartPageImg {
   width: 100%;
   height: 400px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  opacity: 1;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
 }
 
 .PageColumnBig:hover .StartPageImg, .PageColumnSmall:hover .StartPageImg {
@@ -549,6 +545,48 @@ h1 {
 
 .PageColumnBig:hover .ImageOverlay, .PageColumnSmall:hover .ImageOverlay {
   opacity: 1;
+}
+
+.ItemPageColumn {
+  float: left;
+  width: 50%;
+}
+
+.ItemCard {
+  margin: 10px;
+  text-align: left;
+}
+
+.ItemPageImg {
+  width: 90%;
+  height: 400px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ItemHeadline {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.ItemCard .price {
+  margin: 50px 0 0 0;
+}
+
+.ItemCard .information {
+  padding: 20px;
+}
+
+.ItemCard ul li {
+  padding: 2px;
+}
+
+.ItemCard button:hover {
+  opacity: 0.7;
+}
+
+.ItemCard .description {
+  margin: 50px 0 20px 0;
 }
 
 .sideBar ul {

@@ -1,4 +1,4 @@
-app.directive('test', function() {
+app.directive('startpagecontent', function() {
     return {
         restrict: 'E',
         scope: {

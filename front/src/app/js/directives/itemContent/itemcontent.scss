@@ -1,0 +1,42 @@
+@import "../../../scss/colors";
+  
+  .ItemPageColumn {
+    float: left;
+    width: 50%;
+  }
+
+  .ItemCard {
+    margin: 10px;
+    text-align: left;
+  }
+
+  .ItemPageImg {
+    width: 90%;
+    height: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .ItemHeadline {
+    padding: 10px;
+    font-size: 20px;
+  }
+
+  .ItemCard .price {
+    margin: 50px 0 0 0;
+  }
+
+  .ItemCard .information {
+    padding: 20px
+  }
+
+  .ItemCard ul li {
+    padding: 2px
+  }
+  
+  .ItemCard button:hover {
+    opacity: 0.7;
+  }
+
+  .ItemCard .description {
+    margin: 50px 0 20px 0;
+  }
