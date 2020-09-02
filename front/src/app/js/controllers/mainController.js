@@ -13,4 +13,6 @@ app.controller('mainController', ['$scope', function($scope) {
         itemList.push(item);
     }
 
+    $scope.test = 'Test'
+
 }])

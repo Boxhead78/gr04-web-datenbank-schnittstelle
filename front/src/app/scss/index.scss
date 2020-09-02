@@ -1,15 +1,12 @@
 @import "_colors";
-@import "_fonts";
-@import "../js/directives/header/header";
-@import "../js/directives/menu/menu";
 @import "../js/directives/filter/filter";
-@import "../js/directives/footer/footer";
 @import "../js/directives/layout/layout";
 @import "../js/directives/content-List/contentlist";
 @import "../js/directives/content-StartPage/contentstartpage";
 @import "../js/directives/content-Item/contentitem";
 @import "../js/directives/side-bar/side-bar";
 
+// General Styles
 * {
     margin: 0;
     padding: 0;
@@ -20,4 +17,132 @@ html, body {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+// Header
+.header {
+    background-image: url('/front/src/assets/images/DSC_5590.jpg');
+    background-color: #cccccc;
+    height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    h1 {
+        position: absolute;
+        top: 50%;
+        left: 150px;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-variant: small-caps;
+        font-family: "Segoe UI Light", sans-serif;
+    }
+}
+
+// Menu
+.menu {
+    display: flex;
+    top: 0;
+    opacity: 0.85;
+    position: sticky;
+    background-color: $background-color-gray;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid $border-color;
+    z-index: 100;
+
+    &:hover {
+        opacity: 1;
+        transition: 0.2s;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        width: 100px;
+        display: block;
+        padding: 15px;
+        border-right: 2px solid $border-color;
+        border-left: 2px solid $border-color;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        margin-left: 4.5px;
+
+        &:hover {
+            background: $hover-link;
+        }
+    }
+
+    form.search button {
+        margin-left: -3px;
+        background: $background-footer;
+        color: $white;
+        font-size: 17px;
+        border: 2px solid $background-footer;
+        border-left: none;
+        cursor: pointer;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin-right: 20px;
+        height:48px;
+        width:48px;
+
+        &:hover {
+            background: $search-button-hover;
+            border: 2px solid $search-button-hover;
+        }
+    }
+
+    input[type=search-input] {
+        width: 130px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+        box-sizing: border-box;
+        border: 2px solid $border-input;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: $white;
+        padding: 12px 20px 12px 20px;
+    }
+
+    input[type=search-input]:focus {
+        width: 400px;
+    }
+}
+
+// Footer
+.footer {
+    color: $white;
+    display: flex;
+    background-color: #777;
+    justify-content: space-around;
+
+    div {
+        width: auto;
+        min-width: 100px;
+        margin: 10px;
+        text-align: center;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+// Responsive Design
+@media screen and (max-width: 700px) {
+    .footer, .menu {
+      flex-direction: column;
+    }
+
+    .menu {
+        a {
+            width: 700px;
+            margin: 0;
+        }
+    }
 }
