@@ -1,118 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500");
-@font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url("/front/root/fonts/montserrat.woff2") format("woff2");
-}
-
-.header {
-  background-image: url("/front/src/images/DSC_5590.jpg");
-  background-color: #cccccc;
-  height: 100px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.header-text {
-  position: absolute;
-  top: 50%;
-  left: 150px;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  color: white;
-  font-variant: small-caps;
-  text-shadow: 0 0 0.2em #000000;
-  font-family: "Segoe UI Light", sans-serif;
-}
-
-.menu {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background: #f1f1f1;
-  opacity: 0.85;
-  filter: alpha(opacity=85);
-  font-family: "Segoe UI Light", sans-serif;
-}
-
-.menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  text-align: right;
-  border-bottom: 2px solid #e1e1e1;
-  overflow: hidden;
-}
-
-.menu li {
-  display: inline-block;
-  height: 100%;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: black;
-  width: 100px;
-  display: block;
-  padding: 15px;
-  border-right: 2px solid #e1e1e1;
-  border-left: 2px solid #e1e1e1;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.menu li a:hover {
-  background: #ebeaea;
-}
-
-.menu li a.active {
-  background: #ebeaea;
-}
-
-input[type=search-input] {
-  width: 130px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 20px;
-}
-
-input[type=search-input]:focus {
-  width: 400px;
-}
-
-form.search button {
-  margin-left: -3px;
-  background: #777;
-  color: white;
-  font-size: 17px;
-  border: 2px solid #777;
-  border-left: none;
-  cursor: pointer;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border-radius: 4px;
-  margin-right: 20px;
-  height: 48px;
-  width: 48px;
-}
-
-form.search button:hover {
-  background: #525252;
-  border: 2px solid #525252;
-}
-
 .filter-wrapper {
   border-bottom: 2px solid #e1e1e1;
 }
@@ -168,7 +53,7 @@ form.search button:hover {
 
 /* Style the color of the custom checkbox */
 .checkmark {
-  background-color: #777;
+  background-color: #777777;
 }
 
 /* Colors: Style the color of the custom checkbox*/
@@ -197,7 +82,7 @@ form.search button:hover {
 }
 
 .black {
-  background-color: #000;
+  background-color: black;
 }
 
 .white {
@@ -241,7 +126,7 @@ form.search button:hover {
 
 /* Colors: Style the color of the checkmark/indicator for white*/
 .container .white:after {
-  border: solid #777;
+  border: solid #777777;
 }
 
 /* Colors: Style the checkmark/indicator*/
@@ -286,7 +171,7 @@ input[type=checkbox-Price] {
   transition: width 0.4s ease-in-out;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 2px solid #cccccc;
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
@@ -308,9 +193,9 @@ input[type=checkbox-Price] {
 }
 
 .select-selected {
-  background-color: #ccc;
-  border: 2px solid #ccc;
-  color: #000;
+  background-color: #cccccc;
+  border: 2px solid #cccccc;
+  color: black;
   padding: 12px 15px;
 }
 
@@ -322,13 +207,13 @@ input[type=checkbox-Price] {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: #000 transparent transparent transparent;
+  border-color: black transparent transparent transparent;
   right: 45px;
 }
 
 /* Point the arrow upwards when the select box is open (active): */
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #000 transparent;
+  border-color: transparent transparent black transparent;
   top: 13px;
   right: 45px;
 }
@@ -368,29 +253,6 @@ input[type=checkbox-Price] {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.footer {
-  background-color: #777;
-  text-align: center;
-  color: white;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-footer .column {
-  float: left;
-  width: 32%;
-  padding: 10px;
-  margin: 0;
-}
-
-footer .row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -426,7 +288,7 @@ article {
   padding: 10px;
   background-color: white;
   text-align: center;
-  color: #000;
+  color: black;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
@@ -460,7 +322,7 @@ h1 {
 }
 
 .price {
-  color: #777;
+  color: #777777;
   font-size: 22px;
   padding: 3px;
 }
@@ -470,7 +332,7 @@ h1 {
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: #000;
+  background-color: black;
   text-align: center;
   cursor: pointer;
   width: 100%;
@@ -518,7 +380,7 @@ h1 {
 }
 
 .ImgText {
-  color: #000;
+  color: black;
   font-size: 16px;
   margin: -40px;
   font-weight: 900;
@@ -599,7 +461,7 @@ h1 {
 
 .sideBar li a {
   display: block;
-  color: #000;
+  color: black;
   padding: 15px;
   text-decoration: none;
   border-bottom: 2px solid #e1e1e1;
@@ -610,7 +472,7 @@ h1 {
 /* Change the link color on hover */
 .sideBar li a:hover {
   background: #ebeaea;
-  color: #000;
+  color: black;
 }
 
 .dropdown-content {
@@ -630,8 +492,8 @@ h1 {
 }
 
 .dropdown .dropdown-content a:hover {
-  border-bottom: 2px solid #ccc;
-  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #cccccc;
+  border-top: 2px solid #cccccc;
 }
 
 * {
@@ -644,5 +506,146 @@ html, body {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.header {
+  background-image: url("/front/src/assets/images/DSC_5590.jpg");
+  background-color: #cccccc;
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.header h1 {
+  position: absolute;
+  top: 50%;
+  left: 150px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: white;
+  font-variant: small-caps;
+  font-family: "Segoe UI Light", sans-serif;
+}
+
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 0;
+  opacity: 0.85;
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: #f1f1f1;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 2px solid #e1e1e1;
+  z-index: 100;
+}
+
+.menu:hover {
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  width: 100px;
+  display: block;
+  padding: 15px;
+  border-right: 2px solid #e1e1e1;
+  border-left: 2px solid #e1e1e1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: 4.5px;
+}
+
+.menu a:hover {
+  background: #ebeaea;
+}
+
+.menu form.search button {
+  margin-left: -3px;
+  background: #777777;
+  color: white;
+  font-size: 17px;
+  border: 2px solid #777777;
+  border-left: none;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 4px;
+  margin-right: 20px;
+  height: 48px;
+  width: 48px;
+}
+
+.menu form.search button:hover {
+  background: #525252;
+  border: 2px solid #525252;
+}
+
+.menu input[type=search-input] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 20px 12px 20px;
+}
+
+.menu input[type=search-input]:focus {
+  width: 400px;
+}
+
+.footer {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #777;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.footer div {
+  width: auto;
+  min-width: 100px;
+  margin: 10px;
+  text-align: center;
+}
+
+.footer div img {
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 700px) {
+  .footer, .menu {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .menu a {
+    width: 700px;
+    margin: 0;
+  }
 }
 /*# sourceMappingURL=index.css.map */
