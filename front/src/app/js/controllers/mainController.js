@@ -1,18 +1,5 @@
-app.controller('mainController', ['$scope', function($scope) {
-    $scope.todo = {
-        title: "Things I Need to Do",
-        list: ["Clean my room", "Go to the store", "Study Cracking the Coding Interview"]
-    }
-
-    $scope.books = {
-        title: "Books I Need to Buy",
-        list: []
-    }
-
-    $scope.addItem = function(itemList, item) {
-        itemList.push(item);
-    }
-
-    $scope.test = 'Test'
-
+app.controller('mainController', ['$scope', 'itemListFiltered', function($scope, itemListFiltered) {
+    itemListFiltered.then(function(data) {
+        $scope.items = data.data;
+    })
 }])

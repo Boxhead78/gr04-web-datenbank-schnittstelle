@@ -94,35 +94,42 @@ def api_item_details():
 @app.route('/api/item/list', methods=['GET', 'POST'])
 def api_item():
     # get filter information
-    req = request.get_json()
+    req = request.get_json().get("data")
+
     # build sql query using WHERE to match above infos
-    sql_cur.execute(("""SELECT * FROM item LIMIT '%s'
-        WHERE color CONTAINS '%s'
-        WHERE price BETWEEN %s AND %s
-        WHERE value_stock >= %s
-        WHERE category EQUALS '%s' """ % (reg.get("limit"), req.get("color"), req.get("minCost"), req.get("maxCost"), 1, req.get("category"))
+
+    sql_cur.execute(("""SELECT * FROM item i
+         JOIN item2category i2c ON i2c.item_id = i.item_id
+        WHERE i.color LIKE '%s'
+          AND i.price BETWEEN %s AND %s
+          AND i.value_stock >= %s
+          AND i2c.category_id = %s
+          LIMIT 0, %s """ % (req.get("color"), req.get("minCost"), req.get("maxCost"), 1, req.get("category"), req.get("limit"))
         ))
 
     # fetch all returned items
     data=sql_cur.fetchall()
+
     # loop over each item and build a json object with the general properties
     item_list=[]
+
     for i in data:
+        print(i)
         data_item={
-            "id": data[0],
-            "name": data[1],
-            "description": data[2],
-            "numStock": data[3],
-            "price": data[4],
-            "picture": data[5],
-            "color": data[6],
-            "creation_date": data[7],
-            "currency_id": data[8],
-            "weight": data[9],
-            "count": data[10],
-            "material": data[11],
-            "manufactorer_id": data[12],
-            "technical_details": data[13]
+            "id": i[0],
+            "name": i[1],
+            "description": i[2],
+            "numStock": i[3],
+            "price": i[4],
+            "picture": i[5],
+            "color": i[6],
+            "creation_date": i[7],
+            "currency_id": i[8],
+            "weight": i[9],
+            "count": i[10],
+            "material": i[11],
+            "manufactorer_id": i[12],
+            "technical_details": i[13]
         }
         item_list.append(data_item)
     # return the json object
@@ -131,6 +138,7 @@ def api_item():
                    )
     resp.status_code=200
     return resp
+
 
 # for recieving and applying score reviews from users
 @ app.route('/api/item/score', methods=['POST'])
