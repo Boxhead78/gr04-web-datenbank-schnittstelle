@@ -97,10 +97,11 @@ def api_item():
     req = request.get_json()
     # build sql query using WHERE to match above infos
     sql_cur.execute(("""SELECT * FROM item LIMIT '%s'
-        WHERE name CONTAINS '%s'
+        WHERE color CONTAINS '%s'
         WHERE price BETWEEN %s AND %s
-        WHERE category EQUALS '%s' """ % (req.get("amount"), req.get("term"), req.get("costMin"), req.get("costMax"), req.get("cat"))
-        )
+        WHERE value_stock >= %s
+        WHERE category EQUALS '%s' """ % (reg.get("limit"), req.get("color"), req.get("minCost"), req.get("maxCost"), 1, req.get("category"))
+        ))
 
     # fetch all returned items
     data=sql_cur.fetchall()
