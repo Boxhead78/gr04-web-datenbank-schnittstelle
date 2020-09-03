@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `deletion_date` date DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   KEY `FK__user` (`user_id`),
-  KEY `FK_address_country` (`country_id`),item
+  KEY `FK_address_country` (`country_id`),
   CONSTRAINT `FK__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FK_address_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
