@@ -8,14 +8,16 @@ Modules: Flask, mysql-connector-python
 # importing modules
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import mysql.connector
+import sys, os, mysql.connector
 
 
 
 
 
-
-
+## Argument parsing
+# option to disable output to stdout (--silent)
+if str("--silent") in sys.argv:
+	sys.stdout = open(os.devnull, 'w')
 
 # setting session vars
 # enableCorss Origin Resource Sharing (CORS) for HTTPRequests
@@ -50,8 +52,9 @@ def sql_connect():
         user=str(sql_user),
         database=str(sql_db)
     )
-    sql_newcur = sql_con.cursor(buffered=True)
-    return sql_newcon, sql_newcur
+    sql_newcur = sql_newcon.cursor(buffered=True)
+    print("New connector to " + str(sql_host))
+    return sql_newcon, sql_newcur;
 
 
 
