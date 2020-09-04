@@ -6,7 +6,7 @@
   color: black;
   font-weight: bold;
   padding: 10px;
-  border-top: 3px solid #ff6781;
+  border-top: 3px solid #7ab91a;
   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 2px 6px 0 6px;
@@ -273,7 +273,7 @@ nav {
 }
 
 .left {
-  border-right: 3px solid #ff6781;
+  border-right: 3px solid #7ab91a;
 }
 
 article {
@@ -341,7 +341,7 @@ h1 {
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: #ff6781;
+  background-color: #7ab91a;
   text-align: center;
   cursor: pointer;
   width: 100%;
@@ -503,7 +503,7 @@ h1 {
 
 /* Set a style for all buttons */
 .addToCartModal button {
-  background-color: #ff6781;
+  background-color: #7ab91a;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -561,7 +561,7 @@ h1 {
 
 .close:hover,
 .close:focus {
-  color: #ff6781;
+  color: #7ab91a;
   cursor: pointer;
 }
 
@@ -654,7 +654,7 @@ html, body {
 }
 
 .menu a:hover {
-  color: #ff6781;
+  color: #7ab91a;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -676,7 +676,7 @@ html, body {
 }
 
 .menu form.search button:hover {
-  background: #ff6781;
+  background: #7ab91a;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }

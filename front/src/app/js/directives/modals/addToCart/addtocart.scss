@@ -1,7 +1,7 @@
 /* Set a style for all buttons */
 .addToCartModal button {
-    background-color: $pastell-pink;
-    color: white;
+    background-color: $akzentFarbe;
+    color: $white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -58,7 +58,7 @@
 
 .close:hover,
 .close:focus {
-  color: $pastell-pink;
+  color: $akzentFarbe;
   cursor: pointer;
 }
   
