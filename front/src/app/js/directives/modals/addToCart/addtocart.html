@@ -1,0 +1,25 @@
+<div id="addToCartModal" class="addToCartModal">
+    <span onclick="document.getElementById('addToCartModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="addToCartModal-content">
+      <div class="cartContainer">
+        <h1>Produkt ist jetzt im Warenkorb.</h1>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('addToCartModal').style.display='none'" class="weiterEinkaufenBtn">Weiter einkaufen</button>
+          <button type="submit" class="zumWarenkorbBtn">zum Warenkorb</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  
+  <script>
+    // Get the modal
+    var modal = document.getElementById('addToCartModal');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>

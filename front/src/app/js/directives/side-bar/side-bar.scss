@@ -4,7 +4,6 @@
     list-style-type: none;
     margin: 3px 0 0 0;
     padding: 5px;
-    background-color: $background-color-gray;
     overflow: auto;
   }
 
@@ -13,15 +12,14 @@
     color: $black;
     padding: 15px;
     text-decoration: none;
-    border-bottom: 2px solid $border-color;
-    border-top: 2px solid $border-color;
     margin: 3px 10px 3px 10px;
   }
 
   /* Change the link color on hover */
   .sideBar li a:hover {
-    background: $hover-link;
-    color: $black;
+    background: $menu-bar-gray;
+    color: $white;
+    transition: 0.3s;
   }
 
   .dropdown-content {
@@ -33,14 +31,12 @@
   }
 
   .dropdown-content a {
-    background-color: $hover-link;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.6s;
   }
 
   .navbar a:hover, .dropdown:hover .dropbtn a {
-    background-color: $hover-link;
-  }
-
-  .dropdown .dropdown-content a:hover {
-    border-bottom: 2px solid $border-input;
-    border-top: 2px solid $border-input;
+    background: $menu-bar-gray;
+    color: $white;
+    transition: 0.3s;
   }

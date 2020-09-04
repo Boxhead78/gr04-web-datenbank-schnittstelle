@@ -3,14 +3,23 @@
   section {
     display: -webkit-flex;
     display: flex;
-    margin: 3px 0 0 0;
-    background-color: $background-color-gray;
+    margin: 3px 0 3px 0;
   }
 
   nav {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+    background-color: $background-color-gray;
+  }
+
+  .right {
+    border-left: 3px solid $pastell-pink;
+    padding: 4px;
+  }
+
+  .left {
+    border-right: 3px solid $pastell-pink;
   }
 
   article {

@@ -5,6 +5,7 @@
 @import "../js/directives/content-StartPage/contentstartpage";
 @import "../js/directives/content-Item/contentitem";
 @import "../js/directives/side-bar/side-bar";
+@import "../js/directives/modals/addToCart/addtocart";
 
 // General Styles
 * {
@@ -44,23 +45,21 @@ html, body {
 .menu {
     display: flex;
     top: 0;
-    opacity: 0.85;
     position: sticky;
-    background-color: $background-color-gray;
+    background-color: rgba(0, 0, 0, 0.8);
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    border-bottom: 2px solid $border-color;
-    z-index: 100;
+    z-index: 99;
 
     &:hover {
-        opacity: 1;
+        background-color: $menu-bar-gray;
         transition: 0.2s;
     }
 
     a {
         text-decoration: none;
-        color: black;
+        color: $border-color;
         width: 100px;
         display: block;
         padding: 15px;
@@ -72,27 +71,28 @@ html, body {
         margin-left: 4.5px;
 
         &:hover {
-            background: $hover-link;
+            color: $pastell-pink;
+            transition: 0.2s;
         }
     }
 
     form.search button {
-        margin-left: -3px;
         background: $background-footer;
         color: $white;
         font-size: 17px;
-        border: 2px solid $background-footer;
+        border: 0px;
         border-left: none;
         cursor: pointer;
         box-sizing: border-box;
         border-radius: 4px;
         margin-right: 20px;
+        margin-left: -3px;
         height:48px;
         width:48px;
 
         &:hover {
-            background: $search-button-hover;
-            border: 2px solid $search-button-hover;
+            background: $pastell-pink;
+            transition: 0.2s;
         }
     }
 
@@ -117,7 +117,7 @@ html, body {
 .footer {
     color: $white;
     display: flex;
-    background-color: #777;
+    background-color: $background-footer;
     justify-content: space-around;
 
     div {

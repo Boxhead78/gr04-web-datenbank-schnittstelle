@@ -46,15 +46,16 @@
     outline: 0;
     padding: 12px;
     color: $white;
-    background-color: $black;
+    background-color: $pastell-pink;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    opacity: 0.9;
   }
   
-  .card button:hover {
-    opacity: 0.7;
+  .card button:hover, .ItemCard button:hover {
+    opacity: 1;
   }
 
   .PageImg, .StartPageImg, .ItemPageImg {

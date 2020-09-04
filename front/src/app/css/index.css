@@ -3,7 +3,7 @@
 }
 
 .filter-headline {
-  background-color: #525252;
+  background-color: #333333;
   color: white;
   padding: 10px;
 }
@@ -227,8 +227,8 @@ input[type=checkbox-Price] {
 /* Style the item */
 .select-items div {
   margin: 4px 10px;
-  border-bottom: 2px solid #f1f1f1;
-  border-top: 2px solid #f1f1f1;
+  border-bottom: 2px solid rgba(51, 51, 51, 0.2);
+  border-top: 2px solid rgba(51, 51, 51, 0.2);
   padding: 8px 16px;
 }
 
@@ -257,14 +257,23 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 3px 0 0 0;
-  background-color: #f1f1f1;
+  margin: 3px 0 3px 0;
 }
 
 nav {
   -ms-flex: 1;
   -webkit-box-flex: 1;
           flex: 1;
+  background-color: rgba(51, 51, 51, 0.2);
+}
+
+.right {
+  border-left: 3px solid #ff6781;
+  padding: 4px;
+}
+
+.left {
+  border-right: 3px solid #ff6781;
 }
 
 article {
@@ -332,15 +341,16 @@ h1 {
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: black;
+  background-color: #ff6781;
   text-align: center;
   cursor: pointer;
   width: 100%;
   font-size: 18px;
+  opacity: 0.9;
 }
 
-.card button:hover {
-  opacity: 0.7;
+.card button:hover, .ItemCard button:hover {
+  opacity: 1;
 }
 
 .PageImg, .StartPageImg, .ItemPageImg {
@@ -443,10 +453,6 @@ h1 {
   padding: 2px;
 }
 
-.ItemCard button:hover {
-  opacity: 0.7;
-}
-
 .ItemCard .description {
   margin: 50px 0 20px 0;
 }
@@ -455,7 +461,6 @@ h1 {
   list-style-type: none;
   margin: 3px 0 0 0;
   padding: 5px;
-  background-color: #f1f1f1;
   overflow: auto;
 }
 
@@ -464,15 +469,15 @@ h1 {
   color: black;
   padding: 15px;
   text-decoration: none;
-  border-bottom: 2px solid #e1e1e1;
-  border-top: 2px solid #e1e1e1;
   margin: 3px 10px 3px 10px;
 }
 
 /* Change the link color on hover */
 .sideBar li a:hover {
-  background: #ebeaea;
-  color: black;
+  background: #333333;
+  color: white;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .dropdown-content {
@@ -484,16 +489,94 @@ h1 {
 }
 
 .dropdown-content a {
-  background-color: #ebeaea;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn a {
-  background-color: #ebeaea;
+  background: #333333;
+  color: white;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
-.dropdown .dropdown-content a:hover {
-  border-bottom: 2px solid #cccccc;
-  border-top: 2px solid #cccccc;
+/* Set a style for all buttons */
+.addToCartModal button {
+  background-color: #ff6781;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+.addToCartModal button:hover {
+  opacity: 0.9;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.weiterEinkaufenBtn, .zumWarenkorbBtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.cartContainer {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.addToCartModal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.addToCartModal-content {
+  background-color: white;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 15%;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #ff6781;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .weiterEinkaufenBtn, .zumWarenkorbBtn {
+    width: 100%;
+  }
 }
 
 * {
@@ -534,10 +617,9 @@ html, body {
   display: -ms-flexbox;
   display: flex;
   top: 0;
-  opacity: 0.85;
   position: -webkit-sticky;
   position: sticky;
-  background-color: #f1f1f1;
+  background-color: rgba(0, 0, 0, 0.8);
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -548,19 +630,18 @@ html, body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-bottom: 2px solid #e1e1e1;
-  z-index: 100;
+  z-index: 99;
 }
 
 .menu:hover {
-  opacity: 1;
+  background-color: #333333;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 
 .menu a {
   text-decoration: none;
-  color: black;
+  color: #e1e1e1;
   width: 100px;
   display: block;
   padding: 15px;
@@ -573,28 +654,31 @@ html, body {
 }
 
 .menu a:hover {
-  background: #ebeaea;
+  color: #ff6781;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 .menu form.search button {
-  margin-left: -3px;
   background: #777777;
   color: white;
   font-size: 17px;
-  border: 2px solid #777777;
+  border: 0px;
   border-left: none;
   cursor: pointer;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 4px;
   margin-right: 20px;
+  margin-left: -3px;
   height: 48px;
   width: 48px;
 }
 
 .menu form.search button:hover {
-  background: #525252;
-  border: 2px solid #525252;
+  background: #ff6781;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 .menu input[type=search-input] {
@@ -619,7 +703,7 @@ html, body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #777;
+  background-color: #777777;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
