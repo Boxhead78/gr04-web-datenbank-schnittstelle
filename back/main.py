@@ -11,6 +11,12 @@ from flask_cors import CORS
 import mysql.connector
 
 
+
+
+
+
+
+
 # setting session vars
 # enableCorss Origin Resource Sharing (CORS) for HTTPRequests
 
@@ -23,34 +29,39 @@ cors = CORS(app, resources={
 })
 app_host = "localhost"
 app_port = "5000"
-sql_host = "localhost"
+sql_host = "127.0.0.1"
+sql_port = "3306"
 sql_user = "root"
-sql_key = ""
 sql_db = "baufuchs"
 sql_buffered = True
 
 
-sql_con = mysql.connector.connect(
-    host="127.0.0.1",
-    port="3306",
-    user="root",
-    database="baufuchs"
-)
-sql_cur = sql_con.cursor(buffered=True)
-
-'''
-sql_cur.execute("SELECT * FROM items")
-data = sql_cur.fetchone()
-for result in data:
-    print(result)
-# sql_cur.close()
-'''
-
-# routes
-# for quick return tests
 
 
-# routes
+
+
+
+## Methods
+# Creates a new connection to a database and a cursor and returns both as a tuple
+def sql_connect():
+    sql_newcon = mysql.connector.connect(
+        host=str(sql_host),
+        port=str(sql_port),
+        user=str(sql_user),
+        database=str(sql_db)
+    )
+    sql_newcur = sql_con.cursor(buffered=True)
+    return sql_newcon, sql_newcur
+
+
+
+
+
+
+
+
+
+## Routes
 # for quick return tests
 @app.route('/api/hello', methods=['GET'])
 def api_hello():
@@ -68,6 +79,7 @@ def api_hello():
 
 @app.route('/api/item/details', methods=['GET', 'POST'])
 def api_item_details():
+    sql_con, sql_cur = sql_connect()
     sql_cur.execute("SELECT * FROM item LIMIT 0, 1")
     data = sql_cur.fetchone()
     data_item = {
@@ -88,6 +100,8 @@ def api_item_details():
                    score=data_scores
                    )
     resp.status_code = 200
+    sql_cur.close()
+    sql_con.close()
     return resp
 
 
@@ -95,9 +109,8 @@ def api_item_details():
 def api_item():
     # get filter information
     req = request.get_json().get("data")
-
+    sql_con, sql_cur = sql_connect()
     # build sql query using WHERE to match above infos
-
     sql_cur.execute(("""SELECT * FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
         WHERE i.color LIKE '%s'
@@ -106,13 +119,10 @@ def api_item():
           AND i2c.category_id = %s
           LIMIT 0, %s """ % (req.get("color"), req.get("minCost"), req.get("maxCost"), 1, req.get("category"), req.get("limit"))
         ))
-
     # fetch all returned items
     data=sql_cur.fetchall()
-
     # loop over each item and build a json object with the general properties
     item_list=[]
-
     for i in data:
         print(i)
         data_item={
@@ -137,6 +147,8 @@ def api_item():
                    score=item_list
                    )
     resp.status_code=200
+    sql_cur.close()
+    sql_con.close()
     return resp
 
 
@@ -147,9 +159,13 @@ def api_item_score():
     req=request.get_json()
     # frontend needs to check for user registration
     # add score to score table
+    sql_con, sql_cur = sql_connect()
     sql_cur.execute("""INSERT irgendwie * FROM items LIMIT 0, 1
     WHERE """ + req.get("val"))
     # update score data in item table
+    sql_cur.close()
+    sql_con.close()
+    return
 
 
 
