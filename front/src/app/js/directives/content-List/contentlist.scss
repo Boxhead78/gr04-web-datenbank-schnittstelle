@@ -51,11 +51,11 @@
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-    opacity: 0.9;
+    opacity: 1;
   }
   
   .card button:hover, .ItemCard button:hover {
-    opacity: 1;
+    opacity: 0.9;
   }
 
   .PageImg, .StartPageImg, .ItemPageImg {

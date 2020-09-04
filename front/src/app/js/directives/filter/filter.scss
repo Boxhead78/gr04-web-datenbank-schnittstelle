@@ -5,9 +5,13 @@
 }
 
 .filter-headline {
-    background-color: $menu-bar-gray;
-    color: $white;
+    color: $black;
+    font-weight: bold;
     padding: 10px;
+    border-top: 3px solid #ff6781;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 2px 6px 0 6px;
+    background: rgba(255,255,255,0.4)
   }
 
   .filter-content ul, .filter-content-horizontal ul {
@@ -63,10 +67,10 @@
   .blue {background-color: blue}
   .green {background-color: green}
   .yellow {background-color: yellow}
-  .pink {background-color: rgb(255, 0, 170)}
+  .pink {background-color: $pastell-pink}
   .multicolored {
       background-image: -webkit-gradient(linear,left bottom,right top
-      ,color-stop(.05,#1167cf),color-stop(.15,#ef00bf)
+      ,color-stop(.05,#1167cf),color-stop(.15, $pastell-pink)
       ,color-stop(.25,#000291),color-stop(.45,#00ebd7)
       ,color-stop(.55,#00b539),color-stop(.75,#f9fd00)
       ,color-stop(1,red))
