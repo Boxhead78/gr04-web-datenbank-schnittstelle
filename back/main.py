@@ -112,15 +112,16 @@ def api_item_details():
 def api_item():
     # get filter information
     req = request.get_json().get("data")
+    print(req)
     sql_con, sql_cur = sql_connect()
     # build sql query using WHERE to match above infos
     sql_cur.execute(("""SELECT * FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
-        WHERE i.color LIKE '%s'
-          AND i.price BETWEEN %s AND %s
-          AND i.value_stock >= %s
-          AND i2c.category_id = %s
-          LIMIT 0, %s """ % (req.get("color"), req.get("minCost"), req.get("maxCost"), 1, req.get("category"), req.get("limit"))
+        WHERE ('%s' IS NULL OR i.color LIKE '%s')
+          AND (%s IS NULL OR i.price BETWEEN %s AND %s)
+          AND (%s IS NULL OR i.value_stock >= %s) 
+          LIMIT 0, %s""" % (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
+          req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"))
         ))
     # fetch all returned items
     data=sql_cur.fetchall()
@@ -159,12 +160,22 @@ def api_item():
 @ app.route('/api/item/score', methods=['POST'])
 def api_item_score():
     # get score value etc from request
-    req=request.get_json()
+    req=request.get_json().get("data")
     # frontend needs to check for user registration
     # add score to score table
     sql_con, sql_cur = sql_connect()
-    sql_cur.execute("""INSERT irgendwie * FROM items LIMIT 0, 1
-    WHERE """ + req.get("val"))
+
+    sql_cur.execute("""INSERT INTO rating (rating_value)
+        VALUES (%s);""" % (req.get("rating_value")))
+    sql_con.commit()
+
+    #fetching new rating id 
+    sql_cur.execute("""SELECT @@IDENTITY AS 'Identity'""")
+    rating_id = int(sql_cur.fetchone())[0]
+
+    #connecing new rating with item in database
+    sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
+        VALUES (%s, %s, %s)""" % (rating_id, req.get("user_id"), req.get("item_id")))
     # update score data in item table
     sql_cur.close()
     sql_con.close()
