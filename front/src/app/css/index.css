@@ -3,9 +3,14 @@
 }
 
 .filter-headline {
-  background-color: #333333;
-  color: white;
+  color: black;
+  font-weight: bold;
   padding: 10px;
+  border-top: 3px solid #ff6781;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 2px 6px 0 6px;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .filter-content ul, .filter-content-horizontal ul {
@@ -74,11 +79,11 @@
 }
 
 .pink {
-  background-color: #ff00aa;
+  background-color: #ff6781;
 }
 
 .multicolored {
-  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0.05, #1167cf), color-stop(0.15, #ef00bf), color-stop(0.25, #000291), color-stop(0.45, #00ebd7), color-stop(0.55, #00b539), color-stop(0.75, #f9fd00), color-stop(1, red));
+  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0.05, #1167cf), color-stop(0.15, #ff6781), color-stop(0.25, #000291), color-stop(0.45, #00ebd7), color-stop(0.55, #00b539), color-stop(0.75, #f9fd00), color-stop(1, red));
 }
 
 .black {
@@ -267,11 +272,6 @@ nav {
   background-color: rgba(51, 51, 51, 0.2);
 }
 
-.right {
-  border-left: 3px solid #ff6781;
-  padding: 4px;
-}
-
 .left {
   border-right: 3px solid #ff6781;
 }
@@ -346,11 +346,11 @@ h1 {
   cursor: pointer;
   width: 100%;
   font-size: 18px;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .card button:hover, .ItemCard button:hover {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .PageImg, .StartPageImg, .ItemPageImg {
