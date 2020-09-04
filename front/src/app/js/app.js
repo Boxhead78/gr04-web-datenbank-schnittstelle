@@ -1,19 +1,22 @@
 var app = angular.module('baufuchs', ["ngRoute"]);
         app.config(function($routeProvider) {
             $routeProvider
-                .when("/", {
+                .when("/home", {
                     templateUrl: "js/views/home.html"
                 })
-                .when("/aboutme", {
-                    templateUrl: "js/views/aboutme.html"
+                .when("/item", {
+                    templateUrl:"js/views/itemFiltered.html"
                 })
-                .when("/posts", {
-                    templateUrl: "js/views/posts.html"
+                .when("/item/:id", {
+                    templateUrl:"js/views/itemDetail.html"
                 })
-                .when("/contact", {
-                    templateUrl: "js/views/contact.html"
+                .when("/cart", {
+                    templateUrl: "js/views/cart.html"
+                })
+                .when("/login", {
+                    templateUrl: "js/views/login.html"
                 })
                 .otherwise({
-                    redirectTo: "/"
+                    redirectTo: "/home"
                 });
         });
