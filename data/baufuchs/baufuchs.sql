@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server Version:               10.4.11-MariaDB - mariadb.org binary distribution
+-- Server Version:               10.4.14-MariaDB - mariadb.org binary distribution
 -- Server Betriebssystem:        Win64
 -- HeidiSQL Version:             11.0.0.5919
 -- --------------------------------------------------------
@@ -38,17 +38,18 @@ INSERT INTO `address` (`address_id`, `user_id`, `street`, `house_number`, `post_
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
+  `category_parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`category_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Exportiere Daten aus Tabelle baufuchs.category: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` (`category_id`, `name`) VALUES
-	(1, 'Handwerkzeug'),
-	(2, 'Maschienen'),
-	(3, 'Messwerkzeuge'),
-	(4, 'Maschienenzubeör'),
-	(5, 'Eisenwaren');
+INSERT INTO `category` (`category_id`, `name`, `category_parent_id`) VALUES
+	(1, 'Handwerkzeug', NULL),
+	(2, 'Maschienen', NULL),
+	(3, 'Messwerkzeuge', NULL),
+	(4, 'Maschienenzubeör', NULL),
+	(5, 'Eisenwaren', NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.country
@@ -63,19 +64,6 @@ CREATE TABLE IF NOT EXISTS `country` (
 INSERT INTO `country` (`country_id`, `country_name`) VALUES
 	(1, 0);
 /*!40000 ALTER TABLE `country` ENABLE KEYS */;
-
--- Exportiere Struktur von Tabelle baufuchs.currency
-CREATE TABLE IF NOT EXISTS `currency` (
-  `currency_id` int(11) NOT NULL AUTO_INCREMENT,
-  `exchange_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`currency_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
--- Exportiere Daten aus Tabelle baufuchs.currency: ~0 rows (ungefähr)
-/*!40000 ALTER TABLE `currency` DISABLE KEYS */;
-INSERT INTO `currency` (`currency_id`, `exchange_id`) VALUES
-	(1, 0);
-/*!40000 ALTER TABLE `currency` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item
 CREATE TABLE IF NOT EXISTS `item` (
@@ -93,21 +81,21 @@ CREATE TABLE IF NOT EXISTS `item` (
   `material` varchar(50) DEFAULT NULL,
   `manufactorer_id` int(11) DEFAULT NULL,
   `technical_details` varchar(50) DEFAULT NULL,
+  `average_rating` double DEFAULT 0,
   PRIMARY KEY (`item_id`) USING BTREE,
   KEY `FK_item_currency` (`currency_id`),
   KEY `FK_item_manufactorer` (`manufactorer_id`),
-  CONSTRAINT `FK_item_currency` FOREIGN KEY (`currency_id`) REFERENCES `currency` (`currency_id`),
   CONSTRAINT `FK_item_manufactorer` FOREIGN KEY (`manufactorer_id`) REFERENCES `manufactorer` (`manufactorer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Exportiere Daten aus Tabelle baufuchs.item: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `currency_id`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`) VALUES
-	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'braun', '2020-09-02', NULL, 1074, 1, 'Holz', 1, NULL),
-	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet besteht', 15, 14.57, 'screwdriver.jpg', 'schwarz', '2020-09-02', NULL, 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch'),
-	(3, 'Nägel-Set', NULL, 4, 0, NULL, '', '2020-09-02', NULL, NULL, NULL, NULL, NULL, NULL),
-	(4, 'Bügelsäge', NULL, 3, 21.35, NULL, 'silber', '2020-09-02', NULL, 870, 1, 'Kunststoff/Stahl', 3, NULL),
-	(5, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal z', 10, 40.45, NULL, 'orange/schwarz', '2020-09-02', NULL, 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm');
+INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `currency_id`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`, `average_rating`) VALUES
+	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'braun', '2020-09-02', NULL, 1074, 1, 'Holz', 1, NULL, 0),
+	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet besteht', 15, 14.57, 'screwdriver.jpg', 'schwarz', '2020-09-02', NULL, 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0),
+	(3, 'Nägel-Set', NULL, 4, 0, NULL, '', '2020-09-02', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(4, 'Bügelsäge', NULL, 3, 21.35, NULL, 'silber', '2020-09-02', NULL, 870, 1, 'Kunststoff/Stahl', 3, NULL, 0),
+	(5, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal z', 10, 40.45, NULL, 'orange/schwarz', '2020-09-02', NULL, 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item2category
@@ -115,7 +103,6 @@ CREATE TABLE IF NOT EXISTS `item2category` (
   `item2category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) NOT NULL DEFAULT 0,
   `item_id` int(11) NOT NULL DEFAULT 0,
-  `category_parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`item2category_id`) USING BTREE,
   KEY `FK_ittoct_category` (`category_id`),
   KEY `FK_ittoct_items` (`item_id`),
@@ -125,12 +112,12 @@ CREATE TABLE IF NOT EXISTS `item2category` (
 
 -- Exportiere Daten aus Tabelle baufuchs.item2category: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `item2category` DISABLE KEYS */;
-INSERT INTO `item2category` (`item2category_id`, `category_id`, `item_id`, `category_parent_id`) VALUES
-	(1, 1, 1, NULL),
-	(2, 1, 2, NULL),
-	(3, 5, 3, NULL),
-	(4, 1, 5, NULL),
-	(5, 1, 4, NULL);
+INSERT INTO `item2category` (`item2category_id`, `category_id`, `item_id`) VALUES
+	(1, 1, 1),
+	(2, 1, 2),
+	(3, 5, 3),
+	(4, 1, 5),
+	(5, 1, 4);
 /*!40000 ALTER TABLE `item2category` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.language
