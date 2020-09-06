@@ -2,7 +2,8 @@ var app = angular.module('baufuchs', ["ngRoute"]);
         app.config(function($routeProvider) {
             $routeProvider
                 .when("/home", {
-                    templateUrl: "js/views/home.html"
+                    templateUrl: "js/views/home.html",
+                    controller: "homeController"
                 })
                 .when("/item", {
                     templateUrl:"js/views/itemFiltered.html"
