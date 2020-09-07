@@ -1,5 +1,5 @@
-app.controller('homeController', ['$scope', 'itemListFiltered', function($scope, itemListFiltered) {
-    itemListFiltered.then(function(items) {
+app.controller('homeController', ['$scope', 'itemListService', function($scope, itemList) {
+    itemList.then(function(items) {
         $scope.items = items.data;
 
         var y = 1;

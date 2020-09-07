@@ -6,7 +6,8 @@ var app = angular.module('baufuchs', ["ngRoute"]);
                     controller: "homeController"
                 })
                 .when("/item", {
-                    templateUrl:"js/views/itemFiltered.html"
+                    templateUrl:"js/views/itemFiltered.html",
+                    controller: "itemlistController"
                 })
                 .when("/item/:id", {
                     templateUrl:"js/views/itemDetail.html"

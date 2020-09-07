@@ -1,134 +1,17 @@
-<div class="PageContent">
-
-    <div class="PageRow">
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
+<div class="item-container">
+    <div class="item-card" ng-repeat="item in items.item">
+        <a href="#!item/{{item.id}}">
+            <div class="image-container">
+                <img src="/front/src/assets/images/hammer.jpg" alt="Denim Jeans">
+                <div class="image-overlay">
+                    <div class="image-text">
+                        {{item.description}}
                     </div>
                 </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
             </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/Holz.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/baum.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-      </div>
-
-      <div class="PageRow">
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/baum.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/baum.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-
-        <div class="PageColumn">
-            <div class="card">
-                <div class="Image">
-                    <img class="PageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
+            <h1>{{item.name}}</h1>
+            <p class="price">{{item.price}}</p>
+        </a>
+        <button>Add to Cart</button>
     </div>
 </div>
