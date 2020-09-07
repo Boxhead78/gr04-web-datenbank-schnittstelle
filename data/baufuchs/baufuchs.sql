@@ -146,7 +146,8 @@ CREATE TABLE IF NOT EXISTS `manufactorer` (
 INSERT INTO `manufactorer` (`manufactorer_id`, `name`) VALUES
 	(1, 'Wisent'),
 	(2, 'Hazet'),
-	(3, 'Gardena');
+	(3, 'Gardena'),
+  (4, 'Mojang');
 /*!40000 ALTER TABLE `manufactorer` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.order
