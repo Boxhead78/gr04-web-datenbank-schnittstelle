@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- Exportiere Daten aus Tabelle baufuchs.address: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`address_id`, `user_id`, `street`, `house_number`, `post_code`, `city`, `country_id`, `deletion_date`) VALUES
-	(1, 1, 'Hauptstraße', 5, 22087, 'Hamburg', 1, NULL);
+	(1, 1, 'Hauptstraße', 5, 22087, 'Hamburg', 1, NULL),
+  (2, 2, 'Hamburger Straße', 19, 22043, 'Hamburg', 1, NULL);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.category
@@ -261,7 +262,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Exportiere Daten aus Tabelle baufuchs.user: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `first_name`, `gender`, `surname`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`) VALUES
-	(1, 'Fabian', 'Männlich', 'Hennemann', '1999-12-28', 1, '', 1, 1);
+	(1, 'Fabian', 'Männlich', 'Hennemann', '1999-12-28', 1, '', 1, 1),
+  (2, 'Maik', 'Männlich', 'Baumann', '1996-08-19', 2, '', 1, 3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
