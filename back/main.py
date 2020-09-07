@@ -8,16 +8,15 @@ Modules: Flask, mysql-connector-python
 # importing modules
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import sys, os, mysql.connector
+import sys
+import os
+import mysql.connector
 
 
-
-
-
-## Argument parsing
+# Argument parsing
 # option to disable output to stdout (--silent)
 if str("--silent") in sys.argv:
-	sys.stdout = open(os.devnull, 'w')
+    sys.stdout = open(os.devnull, 'w')
 
 # setting session vars
 # enableCorss Origin Resource Sharing (CORS) for HTTPRequests
@@ -38,12 +37,7 @@ sql_db = "baufuchs"
 sql_buffered = True
 
 
-
-
-
-
-
-## Methods
+# Methods
 # Creates a new connection to a database and a cursor and returns both as a tuple
 def sql_connect():
     sql_newcon = mysql.connector.connect(
@@ -54,18 +48,20 @@ def sql_connect():
     )
     sql_newcur = sql_newcon.cursor(buffered=True)
     print("New connector to " + str(sql_host))
-    return sql_newcon, sql_newcur;
+    return sql_newcon, sql_newcur
 
 
+def addToAverage(average, size, value):
+    return(size * average + value) / (size + 1)
 
 
+def subtractFromAverage(average, size, value):
+    return(size * average - value) / (size - 1)
 
-
-
-
-
-## Routes
+# Routes
 # for quick return tests
+
+
 @app.route('/api/hello', methods=['GET'])
 def api_hello():
     data = {
@@ -115,21 +111,21 @@ def api_item():
     print(req)
     sql_con, sql_cur = sql_connect()
     # build sql query using WHERE to match above infos
-    sql_cur.execute(("""SELECT * FROM item i
+    sql_cur.execute("""SELECT * FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
-        WHERE ('%s' IS NULL OR i.color LIKE '%s')
+        WHERE (%s IS NULL OR i.color LIKE %s)
           AND (%s IS NULL OR i.price BETWEEN %s AND %s)
           AND (%s IS NULL OR i.value_stock >= %s) 
-          LIMIT 0, %s""" % (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
-          req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"))
-        ))
+          LIMIT 0, %s""", (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
+                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"),)
+                    )
     # fetch all returned items
-    data=sql_cur.fetchall()
+    data = sql_cur.fetchall()
     # loop over each item and build a json object with the general properties
-    item_list=[]
+    item_list = []
     for i in data:
         print(i)
-        data_item={
+        data_item = {
             "id": i[0],
             "name": i[1],
             "description": i[2],
@@ -147,10 +143,10 @@ def api_item():
         }
         item_list.append(data_item)
     # return the json object
-    resp=jsonify(item=item_list,
+    resp = jsonify(item=item_list,
                    score=item_list
                    )
-    resp.status_code=200
+    resp.status_code = 200
     sql_cur.close()
     sql_con.close()
     return resp
@@ -160,33 +156,34 @@ def api_item():
 @ app.route('/api/item/score', methods=['POST'])
 def api_item_score():
     # get score value etc from request
-    req=request.get_json().get("data")
+    req = request.get_json().get("data")
     # frontend needs to check for user registration
     # add score to score table
     sql_con, sql_cur = sql_connect()
 
     sql_cur.execute("""INSERT INTO rating (rating_value)
-        VALUES (%s);""" % (req.get("rating_value")))
+        VALUES (%s);""", (req.get("rating_value"),))
     sql_con.commit()
 
-    #fetching new rating id 
+    # fetching new rating id
     sql_cur.execute("""SELECT @@IDENTITY AS 'Identity'""")
-    rating_id = int(sql_cur.fetchone())[0]
+    rating_id = int(sql_cur.fetchone())
 
-    #connecing new rating with item in database
+    # connecing new rating with item in database
     sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
-        VALUES (%s, %s, %s)""" % (rating_id, req.get("user_id"), req.get("item_id")))
+        VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
+    sql_con.commit()
+
+    # calculate new average_rating for item
+    new_average_rating = addToAverage(req.get(""),)
+
     # update score data in item table
+    sql_cur.execute("""UPDATE item SET rating_average = %s WHERE item_id = %s """, (
+        rating_average, req.get("item_id"),))
+    sql_con.commit()
     sql_cur.close()
     sql_con.close()
-    return
-
-
-
-
-
-
-
+    return new_average_rating
 
 
 if __name__ == '__main__':
