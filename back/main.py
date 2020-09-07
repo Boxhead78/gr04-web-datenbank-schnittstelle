@@ -32,11 +32,11 @@ cors = CORS(app, resources={
     }
 })
 argon = PasswordHasher(time_cost=int(2),
-    memory_cost=int(51200),
-    parallelism=int(2),
-    hash_len=int(16),
-    salt_len=int(8),
-    encoding=str('utf-8'))
+                       memory_cost=int(51200),
+                       parallelism=int(2),
+                       hash_len=int(16),
+                       salt_len=int(8),
+                       encoding=str('utf-8'))
 argonprefix = str("$argon2id$v=19$m=51200,t=2,p=")
 
 # Argument parsing
@@ -46,6 +46,8 @@ if str("--silent") in sys.argv:
 
 # Methods
 # Creates a new connection to a database and a cursor and returns both as a tuple
+
+
 def sql_connect():
     sql_newcon = mysql.connector.connect(
         host=str(sql_host),
@@ -57,13 +59,18 @@ def sql_connect():
     print("New connector to " + str(sql_host))
     return sql_newcon, sql_newcur
 
+# add new score to average_rating
+
 
 def addToAverage(average, size, value):
     return int((size * average + value) / (size + 1))
 
+# remove definied score from average_rating
+
 
 def subtractFromAverage(average, size, value):
     return int((size * average - value) / (size - 1))
+
 
 # Routes
 # for quick return tests
@@ -85,8 +92,10 @@ def api_hello():
 
 @app.route('/api/item/details', methods=['GET', 'POST'])
 def api_item_details():
+    req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
-    sql_cur.execute("SELECT * FROM item LIMIT 0, 1")
+    sql_cur.execute("""SELECT * FROM item WHERE item_id = %s""",
+                    (req.get("item_id"),))
     data = sql_cur.fetchone()
     data_item = {
         "id": data[0],
@@ -94,9 +103,17 @@ def api_item_details():
         "description": data[2],
         "numStock": data[3],
         "price": data[4],
-        "picture": data[5]
+        "picture": data[5],
+        "color": data[6],
+        "creation_date": data[7],
+        "currency_id": data[8],
+        "weight": data[9],
+        "count": data[10],
+        "material": data[11],
+        "manufactorer_id": data[12],
+        "technical_details": data[13]
     }
-    # TODO: make this get scores of the item
+    # TODO: make this get scores and each comment of the item
     sql_cur.execute("SELECT * FROM item LIMIT 0, 1")
     data = sql_cur.fetchone()
     data_scores = {
@@ -110,28 +127,29 @@ def api_item_details():
     sql_con.close()
     return resp
 
+# item list returned after filter for items
 
-@app.route('/api/item/list', methods=['GET', 'POST'])
-def api_item():
+
+@app.route('/api/item/filter', methods=['GET', 'POST'])
+def api_item_filter():
     # get filter information
     req = request.get_json().get("data")
-    print(req)
     sql_con, sql_cur = sql_connect()
     # build sql query using WHERE to match above infos
-    sql_cur.execute("""SELECT * FROM item i
+    sql_cur.execute("""SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
         WHERE (%s IS NULL OR i.color LIKE %s)
           AND (%s IS NULL OR i.price BETWEEN %s AND %s)
-          AND (%s IS NULL OR i.value_stock >= %s) 
+          AND (%s IS NULL OR i.value_stock >= %s)
+          AND (%s IS NULL OR i2c.category_id = %s)
           LIMIT 0, %s""", (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
-                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"),)
+                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"), req.get("category"), req.get("category"),)
                     )
     # fetch all returned items
     data = sql_cur.fetchall()
     # loop over each item and build a json object with the general properties
     item_list = []
     for i in data:
-        print(i)
         data_item = {
             "id": i[0],
             "name": i[1],
@@ -139,19 +157,11 @@ def api_item():
             "numStock": i[3],
             "price": i[4],
             "picture": i[5],
-            "color": i[6],
-            "creation_date": i[7],
-            "currency_id": i[8],
-            "weight": i[9],
-            "count": i[10],
-            "material": i[11],
-            "manufactorer_id": i[12],
-            "technical_details": i[13]
+            "creation_date": i[6],
         }
         item_list.append(data_item)
     # return the json object
-    resp = jsonify(item=item_list,
-                   score=item_list
+    resp = jsonify(item=item_list
                    )
     resp.status_code = 200
     sql_cur.close()
@@ -160,7 +170,10 @@ def api_item():
 
 
 # for recieving and applying score reviews from users
-@ app.route('/api/item/score', methods=['POST'])
+# json input: item_id, user_id, new_rating_value, password_hash
+# TODO integrate password hash in function
+
+@app.route('/api/item/score', methods=['POST'])
 def api_item_score():
     # get score value etc from request
     req = request.get_json().get("data")
@@ -169,28 +182,69 @@ def api_item_score():
     sql_con, sql_cur = sql_connect()
 
     sql_cur.execute("""INSERT INTO rating (rating_value)
-        VALUES (%s);""", (req.get("rating_value"),))
+        VALUES (%s)""", (req.get("new_rating_value"),))
     sql_con.commit()
 
     # fetching new rating id
     sql_cur.execute("""SELECT @@IDENTITY AS 'Identity'""")
-    rating_id = int(sql_cur.fetchone())
+    rating_id = int(sql_cur.fetchone()[0])
 
     # connecing new rating with item in database
     sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
         VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
     sql_con.commit()
 
+    # fetching required data for calculationg ne_average_raing
+    sql_cur.execute(
+        """SELECT average_rating, rating_count FROM item WHERE item_id = %s """, (req.get(
+            "item_id"),))
+    result = sql_cur.fetchone()
+
     # calculate new average_rating for item
-    new_average_rating = addToAverage(req.get(""),)
+    new_average_rating = addToAverage(
+        result[1], result[0], req.get("new_rating_value"))
 
     # update score data in item table
-    sql_cur.execute("""UPDATE item SET rating_average = %s WHERE item_id = %s """, (
-        rating_average, req.get("item_id"),))
+    sql_cur.execute("""UPDATE item SET average_rating = %s WHERE item_id = %s """, (
+        new_average_rating, req.get("item_id"),))
     sql_con.commit()
     sql_cur.close()
     sql_con.close()
-    return new_average_rating
+    resp = jsonify(new_average_rating=new_average_rating
+                   )
+    resp.status_code = 200
+    sql_cur.close()
+    sql_con.close()
+    return resp
+
+
+@app.route('/api/item/list', methods=['GET'])
+def api_item_list():
+    sql_con, sql_cur = sql_connect()
+    sql_cur.execute(
+        """SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i""")
+    data = sql_cur.fetchall()
+    item_list = []
+    for i in data:
+        data_item = {
+            "id": i[0],
+            "name": i[1],
+            "description": i[2],
+            "numStock": i[3],
+            "price": i[4],
+            "picture": i[5],
+            "creation_date": i[6],
+        }
+        item_list.append(data_item)
+    sql_cur.close()
+    sql_con.close()
+    resp = jsonify(item_list=item_list
+                   )
+    resp.status_code = 200
+    sql_cur.close()
+    sql_con.close()
+    return resp
+
 
 @app.route('/api/user/login', methods=['POST'])
 def api_login():
@@ -202,6 +256,7 @@ def api_login():
     # front-end saves rest of the data entered in a cookie
     pass
 
+
 @app.route('/api/user/register', methods=['POST'])
 def api_register():
     # get request data
@@ -209,12 +264,12 @@ def api_register():
     # TODO handle exceptions in entered data
     sql_con, sql_cur = sql_connect()
     sql_cur.execute("""SELECT * FROM user
-        WHERE email = %s""", (req.get("email"),) )
+        WHERE email = %s""", (req.get("email"),))
     res = sql_cur.fetchone()
     if res != None:
         sql_cur.close()
         sql_con.close()
-        return # TODO return fail code because user/email already in use
+        return  # TODO return fail code because user/email already in use
     # TODO confirm registration via oauth/mail
     # compile data
     req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
@@ -227,6 +282,7 @@ def api_register():
     # return success code
     return
 
+
 @api.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
@@ -234,7 +290,7 @@ def api_order_place():
     # compile order details
     # commit order to sql db
     # return success code
-    pass 
+    pass
 
 
 if __name__ == '__main__':
