@@ -32,10 +32,12 @@
                 <button><i class="fa fa-search"></i></button>
             </form>
             <a href="#!"><i class="fas fa-home"></i> Home</a>
-            <a href="#!login"><i class="fas fa-user"></i> Login</a>
+            <a class="loginBtn" onclick="document.getElementById('loginModal').style.display='block'"><i class="fas fa-user"></i> Login</a>
             <a href="#!cart"><i class="fas fa-shopping-cart"></i> Warenkorb</a>
         </div>
 
+        <!-- login Modal -->
+        <login></login>
 
         <!-- dynamic content -->
         <ng-view></ng-view>
@@ -63,10 +65,6 @@
             </div>
         </div>
 
-          <ul ng-repeat="item in items.item">
-            <li> {{ item.name }} </li>
-        </ul>
-
         <!-- Modules -->
         <script src="js/app.js"></script>
 
@@ -80,11 +78,12 @@
 
         <!-- Controllers -->
         <script src="js/controllers/mainController.js"></script>
+        <script src="js/controllers/homeController.js"></script>
 
         <!-- Services -->
         <script src="js/services/itemListFilteredService.js"></script>
-        <script src="js/services/dummyService.js"></script>
         <script src="js/directives/modals/addToCart/addtocart.js"></script>
+        <script src="js/directives/modals/login/login.js"></script>
 
     </body>
 </html>

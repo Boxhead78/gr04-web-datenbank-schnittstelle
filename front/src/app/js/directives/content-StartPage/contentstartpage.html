@@ -1,71 +1,18 @@
-<div class="PageContent">
-
-    <div class="PageRow">
-        <div class="PageColumnBig">
-            <a href="#!item/1"><div class="card">
-                <div class="Image">
-                    <img class="StartPageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
+<div class="item-container">
+    <div class={{item.class}} ng-repeat="item in items.item">
+        <a href="#!item/{{item.id}}">
+            <div class="image-container">
+                <img src="/front/src/assets/images/hammer.jpg" alt="Denim Jeans">
+                <div class="description-container">
+                    <div class="description">
+                        {{ item.description }}
                     </div>
                 </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div></a>
-        </div>
-
-        <div class="PageColumnSmall">
-            <div class="card">
-                <div class="Image">
-                    <img class="StartPageImg" src="/front/src/assets/images/baum.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
             </div>
-        </div>
-      </div>
-
-      <div class="PageRow">
-        <div class="PageColumnSmall">
-            <div class="card">
-                <div class="Image">
-                    <img class="StartPageImg" src="/front/src/assets/images/wiese.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-        <div class="PageColumnBig">
-            <div class="card">
-                <div class="Image">
-                    <img class="StartPageImg" src="/front/src/assets/images/baum.jpg" alt="Denim Jeans">
-                    <div class="ImageOverlay">
-                        <div class="ImgText">
-                            Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
-                        </div>
-                    </div>
-                </div>
-                <h1>Tailored Jeans</h1>
-                <p class="price">$19.99</p>
-                <p><button>Add to Cart</button></p>
-            </div>
-        </div>
-      </div>
-
-
+            <h1>{{ item.name }}</h1>
+            <p class="price">{{ item.class }}</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
 </div>
+

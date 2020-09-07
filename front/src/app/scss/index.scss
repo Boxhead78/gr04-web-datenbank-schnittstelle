@@ -6,6 +6,8 @@
 @import "../js/directives/content-Item/contentitem";
 @import "../js/directives/side-bar/side-bar";
 @import "../js/directives/modals/addToCart/addtocart";
+@import "../js/directives/modals/login/login";
+
 
 // General Styles
 * {
@@ -110,6 +112,10 @@ html, body {
 
     input[type=search-input]:focus {
         width: 400px;
+    }
+
+    .loginBtn {
+        cursor: pointer;
     }
 }
 
