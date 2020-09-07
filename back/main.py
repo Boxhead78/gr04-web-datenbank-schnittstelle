@@ -8,26 +8,14 @@ Modules: Flask, mysql-connector-python
 # importing modules
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from argon2 import PasswordHasher
 import sys
 import os
 import mysql.connector
 
 
-# Argument parsing
-# option to disable output to stdout (--silent)
-if str("--silent") in sys.argv:
-    sys.stdout = open(os.devnull, 'w')
-
 # setting session vars
 # enableCorss Origin Resource Sharing (CORS) for HTTPRequests
-
-app = Flask(__name__)
-CORS(app)
-cors = CORS(app, resources={
-    r"/*": {
-        "origins": "*"
-    }
-})
 app_host = "localhost"
 app_port = "5000"
 sql_host = "127.0.0.1"
@@ -36,6 +24,25 @@ sql_user = "root"
 sql_db = "baufuchs"
 sql_buffered = True
 
+app = Flask(__name__)
+CORS(app)
+cors = CORS(app, resources={
+    r"/*": {
+        "origins": "*"
+    }
+})
+argon = PasswordHasher(time_cost=int(2),
+    memory_cost=int(51200),
+    parallelism=int(2),
+    hash_len=int(16),
+    salt_len=int(8),
+    encoding=str('utf-8'))
+argonprefix = str("$argon2id$v=19$m=51200,t=2,p=")
+
+# Argument parsing
+# option to disable output to stdout (--silent)
+if str("--silent") in sys.argv:
+    sys.stdout = open(os.devnull, 'w')
 
 # Methods
 # Creates a new connection to a database and a cursor and returns both as a tuple
@@ -52,11 +59,11 @@ def sql_connect():
 
 
 def addToAverage(average, size, value):
-    return(size * average + value) / (size + 1)
+    return int((size * average + value) / (size + 1))
 
 
 def subtractFromAverage(average, size, value):
-    return(size * average - value) / (size - 1)
+    return int((size * average - value) / (size - 1))
 
 # Routes
 # for quick return tests
@@ -184,6 +191,50 @@ def api_item_score():
     sql_cur.close()
     sql_con.close()
     return new_average_rating
+
+@app.route('/api/user/login', methods=['POST'])
+def api_login():
+    # get request json and login data
+    req = request.get_json().get("data")
+    # compare user data from db
+    # argon rehash
+    # return user id and success code
+    # front-end saves rest of the data entered in a cookie
+    pass
+
+@app.route('/api/user/register', methods=['POST'])
+def api_register():
+    # get request data
+    req = request.get_json().get("data")
+    # TODO handle exceptions in entered data
+    sql_con, sql_cur = sql_connect()
+    sql_cur.execute("""SELECT * FROM user
+        WHERE email = %s""", (req.get("email"),) )
+    res = sql_cur.fetchone()
+    if res != None:
+        sql_cur.close()
+        sql_con.close()
+        return # TODO return fail code because user/email already in use
+    # TODO confirm registration via oauth/mail
+    # compile data
+    req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
+    # commit new data to sql db
+    sql_cur.execute("""INSERT INTO user (rating_id, item_id, user_id)
+        VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
+    sql_con.commit()
+    sql_cur.close()
+    sql_con.close()
+    # return success code
+    return
+
+@api.route('/api/order/place', methods=['POST'])
+def api_order_place():
+    # get request data
+    # check authority of user
+    # compile order details
+    # commit order to sql db
+    # return success code
+    pass 
 
 
 if __name__ == '__main__':

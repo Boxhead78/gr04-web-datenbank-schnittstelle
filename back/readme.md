@@ -3,6 +3,7 @@
 ### Requirements:
 Flask python module: pip install flask
 mysql.connector python modul: pip install mysql.connector
+Argon2 password hasher: pip install argon2-cffi
 
 
 
