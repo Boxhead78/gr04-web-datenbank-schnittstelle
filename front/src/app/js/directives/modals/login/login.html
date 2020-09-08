@@ -1,8 +1,11 @@
 <div id="loginModal" class="loginModal">
-    <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+    
     <form class="loginModal-content animate">
-
+      
       <div class="cartContainer">
+        
+        <span onclick="document.getElementById('loginModal').style.display='none'" class="loginClose" title="Close Modal">&times;</span>
+        
         <h1>Login</h1>
         <hr>
 
@@ -19,10 +22,9 @@
       </div>
   
       <div class="cartContainer login" style="background-color:#f1f1f1">
-        <button type="signUpBtn" onclick="document.getElementById('id01').style.display='none'">Registrieren</button>
+        <button type="signUpBtn" onclick="document.getElementById('loginModal').style.display='none'"><a href="#!signUpView">Registrieren</a></button>
         <span class="psw"><a href="#">Passwort</a> vergessen?</span>
       </div>
-
     </form>
   </div>
 

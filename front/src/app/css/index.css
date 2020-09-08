@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .filter-wrapper {
   border-bottom: 2px solid #e1e1e1;
 }
@@ -710,7 +711,7 @@ button:hover {
 }
 
 /* Set a style for all buttons */
-.loginModal button {
+.loginModal button, .signUpContent button {
   color: white;
   margin: 8px 0;
   border: none;
@@ -720,7 +721,7 @@ button:hover {
   background-color: #7ab91a;
 }
 
-.loginModal button:hover {
+.loginModal button:hover, .signUpContent button:hover {
   opacity: 0.9;
 }
 
@@ -759,17 +760,19 @@ button:hover {
 }
 
 /* The Close Button (x) */
-.close {
+.loginClose {
   position: absolute;
-  right: 35px;
-  top: 15px;
+  right: 10px;
+  top: -15px;
   font-size: 40px;
   font-weight: bold;
   color: #f1f1f1;
+  position: relative;
+  float: right;
 }
 
-.close:hover,
-.close:focus {
+.loginClose:hover,
+.loginClose:focus {
   color: #7ab91a;
   cursor: pointer;
 }
@@ -785,6 +788,7 @@ button:hover {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 /* Full-width input fields */
@@ -834,6 +838,111 @@ span.psw {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
+}
+
+.signUpContent {
+  text-align: left;
+  margin: 20px;
+  width: 75%;
+  margin-left: 12%;
+}
+
+.signUpContent button[type=submitBtn] {
+  width: 100%;
+}
+
+/* Full-width input fields */
+.signUpContent input, .geburtstagLbl {
+  padding: 12px 20px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=date]:focus,
+input[type=straße]:focus,
+input[type=Hausnr]:focus,
+input[type=plz]:focus,
+input[type=Stadt]:focus,
+input[type=Land]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.signUpContent input[type=text], .signUpContent input[type=password], .signUpContent input[type=date], .geburtstagLbl {
+  width: 100%;
+  margin: 8px 5px;
+  float: left;
+}
+
+.signUpContent input[type=straße] {
+  width: 82%;
+  margin: 8px 0px 8px 5px;
+  float: left;
+}
+
+.signUpContent input[type=Hausnr] {
+  width: 16%;
+  margin: 8px -5px 8px 0px;
+  float: right;
+}
+
+.signUpContent input[type=plz], .signUpContent input[type=Stadt] {
+  width: 32%;
+  margin: 8px 10px 8px 5px;
+  float: left;
+}
+
+.signUpContent input[type=Land] {
+  width: 32%;
+  margin: 8px -5px 8px 0px;
+  float: right;
+}
+
+.geburtstagLbl, .signUpContent input[type=date] {
+  font-size: smaller;
+  color: gray;
+}
+
+.geburtstagLbl {
+  width: 14%;
+  margin: 8px 0 8px 5px;
+  float: left;
+  opacity: 0.9;
+}
+
+.signUpContent input[type=date] {
+  width: 86%;
+  margin: 8px -5px 8px 0px;
+  float: right;
+  padding: 11px 40px;
+}
+
+.signUpContent button[type=submitBtn] {
+  width: 100%;
+  margin: 8px 5px;
+}
+
+.signUpContent hr {
+  border: 1px solid #f1f1f1;
+  margin: 15px 0 20px 5px;
+  width: 100%;
+}
+
+.signUpContent p, .signUpContent h1 {
+  padding: 5px;
+  text-align: center;
+}
+
+.signUpContent h1 {
+  font-size: 25px;
+}
+
+.paymentButtons {
+  padding: 5px;
 }
 
 * {

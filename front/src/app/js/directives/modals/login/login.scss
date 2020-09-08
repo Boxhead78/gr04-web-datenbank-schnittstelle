@@ -2,7 +2,7 @@
 
 
 /* Set a style for all buttons */
-.loginModal button {
+.loginModal button, .signUpContent button {
   color: white;
   margin: 8px 0;
   border: none;
@@ -12,18 +12,16 @@
   background-color: $akzentFarbe;
 }
   
-.loginModal button:hover {
+.loginModal button:hover, .signUpContent button:hover {
   opacity: 0.9;
 }
 
 .loginModal button[type=submitBtn] {
-  // background-color: $akzentFarbe;
   width: 100%;
 }
 
 .loginModal button[type=signUpBtn] {
   width: auto;
-  // background-color: #f44336;
 }
   
 /* Add padding to container elements */
@@ -53,17 +51,19 @@
 }
    
 /* The Close Button (x) */
-.close {
+.loginClose {
   position: absolute;
-  right: 35px;
-  top: 15px;
+  right: 10px;
+  top: -15px;
   font-size: 40px;
   font-weight: bold;
   color: #f1f1f1;
+  position: relative;
+  float: right
 }
 
-.close:hover,
-.close:focus {
+.loginClose:hover,
+.loginClose:focus {
   color: $akzentFarbe;
   cursor: pointer;
 }
@@ -79,6 +79,7 @@
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+  width: 100%
 }
 
 /* Full-width input fields */

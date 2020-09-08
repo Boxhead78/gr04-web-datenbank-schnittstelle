@@ -1,0 +1,47 @@
+<div class="PageContent">
+    <div class="signUpContent">
+
+        <h1>Registrierung</h1>
+        <p>Jetzt registrieren und von den Vorteilen des Kundenkontos profitieren!</p>
+        <hr>
+
+        <input type="text" placeholder="E-mail" name="email" maxlength="30" required autofocus>
+        <input type="password" placeholder="Passwort" name="psw" maxlength="30" required>
+        <input type="password" placeholder="Passwort wiederholen" name="psw" maxlength="30" required>
+        <hr>
+
+        <input type="text" placeholder="Vorname" name="Vorname" maxlength="30" required>
+        <input type="text" placeholder="Nachname" name="Nachname" maxlength="30" required>
+
+        <label class="geburtstagLbl" for="Geburtstag">Geburtstag</label>
+        <input type="date" max="1999-01-01" placeholder="Geburtstag" name="Geburtstag" required>
+
+        <input type="straße" placeholder="Straße" name="Straße" maxlength="30" required>
+        <input type="Hausnr" placeholder="Hausnr." name="Hausnr" maxlength="4" required>
+
+        <input type="plz" placeholder="PLZ" name="plz" maxlength="5" pattern="[0-9]{5}" required>
+        <input type="Stadt" placeholder="Stadt" name="Stadt" maxlength="30" required>
+        <input type="Land" placeholder="Land" name="Land" maxlength="30" required>
+        <hr>
+
+        <div class="paymentButtons">
+            <label for="Rechnung" class="container">Rechnung
+                <input type="radio" id="Rechnung" name="payment" value="Rechnung" required>
+                <span class="checkmark"></span>
+            </label>
+            <label for="PayPal" class="container">PayPal
+                <input type="radio" id="PayPal" name="payment" value="PayPal">
+                <span class="checkmark"></span>
+            </label>
+            <label for="Kreditkarte" class="container">Lastschrift
+                <input type="radio" id="Kreditkarte" name="payment" value="Kreditkarte">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <hr>
+
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        <button type="submitBtn">Jetzt Registrieren</button>
+
+    </div>
+</div>
