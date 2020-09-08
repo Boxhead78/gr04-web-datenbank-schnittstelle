@@ -8,7 +8,7 @@ Modules: Flask, mysql-connector-python
 # importing modules
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from argon2 import PasswordHasher
+import argon2
 import sys
 import os
 import mysql.connector
@@ -31,7 +31,7 @@ cors = CORS(app, resources={
         "origins": "*"
     }
 })
-argon = PasswordHasher(time_cost=int(2),
+argon = argon2.PasswordHasher(time_cost=int(2),
                        memory_cost=int(51200),
                        parallelism=int(2),
                        hash_len=int(16),
@@ -58,6 +58,33 @@ def sql_connect():
     sql_newcur = sql_newcon.cursor(buffered=True)
     print("New connector to " + str(sql_host))
     return sql_newcon, sql_newcur
+
+
+# verify authentification of user
+
+
+def user_verfiy(email, password, sql_con, sql_cur):
+    # get user hash
+    sql_cur.execute("""SELECT password FROM user
+        WHERE email = %s""", (str(email),))
+    key = sql_cur.fetchone()
+    if key != None:
+        # use argon verify
+        try:
+            argon.verify(str(str(argonprefix) + str(key[0])), str(password))
+        # catch exceptions
+        except argon2.exceptions.VerifyMismatchError:
+            rc = bool(False)
+        except:
+            rc = bool(False)
+            print("Authentification process met an internal error!")
+        else:
+            rc = bool(True)
+        finally:
+            return bool(rc)
+    else:
+        return bool(False)
+
 
 # add new score to average_rating
 
@@ -194,7 +221,7 @@ def api_item_score():
         VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
     sql_con.commit()
 
-    # fetching required data for calculationg ne_average_raing
+    # fetching required data for calculationg new_average_rating
     sql_cur.execute(
         """SELECT average_rating, rating_count FROM item WHERE item_id = %s """, (req.get(
             "item_id"),))
@@ -250,18 +277,31 @@ def api_item_list():
 def api_login():
     # get request json and login data
     req = request.get_json().get("data")
+    resp = {"rc": int(1), "user_id": int(0)}
     # compare user data from db
-    # argon rehash
-    # return user id and success code
-    # front-end saves rest of the data entered in a cookie
-    pass
+    sql_con, sql_cur = sql_connect()
+    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+        # TODO argon rehash
+        sql_cur.execute("""SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
+        # return user id and success code
+        # front-end saves rest of the data entered in a cookie
+        resp["user_id"] = sql_cur.fetchone()[0]
+        resp["rc"] = int(1)
+        resp.update()
+    sql_cur.close()
+    sql_con.close()
+    return jsonify(resp=resp)
 
 
 @app.route('/api/user/register', methods=['POST'])
 def api_register():
     # get request data
     req = request.get_json().get("data")
+    resp = {"rc": int(1),
+            "id": int(0)}
     # TODO handle exceptions in entered data
+
+    # check for duplicate users
     sql_con, sql_cur = sql_connect()
     sql_cur.execute("""SELECT * FROM user
         WHERE email = %s""", (req.get("email"),))
@@ -269,21 +309,27 @@ def api_register():
     if res != None:
         sql_cur.close()
         sql_con.close()
-        return  # TODO return fail code because user/email already in use
-    # TODO confirm registration via oauth/mail
-    # compile data
-    req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
-    # commit new data to sql db
-    sql_cur.execute("""INSERT INTO user (rating_id, item_id, user_id)
-        VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
-    sql_con.commit()
-    sql_cur.close()
-    sql_con.close()
-    # return success code
-    return
+        return jsonify(resp=resp)
+    else: 
+        # TODO confirm registration via oauth/mail
+        
+        # compile data
+        req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
+        req.update()
+        # commit new data to sql db
+        sql_cur.execute("""INSERT INTO user (first_name, surname, email, gender, birthday, payment_method, password)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)""", (req.get("first_name"), req.get("surname"), req.get("email"), req.get("gender"), req.get("birthday"), req.get("payment_method"), req.get("password"),))
+        sql_con.commit()
+        resp["rc"] = int(0)
+        resp["id"] = sql_cur.lastrowid
+        resp.update()
+        sql_cur.close()
+        sql_con.close()
+        # return success code
+        return jsonify(resp=resp)
 
 
-@api.route('/api/order/place', methods=['POST'])
+@app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
     # check authority of user
