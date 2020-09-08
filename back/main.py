@@ -218,7 +218,7 @@ def api_item_score():
     return resp
 
 
-@app.route('/api/item/list', methods=['GET'])
+@app.route('/api/item/list', methods=['GET', 'POST'])
 def api_item_list():
     sql_con, sql_cur = sql_connect()
     sql_cur.execute(
@@ -283,7 +283,7 @@ def api_register():
     return
 
 
-@api.route('/api/order/place', methods=['POST'])
+@app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
     # check authority of user

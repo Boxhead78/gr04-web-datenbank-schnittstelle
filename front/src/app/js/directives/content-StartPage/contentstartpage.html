@@ -1,8 +1,8 @@
 <div class="item-container">
-    <div class={{item.class}} ng-repeat="item in items.item">
+    <div class={{item.class}} ng-repeat="item in items.item_list">
         <a href="#!item/{{item.id}}">
             <div class="image-container">
-                <img src="/front/src/assets/images/hammer.jpg" alt="Denim Jeans">
+                <img ng-src="/front/src/assets/images/{{item_list.picture}}" alt="{{ item.name }}">
                 <div class="description-container">
                     <div class="description">
                         {{ item.description }}
