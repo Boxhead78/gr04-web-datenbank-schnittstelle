@@ -14,6 +14,7 @@
         <!-- Imports -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-cookies.js"></script>
     </head>
     <body ng-app="baufuchs">
         <!--[if lt IE 7]>
@@ -38,8 +39,7 @@
         </div>
 
         <!-- login Modal -->
-        <login></login>
-
+            <login></login>
         <!-- dynamic content -->
         <ng-view></ng-view>
 
@@ -82,6 +82,7 @@
         <script src="js/controllers/homeController.js"></script>
         <script src="js/controllers/itemlistController.js"></script>
         <script src="js/controllers/itemdetailController.js"></script>
+        <script src="js/controllers/loginController.js"></script>
 
         <!-- Services -->
         <script src="js/services/itemListFilteredService.js"></script>

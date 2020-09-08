@@ -733,6 +733,11 @@ button:hover {
   width: auto;
 }
 
+.loginModal button[type=signUpBtn] a {
+  text-decoration: none;
+  color: white;
+}
+
 /* Add padding to container elements */
 .cartContainer {
   padding: 16px;

@@ -1,38 +1,46 @@
-<div id="loginModal" class="loginModal">
-    
-    <form class="loginModal-content animate">
-      
-      <div class="cartContainer">
-        
-        <span onclick="document.getElementById('loginModal').style.display='none'" class="loginClose" title="Close Modal">&times;</span>
-        
-        <h1>Login</h1>
-        <hr>
+<div id="loginModal" class="loginModal" ng-controller="loginController">
 
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-  
-        <label for="psw"><b>Passwort</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-          
-        <button type="submitBtn">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
+    <form class="loginModal-content animate">
+
+      <div class="cartContainer">
+
+        <span onclick="document.getElementById('loginModal').style.display='none'" class="loginClose" title="Close Modal">&times;</span>
+
+        <h1>Login</h1>
+        {{rootUser}}
+        <hr>
+        <div ng-if="rootUser==null">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required ng-model="$parent.username">
+
+          <label for="psw"><b>Passwort</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required ng-model="$parent.password">
+
+          <button type="submitBtn" ng-click="submitLoginForm(username, password)">Login</button>
+          <label>
+            <input type="checkbox" ng-checked="true" name="remember" ng-model="$parent.remember"> Remember me
+          </label>
+        </div>
       </div>
-  
-      <div class="cartContainer login" style="background-color:#f1f1f1">
-        <button type="signUpBtn" onclick="document.getElementById('loginModal').style.display='none'"><a href="#!signUpView">Registrieren</a></button>
-        <span class="psw"><a href="#">Passwort</a> vergessen?</span>
+
+      <div ng-if="rootUser==null">
+        <div class="cartContainer login" style="background-color:#f1f1f1">
+          <button type="signUpBtn" onclick="document.getElementById('loginModal').style.display='none'"><a href="#!register">Registrieren</a></button>
+          <span class="psw"><a href="#">Passwort</a> vergessen?</span>
+        </div>
+      </div>
+
+      <div ng-if="rootUser!=null">
+        <h3>Sie sind bereits eingeloggt</h3>
+        <button ng-click="removeCookie()">remove Cookie</button>
       </div>
     </form>
   </div>
 
-  
   <script>
     // Get the modal
     var modal = document.getElementById('loginModal');
-    
+
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {

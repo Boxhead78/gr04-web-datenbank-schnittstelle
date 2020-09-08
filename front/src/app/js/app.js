@@ -1,4 +1,4 @@
-var app = angular.module('baufuchs', ["ngRoute"]);
+var app = angular.module('baufuchs', ["ngRoute", "ngCookies"]);
         app.config(function($routeProvider) {
             $routeProvider
                 .when("/home", {
@@ -16,10 +16,14 @@ var app = angular.module('baufuchs', ["ngRoute"]);
                 .when("/cart", {
                     templateUrl: "js/views/cart.html"
                 })
-                .when("/login", {
-                    templateUrl: "js/views/login.html"
+                .when("/register", {
+                    templateUrl: "js/views/signUpView.html"
                 })
                 .otherwise({
                     redirectTo: "/home"
                 });
+        });
+
+        app.run(function($rootScope, $cookies) {
+            $rootScope.user = $cookies.get('user') ? $cookies.get('user') : null;
         });

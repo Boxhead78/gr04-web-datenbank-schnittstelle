@@ -11,7 +11,7 @@
   padding: 14px 20px;
   background-color: $akzentFarbe;
 }
-  
+
 .loginModal button:hover, .signUpContent button:hover {
   opacity: 0.9;
 }
@@ -22,13 +22,19 @@
 
 .loginModal button[type=signUpBtn] {
   width: auto;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
-  
+
+
 /* Add padding to container elements */
 .cartContainer {
   padding: 16px;
 }
-  
+
 /* The Modal (background) */
 .loginModal {
   display: none;
@@ -41,7 +47,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding-top: 50px;
 }
-  
+
 /* Modal Content/Box */
 .loginModal-content {
   background-color: $white;
@@ -49,7 +55,7 @@
   border: 1px solid #888;
   width: 50%;
 }
-   
+
 /* The Close Button (x) */
 .loginClose {
   position: absolute;
@@ -67,7 +73,7 @@
   color: $akzentFarbe;
   cursor: pointer;
 }
-  
+
 /* Clear floats */
 .clearfix::after {
   content: "";
@@ -111,11 +117,11 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
