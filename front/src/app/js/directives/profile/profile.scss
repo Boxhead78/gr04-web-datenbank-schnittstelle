@@ -1,0 +1,84 @@
+@import "../../../scss/colors";
+  
+.profileContent {
+  text-align: center;
+  margin: 20px;
+  width: 75%;
+  margin-left: 12%;
+}
+
+.labelGray, .labelWhite{
+  padding: 8px 20px;
+  display: inline-block;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+}
+
+.labelWhite {
+  background: $white;
+  font-weight: bold;
+}
+
+.labelGray{
+  background: #f1f1f1;
+}
+
+.profileLeft, .profileRight {
+  float: left;
+  margin-bottom: 20px;
+}
+
+.profileLeft {
+  width: 30%;
+  font-weight: bold;
+}
+
+.profileRight {
+  width: 70%;
+}
+
+.profile-avatar {
+  height: 200px;
+}
+
+.profileContent hr {
+  border: 1px solid #f1f1f1;
+  margin: 15px 0;
+  width: 100%
+}
+
+.profileContent p, .profileContent h1 {
+  margin: 5px;
+  text-align: center;
+}
+
+.profileContent h1 {
+  font-size: 25px;
+}
+
+.OrderTable, .OrderDetails, .OrderHeadlines {
+  width:100%;
+}
+
+.OrderHeadlines {
+  background-color: #f1f1f1;
+}
+
+.historyContent {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.OrderTable tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.OrderDetails tr:nth-child(even) {
+  background: transparent;
+}
+
+table {
+  border-spacing: 0px;
+  -webkit-border-vertical-spacing: 5px;
+}

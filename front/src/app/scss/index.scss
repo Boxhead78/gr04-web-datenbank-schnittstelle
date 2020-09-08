@@ -9,6 +9,7 @@
 @import "../js/directives/modals/login/login";
 @import "../js/directives/sign-up/signup";
 @import "../js/directives/cart/cart";
+@import "../js/directives/profile/profile";
 
 
 // General Styles
@@ -80,6 +81,10 @@ html, body {
         }
     }
 
+    #avatar-icon {
+        padding: 0px;
+    }
+
     form.search button {
         background: $background-footer;
         color: $white;
@@ -91,8 +96,8 @@ html, body {
         border-radius: 4px;
         margin-right: 20px;
         margin-left: -3px;
-        height:48px;
-        width:48px;
+        height:49px;
+        width:49px;
 
         &:hover {
             background: $akzentFarbe;
