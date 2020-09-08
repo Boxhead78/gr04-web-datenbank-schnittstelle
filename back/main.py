@@ -32,11 +32,11 @@ cors = CORS(app, resources={
     }
 })
 argon = argon2.PasswordHasher(time_cost=int(2),
-                       memory_cost=int(51200),
-                       parallelism=int(2),
-                       hash_len=int(16),
-                       salt_len=int(8),
-                       encoding=str('utf-8'))
+                              memory_cost=int(51200),
+                              parallelism=int(2),
+                              hash_len=int(16),
+                              salt_len=int(8),
+                              encoding=str('utf-8'))
 argonprefix = str("$argon2id$v=19$m=51200,t=2,p=")
 
 # Argument parsing
@@ -197,50 +197,47 @@ def api_item_filter():
 
 
 # for recieving and applying score reviews from users
-# json input: item_id, user_id, new_rating_value, password_hash
+# json input: item_id, user_id, new_rating_value, email, password
 # TODO integrate password hash in function
 
 @app.route('/api/item/score', methods=['POST'])
 def api_item_score():
     # get score value etc from request
     req = request.get_json().get("data")
+    resp = {"rc": int(1)}
     # frontend needs to check for user registration
-    # add score to score table
     sql_con, sql_cur = sql_connect()
+    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+        # add score to score table
+        sql_cur.execute("""INSERT INTO rating (rating_value)
+            VALUES (%s)""", (req.get("new_rating_value"),))
+        sql_con.commit()
 
-    sql_cur.execute("""INSERT INTO rating (rating_value)
-        VALUES (%s)""", (req.get("new_rating_value"),))
-    sql_con.commit()
+        # fetching new rating id
+        rating_id = sql_cur.lastrowid()
 
-    # fetching new rating id
-    sql_cur.execute("""SELECT @@IDENTITY AS 'Identity'""")
-    rating_id = int(sql_cur.fetchone()[0])
+        # connecing new rating with item in database
+        sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
+            VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
+        sql_con.commit()
 
-    # connecing new rating with item in database
-    sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
-        VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
-    sql_con.commit()
+        # fetching required data for calculating new_average_rating
+        sql_cur.execute(
+            """SELECT average_rating, rating_count FROM item WHERE item_id = %s """, (req.get(
+                "item_id"),))
+        result = sql_cur.fetchone()
 
-    # fetching required data for calculationg new_average_rating
-    sql_cur.execute(
-        """SELECT average_rating, rating_count FROM item WHERE item_id = %s """, (req.get(
-            "item_id"),))
-    result = sql_cur.fetchone()
+        # calculate new average_rating for item
+        new_average_rating = addToAverage(
+            result[1], result[0], req.get("new_rating_value"))
 
-    # calculate new average_rating for item
-    new_average_rating = addToAverage(
-        result[1], result[0], req.get("new_rating_value"))
-
-    # update score data in item table
-    sql_cur.execute("""UPDATE item SET average_rating = %s WHERE item_id = %s """, (
-        new_average_rating, req.get("item_id"),))
-    sql_con.commit()
-    sql_cur.close()
-    sql_con.close()
-    resp = jsonify(new_average_rating=new_average_rating
-                   )
-    resp.status_code = 200
-    return resp
+        # update score data in item table
+        sql_cur.execute("""UPDATE item SET average_rating = %s WHERE item_id = %s """, (
+            new_average_rating, req.get("item_id"),))
+        sql_con.commit()
+        sql_cur.close()
+        sql_con.close()
+        return jsonify(resp=resp)
 
 
 @app.route('/api/item/list', methods=['GET', 'POST'])
@@ -278,7 +275,8 @@ def api_login():
     sql_con, sql_cur = sql_connect()
     if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
         # TODO argon rehash
-        sql_cur.execute("""SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
+        sql_cur.execute(
+            """SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
         # return user id and success code
         # front-end saves rest of the data entered in a cookie
         resp["user_id"] = sql_cur.fetchone()[0]
@@ -306,9 +304,9 @@ def api_register():
         sql_cur.close()
         sql_con.close()
         return jsonify(resp=resp)
-    else: 
+    else:
         # TODO confirm registration via oauth/mail
-        
+
         # compile data
         req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
         req.update()
@@ -324,18 +322,32 @@ def api_register():
         # return success code
         return jsonify(resp=resp)
 
-# json input: password of user, item_ids, counts,
+# json input: email, password of user, item_ids, counts,
 
 
 @app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
     req = request.get_json().get("data")
+    resp = {"rc": int(1)}
+    sql_con, sql_cur = sql_connect()
     # check authority of user
-    # compile order details
-    # commit order to sql db
-    # return success code
-    pass
+    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+        # TODO compile order details
+        # commit order to sql db
+        timestamp = datetime.timestamp(datetime.now())
+        sql_cur.execute(
+            """INSERT INTO order (user_id, booking_date, creation_date) VALUES (%s, timestamp, timestamp)""", (req.get("user_id"),))
+        sql_con.commit()
+        order_id = sql.cur.lastrowid()
+        for i in req.get("order_list"):
+            sql_cur.execute("""INSERT INTO order_details (order_id, item_id, count) VALUES (%s, %s, %s)""",
+                            (i["order_id"], i["item_id"], i["count"],))
+            sql.con.commit()
+        sql_cur.close()
+        sql_con.close()
+        # return success code
+        return jsonify(resp=resp)
 
 
 if __name__ == '__main__':
