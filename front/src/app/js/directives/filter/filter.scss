@@ -1,7 +1,7 @@
 @import "../../../scss/colors";
 
 .filter-wrapper {
-    border-bottom: 2px solid $border-color;
+    border-bottom: 2px solid $lightgray_2;
 }
 
 .filter-headline {
@@ -9,9 +9,9 @@
     font-weight: bold;
     padding: 10px;
     border-top: 3px solid $akzentFarbe;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 $gray_transparent, 0 6px 20px 0 $gray_4_transparent;
     margin: 2px 6px 0 6px;
-    background: rgba(255,255,255,0.4)
+    background: $lightgray_4_transparent;
   }
 
   .filter-content ul, .filter-content-horizontal ul {
@@ -59,7 +59,7 @@
 
   /* Style the color of the custom checkbox */
   .checkmark {
-    background-color: $background-footer;
+    background-color: $gray_1;
   }
 
   /* Colors: Style the color of the custom checkbox*/
@@ -67,10 +67,10 @@
   .blue {background-color: blue}
   .green {background-color: green}
   .yellow {background-color: yellow}
-  .pink {background-color: $pastell-pink}
+  .pink {background-color: $pink}
   .multicolored {
       background-image: -webkit-gradient(linear,left bottom,right top
-      ,color-stop(.05,#1167cf),color-stop(.15, $pastell-pink)
+      ,color-stop(.05,#1167cf),color-stop(.15, $pink)
       ,color-stop(.25,#000291),color-stop(.45,#00ebd7)
       ,color-stop(.55,#00b539),color-stop(.75,#f9fd00)
       ,color-stop(1,red))
@@ -80,18 +80,18 @@
 
   /* On mouse-over, add a grey background color */
   .container:hover input ~ .checkmark {
-    background-color: $search-button-hover;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: $gray_2;
+    box-shadow: 0 4px 8px 0 $gray_transparent, 0 6px 20px 0 $gray_4_transparent;
   }
 
   /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: $search-button-hover;
+    background-color: $gray_2;
   }
 
   /* Colors: On mouse-over, add a grey shadow*/
   .container:hover input ~ .checkmark-color {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 $gray_transparent, 0 6px 20px 0 $gray_4_transparent;
   }
 
   /* Colors: Create the checkmark/indicator (hidden when not checked)*/
@@ -113,7 +113,7 @@
 
   /* Colors: Style the color of the checkmark/indicator for white*/
   .container .white:after {
-    border: solid $background-footer;
+    border: solid $gray_1;
   }
 
   /* Colors: Style the checkmark/indicator*/
@@ -160,7 +160,7 @@
     transition: width 0.4s ease-in-out;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    border: 2px solid $border-input;
+    border: 2px solid $lightgray_3;
     border-radius: 4px;
     font-size: 16px;
     background-color: $white;
@@ -181,8 +181,8 @@
   }
 
   .select-selected {
-    background-color: $border-input;
-    border: 2px solid $border-input;
+    background-color: $lightgray_3;
+    border: 2px solid $lightgray_3;
     // border-radius: 4px;
     color: $black;
     padding: 12px 15px;
@@ -216,8 +216,8 @@
   /* Style the item */
   .select-items div {
       margin: 4px 10px;
-      border-bottom: 2px solid $background-color-gray;
-      border-top: 2px solid $background-color-gray;
+      border-bottom: 2px solid $gray_3_transparent;
+      border-top: 2px solid $gray_3_transparent;
       padding: 8px 16px;
   }
 

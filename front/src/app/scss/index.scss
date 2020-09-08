@@ -51,25 +51,25 @@ html, body {
     display: flex;
     top: 0;
     position: sticky;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: $lightBlack_transparent;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     z-index: 99;
 
     &:hover {
-        background-color: $menu-bar-gray;
+        background-color: $lightBlack;
         transition: 0.2s;
     }
 
     a {
         text-decoration: none;
-        color: $border-color;
+        color: $lightgray_2;
         width: 100px;
         display: block;
         padding: 15px;
-        border-right: 2px solid $border-color;
-        border-left: 2px solid $border-color;
+        border-right: 2px solid $lightgray_2;
+        border-left: 2px solid $lightgray_2;
         margin-top: 10px;
         margin-bottom: 10px;
         text-align: center;
@@ -86,7 +86,7 @@ html, body {
     }
 
     form.search button {
-        background: $background-footer;
+        background: $gray_1;
         color: $white;
         font-size: 17px;
         border: 0px;
@@ -110,7 +110,7 @@ html, body {
         -webkit-transition: width 0.4s ease-in-out;
         transition: width 0.4s ease-in-out;
         box-sizing: border-box;
-        border: 2px solid $border-input;
+        border: 2px solid $lightgray_3;
         border-radius: 4px;
         font-size: 16px;
         background-color: $white;
@@ -130,7 +130,7 @@ html, body {
 .footer {
     color: $white;
     display: flex;
-    background-color: $background-footer;
+    background-color: $gray_1;
     justify-content: space-around;
 
     div {

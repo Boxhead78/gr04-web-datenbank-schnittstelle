@@ -22,7 +22,7 @@
 }
 
 .labelGray{
-  background: #f1f1f1;
+  background: $lightgray_1;
 }
 
 .profileLeft, .profileRight {
@@ -44,7 +44,7 @@
 }
 
 .profileContent hr {
-  border: 1px solid #f1f1f1;
+  border: 1px solid $lightgray_1;
   margin: 15px 0;
   width: 100%
 }
@@ -63,15 +63,15 @@
 }
 
 .OrderHeadlines {
-  background-color: #f1f1f1;
+  background-color: $lightgray_1;
 }
 
 .historyContent {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 $gray_transparent;
 }
 
 .OrderTable tr:nth-child(even) {
-    background-color: #f1f1f1;
+    background-color: $lightgray_1;
 }
 
 .OrderDetails tr:nth-child(even) {

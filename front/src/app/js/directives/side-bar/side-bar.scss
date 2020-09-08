@@ -17,7 +17,7 @@
 
   /* Change the link color on hover */
   .sideBar li a:hover {
-    background: $menu-bar-gray;
+    background: $lightBlack;
     color: $white;
     transition: 0.3s;
   }
@@ -31,12 +31,12 @@
   }
 
   .dropdown-content a {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: $gray_transparent;
     transition: 0.6s;
   }
 
   .navbar a:hover, .dropdown:hover .dropbtn a {
-    background: $menu-bar-gray;
+    background: $lightBlack;
     color: $white;
     transition: 0.3s;
   }

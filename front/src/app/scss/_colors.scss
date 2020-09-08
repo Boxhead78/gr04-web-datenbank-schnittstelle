@@ -1,13 +1,19 @@
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
-// $background-color-gray: rgb(241, 241, 241);
-$background-color-gray: rgba(51, 51, 51, 0.2);
-$hover-link:rgb(235, 234, 234);
-$border-color: rgb(225, 225, 225);
-$border-input: rgb(204, 204, 204);
-$background-header: rgb(204, 204, 204);
-$background-footer: rgb(119, 119, 119);
-$search-button-hover: rgb(82, 82, 82);
-$menu-bar-gray: rgb(51, 51, 51);
-$pastell-pink: #ff6781;
-$akzentFarbe: rgb(122, 185, 26);
+
+$lightgray_1: rgb(241, 241, 241); //lightgray
+$lightgray_2: rgb(225, 225, 225); //border-color
+$lightgray_3: rgb(204, 204, 204); //border-input
+$lightgray_4_transparent: rgba(255,255,255,0.4);
+$gray_1: rgb(119, 119, 119); //background-footer
+$gray_2: rgb(82, 82, 82); //search-button-hover
+$gray_3_transparent: rgba(51, 51, 51, 0.2); //background-color-gray
+$gray_4_transparent: rgba(0, 0, 0, 0.19);
+$lightBlack: rgb(51, 51, 51); //menu-bar on Hover
+$lightBlack_transparent : rgba(0, 0, 0, 0.8); //menu-bar
+$gray_transparent: rgba(0, 0, 0, 0.2); //
+
+
+$pink: #ff6781; //pastell-pink
+$akzentFarbe: rgb(122, 185, 26); //akzentFarbe
+
