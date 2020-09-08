@@ -46,15 +46,18 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Exportiere Daten aus Tabelle baufuchs.category: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`category_id`, `name`, `category_parent_id`) VALUES
-	(1, 'Handwerkzeug', NULL),
-	(2, 'Maschienen', NULL),
-	(3, 'Messwerkzeuge', NULL),
-	(4, 'Maschienenzubehör', NULL),
+	(1, 'Handwerkzeug', 12),
+	(2, 'Maschinen', 5),
+	(3, 'Messwerkzeuge', 12),
+	(4, 'Maschinenzubehör', 5),
 	(5, 'Eisenwaren', NULL),
-  (6, 'Blöcke', NULL),
-  (7, 'Kreaturen', NULL),
-  (8, 'Gegenstände', NULL),
-  (9, 'Spielzeugwaren', NULL);
+  (6, 'Blöcke', 10),
+  (7, 'Kreaturen', 10),
+  (8, 'Gegenstände', 10),
+  (9, 'Spielzeugwaren', 11),
+  (10, 'Minecraft', NULL),
+  (11, 'Kinderwelt', NULL),
+  (12, 'Werkzeuge', NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.country
