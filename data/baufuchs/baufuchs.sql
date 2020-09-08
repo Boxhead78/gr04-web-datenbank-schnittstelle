@@ -77,7 +77,7 @@ INSERT INTO `country` (`country_id`, `country_name`) VALUES
 CREATE TABLE IF NOT EXISTS `item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `description` varchar(50) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
   `value_stock` int(11) NOT NULL DEFAULT 0,
   `price` double NOT NULL DEFAULT 0,
   `picture` varchar(50) DEFAULT NULL,
@@ -100,24 +100,24 @@ CREATE TABLE IF NOT EXISTS `item` (
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `currency_id`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`, `average_rating`) VALUES
 	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'Braun', '2020-09-02', NULL, 1074, 1, 'Holz', 1, NULL, 0),
-	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'schwarz', '2020-09-02', NULL, 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0),
-	(3, 'Bügelsäge', NULL, 3, 21.35, NULL, 'silber', '2020-09-02', NULL, 870, 1, 'Kunststoff/Stahl', 3, NULL, 0),
-	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum zerteilen von Metall', 10, 40.45, NULL, 'orange/schwarz', '2020-09-02', NULL, 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0),
+	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'Schwarz', '2020-09-02', NULL, 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0),
+	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, NULL, 'Weiß', '2020-09-02', NULL, 870, 1, 'Kunststoff/Stahl', 3, NULL, 0),
+	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, NULL, 'Schwarz', '2020-09-02', NULL, 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0),
 	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-02', NULL, 2400, 1, 'Kunststoff', 9, 'XL Variante', 0),
 	(6, 'Erde', 'Ein Würfel Erde aus Minecraft-Kollektion', 5000, 0.99, 'mc_erde.jpg', 'Braun', '2020-09-02', NULL, 1000, 1, 'Dreck', 4, NULL, 0),
 	(7, 'Stein', 'Ein Würfel Stein aus Minecraft-Kollektion', 2500, 1.49, 'mc_stein.jpg', 'Grau', '2020-09-02', NULL, 3000, 1, 'Stein', 4, NULL, 0),
-	(8, 'Eisen', 'Ein Würfel Eisen aus Minecraft-Kollektion', 128, 3.49, 'mc_eisen.jpg', 'Grau-braun', '2020-09-02', NULL, 3500, 1, 'Eisen', 4, NULL, 0),
-	(9, 'Huhn', 'Ein Huhn aus unserer Minecraft-Kollektion', 200, 5.00, 'mc_huhn.jpg', 'Weiß', '2020-09-02', NULL, 500, 1, 'Organisch', 4, NULL, 0),
+	(8, 'Eisen', 'Ein Würfel Eisen aus Minecraft-Kollektion', 128, 3.49, 'mc_eisen.jpg', 'Schwarz', '2020-09-02', NULL, 3500, 1, 'Eisen', 4, NULL, 0),
+	(9, 'Huhn', 'Ein Huhn aus unserer Minecraft-Kollektion', 200, 5, 'mc_huhn.jpg', 'Weiß', '2020-09-02', NULL, 500, 1, 'Organisch', 4, NULL, 0),
 	(10, 'Kabeljau', 'Ein Kabeljau aus unserer Minecraft-Kollektion', 125, 2.49, 'mc_kabeljau.jpg', 'Braun', '2020-09-02', NULL, 100, 1, 'Organisch', 4, NULL, 0),
-	(11, 'Wolf', 'Ein Wolf aus unserer Minecraft-Kollektion (nicht gezähmt!)', 25, 10.00, 'mc_wolf.jpg', 'Weiß-Grau', '2020-09-02', NULL, 2500, 1, 'Organisch', 4, NULL, 0),
+	(11, 'Wolf', 'Ein Wolf aus unserer Minecraft-Kollektion (nicht gezähmt!)', 25, 10, 'mc_wolf.jpg', 'Weiß', '2020-09-02', NULL, 2500, 1, 'Organisch', 4, NULL, 0),
 	(12, 'Lavaeimer', 'Ein frischer Lavaeimer aus unserer Minecraft-Kollektion', 10, 49.99, 'mc_lava.jpg', 'Weiß', '2020-09-02', NULL, 1000, 1, 'Eisen, Lava', 4, NULL, 0),
 	(13, 'Lore', 'Eine Lore aus unserer Minecraft-Kollektion', 3, 49.99, 'mc_minecart.jpg', 'Grau', '2020-09-02', NULL, 6000, 1, 'Eisen', 4, NULL, 0),
 	(14, 'Keks', 'Ein Keks aus unserer Minecraft-Kollektion', 85, 0.49, 'mc_keks.jpg', 'Braun', '2020-09-02', NULL, 75, 1, 'Weizen, Kakao', 4, NULL, 0),
 	(15, 'Knochen', 'Ein Knochen aus unserer Minecraft-Kollektion', 1500, 3.29, 'mc_knochen.jpg', 'Weiß', '2020-09-02', NULL, 125, 1, 'Knochen', 4, NULL, 0),
-	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Himmelsblau', '2020-09-02', NULL, 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 0),
-	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', NULL, '2020-09-02', NULL, 2000, 1, NULL, 1, 'Mit Pipette, Messbecher & Co', 0),
-	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball', 'Weiß-Blau', '2020-09-02', NULL, 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 0),
-  (19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Türkis', '2020-09-02', NULL, 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0);
+	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Blau', '2020-09-02', NULL, 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 0),
+	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', 'Grün', '2020-09-02', NULL, 2000, 1, 'Kunststoff', 1, 'Mit Pipette, Messbecher & Co', 0),
+	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball.jpg', 'Weiß', '2020-09-02', NULL, 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 0),
+	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-02', NULL, 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item2category
