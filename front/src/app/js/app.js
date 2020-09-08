@@ -10,7 +10,8 @@ var app = angular.module('baufuchs', ["ngRoute"]);
                     controller: "itemlistController"
                 })
                 .when("/item/:id", {
-                    templateUrl:"js/views/itemDetail.html"
+                    templateUrl:"js/views/itemDetail.html",
+                    controller: "itemdetailController"
                 })
                 .when("/cart", {
                     templateUrl: "js/views/cart.html"

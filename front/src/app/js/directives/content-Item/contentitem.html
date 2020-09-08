@@ -1,34 +1,31 @@
 <div class="PageContent">
 
     <addtocart></addtocart>
-    
+
     <div class="PageRow">
         <div class="ItemPageColumn">
             <div>
                 <div class="Image">
-                    <img class="ItemPageImg" src="/front/src/assets/images/Holz.jpg" alt="Denim Jeans">
+                    <img class="ItemPageImg" ng-src="/front/src/assets/images/{{item.picture}}" alt="{{item.name}}">
                 </div>
             </div>
         </div>
-        
+
         <div class="ItemPageColumn">
             <div class="ItemCard">
-                <div class="ItemHeadline"><h2>Tailored Jeans</h2></div>
-                <p class="price">$19.99</p>
+                <div class="ItemHeadline"><h2>{{item.name}}</h2></div>
+                <p class="price">{{item.price}}</p>
                 <ul class="information">
-                    <li>additional information</li>
-                    <li>mass and weight</li>
-                    <li>usecase</li>
+                    <li>Auf Lager: {{item.numStock}}</li>
+                    <li>Anzahl: {{item.count}}</li>
+                    <li>Gewicht: {{item.weight}}</li>
+                    <li>Material: {{item.material}}</li>
+                    <li>Farbe: {{item.color}}</li>
+                    <li>Hersteller: {{item.manufactorer_id}}</li>
                 </ul>
                 <p><button onclick="document.getElementById('addToCartModal').style.display='block'">Add to Cart</button></p>
-                <p class="description">Description text. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam 
-                    et justo duo dolores et ea rebum.</p>
+                <p class="description">Beschreibung: <br>{{item.description}}</p>
             </div>
         </div>
       </div>
-
-      
-    
-
 </div>

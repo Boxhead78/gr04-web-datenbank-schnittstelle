@@ -529,6 +529,8 @@ article {
 
 .ItemCard .price {
   margin: 50px 0 0 0;
+  color: grey;
+  font-size: 22px;
 }
 
 .ItemCard .information {
@@ -541,6 +543,49 @@ article {
 
 .ItemCard .description {
   margin: 50px 0 20px 0;
+}
+
+.PageContent {
+  padding: 10px;
+  background-color: white;
+  background-color: white;
+  text-align: center;
+  color: black;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+}
+
+.PageColumn {
+  float: left;
+  width: 25%;
+}
+
+.Image {
+  position: relative;
+}
+
+/* Clear floats after the columns */
+.PageRow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #7ab91a;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 .sideBar ul {
