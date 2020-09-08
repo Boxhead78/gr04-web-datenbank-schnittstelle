@@ -2,7 +2,7 @@
     <div class="item-card" ng-repeat="item in items.item">
         <a href="#!item/{{item.id}}">
             <div class="image-container">
-                <img src="/front/src/assets/images/hammer.jpg" alt="Denim Jeans">
+                <img ng-src="/front/src/assets/images/{{item.picture}}" alt="{{item.name}}">
                 <div class="image-overlay">
                     <div class="image-text">
                         {{item.description}}
