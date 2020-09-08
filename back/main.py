@@ -143,7 +143,7 @@ def api_item_filter():
           AND (%s IS NULL OR i.value_stock >= %s)
           AND (%s IS NULL OR i2c.category_id = %s)
           LIMIT 0, %s""", (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
-                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("limit"), req.get("category"), req.get("category"),)
+                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("category"), req.get("category"), req.get("limit"),)
                     )
     # fetch all returned items
     data = sql_cur.fetchall()
@@ -213,8 +213,6 @@ def api_item_score():
     resp = jsonify(new_average_rating=new_average_rating
                    )
     resp.status_code = 200
-    sql_cur.close()
-    sql_con.close()
     return resp
 
 
@@ -241,8 +239,6 @@ def api_item_list():
     resp = jsonify(item_list=item_list
                    )
     resp.status_code = 200
-    sql_cur.close()
-    sql_con.close()
     return resp
 
 
@@ -282,10 +278,13 @@ def api_register():
     # return success code
     return
 
+# json input: password of user, item_ids, counts,
+
 
 @app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
+    req = request.get_json().get("data")
     # check authority of user
     # compile order details
     # commit order to sql db
