@@ -10,11 +10,11 @@
         {{rootUser}}
         <hr>
         <div ng-if="rootUser==null">
-          <label for="uname"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="uname" required ng-model="$parent.username">
+          <!-- <label for="uname"><b>E-Mail</b></label> -->
+          <input type="text" placeholder="E-Mail" name="uname" required ng-model="$parent.username">
 
-          <label for="psw"><b>Passwort</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required ng-model="$parent.password">
+          <!-- <label for="psw"><b>Passwort</b></label> -->
+          <input type="password" placeholder="Passwort" name="psw" required ng-model="$parent.password">
 
           <button type="submitBtn" ng-click="submitLoginForm(username, password)">Login</button>
           <label>
@@ -36,15 +36,3 @@
       </div>
     </form>
   </div>
-
-  <script>
-    // Get the modal
-    var modal = document.getElementById('loginModal');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    </script>

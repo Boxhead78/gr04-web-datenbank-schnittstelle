@@ -589,6 +589,14 @@ button:hover {
   opacity: 0.9;
 }
 
+.starRating {
+  float: right;
+}
+
+.starRating .checked {
+  color: #7ab91a;
+}
+
 .sideBar ul {
   list-style-type: none;
   margin: 3px 0 0 0;
