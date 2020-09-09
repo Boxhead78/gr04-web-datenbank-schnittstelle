@@ -300,8 +300,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Exportiere Daten aus Tabelle baufuchs.user: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `first_name`, `gender`, `surname`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`, `address_id`, `email_address`) VALUES
-	(1, 'Fabian', 'Männlich', 'Hennemann', '1999-12-28', 1, '', 1, 1, NULL, 'fabian.hennemann@baufuchs.de'),
-	(2, 'Maik', 'Männlich', 'Baumann', '1996-08-19', 2, '', 1, 3, NULL, 'maik.baumann@baufuchs.de');
+	(1, 'Fabian', 'Männlich', 'Hennemann', '1999-12-28', 1, '', 1, 1, 1, 'fabian.hennemann@baufuchs.de'),
+	(2, 'Maik', 'Männlich', 'Baumann', '1996-08-19', 2, '', 1, 3, 2, 'maik.baumann@baufuchs.de');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
