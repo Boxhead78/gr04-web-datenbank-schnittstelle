@@ -1,4 +1,4 @@
-app.controller('homeController', ['$scope', 'itemListService', function($scope, itemList) {
+app.controller('homeController', ['$scope', '$rootScope', '$cookies', 'itemListService', function($scope, $rootScope, $cookies, itemList) {
     itemList.then(function(items) {
         $scope.items = items.data;
 
@@ -21,4 +21,12 @@ app.controller('homeController', ['$scope', 'itemListService', function($scope, 
             }
         }
     })
+
+    $scope.addItem = function(item_id, item_name) {
+        $rootScope.cart.push({id: item_id, name: item_name});
+
+        if ($cookies.get('user') ) {
+            $cookies.putObject('cart', $rootScope.cart);
+        }
+    }
 }])

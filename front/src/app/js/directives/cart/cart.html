@@ -1,12 +1,6 @@
-<section>
-    <nav class="left">
-        <sidebar></sidebar>
-    </nav>
-
-    <article>
         <h2>Warenkorb</h2>
         <p>Hier finden Sie ihre hinzugefügten Produkte.</p>
-         
+
         <table id="warenkorb">
           <thead>
             <th style="width:50%">Produkte</th>
@@ -14,30 +8,10 @@
             <th>Löschen</th>
           </thead>
           <tbody>
-          <tr>
-            <td>Sample text1</td>
+          <tr ng-repeat="item in cart">
+            <td>{{item.name}}</td>
             <td><input type="number" value="1"></td>
-            <td><i class="fas fa-trash" onclick="deleteRow(this)"></i></td>
-          </tr>
-          <tr>
-            <td>Sample text2</td>
-            <td><input type="number" value="1"></td>
-            <td><i class="fas fa-trash" onclick="deleteRow(this)"></i></td>
-          </tr>
-          <tr>
-            <td>Sample text3</td>
-            <td><input type="number" value="1"></td>
-            <td><i class="fas fa-trash" onclick="deleteRow(this)"></i></td>
-          </tr>
-          <tr>
-            <td>Sample text4</td>
-            <td><input type="number" value="1"></td>
-            <td><i class="fas fa-trash" onclick="deleteRow(this)"></i></td>
-          </tr>
-          <tr>
-            <td>Sample text5</td>
-            <td><input type="number" value="1"></td>
-            <td><i class="fas fa-trash" onclick="deleteRow(this)"></i></td>
+            <td><i class="fas fa-trash" ng-click="removeItem(item)"></i></td>
           </tr>
         </tbody>
         </table>
@@ -48,10 +22,3 @@
         <p>12345 Beispielhausen</p>
         <p>Das ist ihre Zahlungsmethode:</p>
         <button class="Kaufen" id="finishbuy">Kaufen</button>
-    </article>
-
-    <nav class="right">
-        <filter></filter>
-    </nav>
-
-</section>

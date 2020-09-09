@@ -12,6 +12,6 @@
             <h1>{{item.name}}</h1>
             <p class="price">{{item.price}}</p>
         </a>
-        <button>Add to Cart</button>
+        <button ng-click="addItem(item.id, item.name)">Add to Cart</button>
     </div>
 </div>
