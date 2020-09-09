@@ -79,43 +79,41 @@ CREATE TABLE IF NOT EXISTS `item` (
   `price` double NOT NULL DEFAULT 0,
   `picture` varchar(50) DEFAULT NULL,
   `color` varchar(50) NOT NULL,
-  `creation_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `currency_id` int(11) DEFAULT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `weight` double DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `material` varchar(50) DEFAULT NULL,
   `manufactorer_id` int(11) DEFAULT NULL,
   `technical_details` varchar(50) DEFAULT NULL,
   `average_rating` double DEFAULT 0,
-  `rating_count` int(11) DEFAULT NULL,
+  `rating_count` int(11) DEFAULT 0,
   PRIMARY KEY (`item_id`) USING BTREE,
-  KEY `FK_item_currency` (`currency_id`),
   KEY `FK_item_manufactorer` (`manufactorer_id`),
   CONSTRAINT `FK_item_manufactorer` FOREIGN KEY (`manufactorer_id`) REFERENCES `manufactorer` (`manufactorer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- Exportiere Daten aus Tabelle baufuchs.item: ~19 rows (ungefähr)
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `currency_id`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`, `average_rating`, `rating_count`) VALUES
-	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'Braun', '2020-09-02 00:00:00', NULL, 1074, 1, 'Holz', 1, NULL, 0, NULL),
-	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'Schwarz', '2020-09-02 00:00:00', NULL, 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0, NULL),
-	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, NULL, 'Weiß', '2020-09-02 00:00:00', NULL, 870, 1, 'Kunststoff/Stahl', 3, NULL, 0, NULL),
-	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, NULL, 'Schwarz', '2020-09-02 00:00:00', NULL, 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0, NULL),
-	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-02 00:00:00', NULL, 2400, 1, 'Kunststoff', 9, 'XL Variante', 0, NULL),
-	(6, 'Erde', 'Ein Würfel Erde aus Minecraft-Kollektion', 5000, 0.99, 'mc_erde.jpg', 'Braun', '2020-09-02 00:00:00', NULL, 1000, 1, 'Dreck', 4, NULL, 0, NULL),
-	(7, 'Stein', 'Ein Würfel Stein aus Minecraft-Kollektion', 2500, 1.49, 'mc_stein.jpg', 'Grau', '2020-09-02 00:00:00', NULL, 3000, 1, 'Stein', 4, NULL, 0, NULL),
-	(8, 'Eisen', 'Ein Würfel Eisen aus Minecraft-Kollektion', 128, 3.49, 'mc_eisen.jpg', 'Schwarz', '2020-09-02 00:00:00', NULL, 3500, 1, 'Eisen', 4, NULL, 0, NULL),
-	(9, 'Huhn', 'Ein Huhn aus unserer Minecraft-Kollektion', 200, 5, 'mc_huhn.jpg', 'Weiß', '2020-09-02 00:00:00', NULL, 500, 1, 'Organisch', 4, NULL, 0, NULL),
-	(10, 'Kabeljau', 'Ein Kabeljau aus unserer Minecraft-Kollektion', 125, 2.49, 'mc_kabeljau.jpg', 'Braun', '2020-09-02 00:00:00', NULL, 100, 1, 'Organisch', 4, NULL, 0, NULL),
-	(11, 'Wolf', 'Ein Wolf aus unserer Minecraft-Kollektion (nicht gezähmt!)', 25, 10, 'mc_wolf.jpg', 'Weiß', '2020-09-02 00:00:00', NULL, 2500, 1, 'Organisch', 4, NULL, 0, NULL),
-	(12, 'Lavaeimer', 'Ein frischer Lavaeimer aus unserer Minecraft-Kollektion', 10, 49.99, 'mc_lava.jpg', 'Weiß', '2020-09-02 00:00:00', NULL, 1000, 1, 'Eisen, Lava', 4, NULL, 0, NULL),
-	(13, 'Lore', 'Eine Lore aus unserer Minecraft-Kollektion', 3, 49.99, 'mc_minecart.jpg', 'Grau', '2020-09-02 00:00:00', NULL, 6000, 1, 'Eisen', 4, NULL, 0, NULL),
-	(14, 'Keks', 'Ein Keks aus unserer Minecraft-Kollektion', 85, 0.49, 'mc_keks.jpg', 'Braun', '2020-09-02 00:00:00', NULL, 75, 1, 'Weizen, Kakao', 4, NULL, 0, NULL),
-	(15, 'Knochen', 'Ein Knochen aus unserer Minecraft-Kollektion', 1500, 3.29, 'mc_knochen.jpg', 'Weiß', '2020-09-02 00:00:00', NULL, 125, 1, 'Knochen', 4, NULL, 0, NULL),
-	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Blau', '2020-09-02 00:00:00', NULL, 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 0, NULL),
-	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', 'Grün', '2020-09-02 00:00:00', NULL, 2000, 1, 'Kunststoff', 1, 'Mit Pipette, Messbecher & Co', 0, NULL),
-	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball.jpg', 'Weiß', '2020-09-02 00:00:00', NULL, 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 0, NULL),
-	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-02 00:00:00', NULL, 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, NULL);
+INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`, `average_rating`, `rating_count`) VALUES
+	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'Braun', '2020-09-09 12:41:48', 1074, 1, 'Holz', 1, NULL, 0, 0),
+	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'Schwarz', '2020-09-09 12:41:49', 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0, 0),
+	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, NULL, 'Weiß', '2020-09-09 12:41:50', 870, 1, 'Kunststoff/Stahl', 3, NULL, 0, 0),
+	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, NULL, 'Schwarz', '2020-09-09 12:41:51', 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0, 0),
+	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-09 12:41:53', 2400, 1, 'Kunststoff', 9, 'XL Variante', 0, 0),
+	(6, 'Erde', 'Ein Würfel Erde aus Minecraft-Kollektion', 5000, 0.99, 'mc_erde.jpg', 'Braun', '2020-09-09 12:41:54', 1000, 1, 'Dreck', 4, NULL, 0, 0),
+	(7, 'Stein', 'Ein Würfel Stein aus Minecraft-Kollektion', 2500, 1.49, 'mc_stein.jpg', 'Grau', '2020-09-09 12:41:57', 3000, 1, 'Stein', 4, NULL, 0, 0),
+	(8, 'Eisen', 'Ein Würfel Eisen aus Minecraft-Kollektion', 128, 3.49, 'mc_eisen.jpg', 'Schwarz', '2020-09-09 12:41:55', 3500, 1, 'Eisen', 4, NULL, 0, 0),
+	(9, 'Huhn', 'Ein Huhn aus unserer Minecraft-Kollektion', 200, 5, 'mc_huhn.jpg', 'Weiß', '2020-09-09 12:41:58', 500, 1, 'Organisch', 4, NULL, 0, 0),
+	(10, 'Kabeljau', 'Ein Kabeljau aus unserer Minecraft-Kollektion', 125, 2.49, 'mc_kabeljau.jpg', 'Braun', '2020-09-09 12:41:59', 100, 1, 'Organisch', 4, NULL, 0, 0),
+	(11, 'Wolf', 'Ein Wolf aus unserer Minecraft-Kollektion (nicht gezähmt!)', 25, 10, 'mc_wolf.jpg', 'Weiß', '2020-09-09 12:42:00', 2500, 1, 'Organisch', 4, NULL, 0, 0),
+	(12, 'Lavaeimer', 'Ein frischer Lavaeimer aus unserer Minecraft-Kollektion', 10, 49.99, 'mc_lava.jpg', 'Weiß', '2020-09-09 12:42:01', 1000, 1, 'Eisen, Lava', 4, NULL, 0, 0),
+	(13, 'Lore', 'Eine Lore aus unserer Minecraft-Kollektion', 3, 49.99, 'mc_minecart.jpg', 'Grau', '2020-09-09 12:42:02', 6000, 1, 'Eisen', 4, NULL, 0, 0),
+	(14, 'Keks', 'Ein Keks aus unserer Minecraft-Kollektion', 85, 0.49, 'mc_keks.jpg', 'Braun', '2020-09-09 12:42:03', 75, 1, 'Weizen, Kakao', 4, NULL, 0, 0),
+	(15, 'Knochen', 'Ein Knochen aus unserer Minecraft-Kollektion', 1500, 3.29, 'mc_knochen.jpg', 'Weiß', '2020-09-09 12:42:04', 125, 1, 'Knochen', 4, NULL, 0, 0),
+	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Blau', '2020-09-09 12:42:05', 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 0, 0),
+	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', 'Grün', '2020-09-09 12:42:06', 2000, 1, 'Kunststoff', 1, 'Mit Pipette, Messbecher & Co', 0, 0),
+	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball.jpg', 'Weiß', '2020-09-09 12:42:07', 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 0, 0),
+	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-09 12:42:09', 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, 0);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item2category
