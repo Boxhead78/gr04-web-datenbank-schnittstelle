@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `item` (
 INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `picture`, `color`, `creation_date`, `weight`, `count`, `material`, `manufactorer_id`, `technical_details`, `average_rating`, `rating_count`) VALUES
 	(1, 'Hammer', 'Der Gummihammer von Wisent ist das ideale Werkzeug', 5, 8.29, 'hammer.jpg', 'Braun', '2020-09-09 12:41:48', 1074, 1, 'Holz', 1, NULL, 0, 0),
 	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'Schwarz', '2020-09-09 12:41:49', 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 0, 0),
-	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, NULL, 'Weiß', '2020-09-09 12:41:50', 870, 1, 'Kunststoff/Stahl', 3, NULL, 0, 0),
-	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, NULL, 'Schwarz', '2020-09-09 12:41:51', 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0, 0),
+	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, 'saege.jpg', 'Weiß', '2020-09-09 12:41:50', 870, 1, 'Kunststoff/Stahl', 3, NULL, 0, 0),
+	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, 'schneider.jpg', 'Schwarz', '2020-09-09 12:41:51', 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 0, 0),
 	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-09 12:41:53', 2400, 1, 'Kunststoff', 9, 'XL Variante', 0, 0),
 	(6, 'Erde', 'Ein Würfel Erde aus Minecraft-Kollektion', 5000, 0.99, 'mc_erde.jpg', 'Braun', '2020-09-09 12:41:54', 1000, 1, 'Dreck', 4, NULL, 0, 0),
 	(7, 'Stein', 'Ein Würfel Stein aus Minecraft-Kollektion', 2500, 1.49, 'mc_stein.jpg', 'Grau', '2020-09-09 12:41:57', 3000, 1, 'Stein', 4, NULL, 0, 0),
