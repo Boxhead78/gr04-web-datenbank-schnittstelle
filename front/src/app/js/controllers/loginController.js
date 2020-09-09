@@ -3,6 +3,10 @@ app.controller('loginController', ['$scope', '$cookies', '$rootScope', '$http', 
 
     $scope.rootUser = $rootScope.user;
 
+    $rootScope.$on("user", function(event, options) {
+        $scope.rootUser = $rootScope.user;
+    });
+
     $scope.submitLoginForm = function() {
 
         //BackendTest
@@ -27,26 +31,20 @@ app.controller('loginController', ['$scope', '$cookies', '$rootScope', '$http', 
                         }
                         $rootScope.user = response.data.resp.user_id;
                         $scope.rootUser = $rootScope.user;
+                        $rootScope.$broadcast("user", { newValue: $rootScope.user});
                     }
                 }, function errorCallback(response) {
                     alert("ACHTUNG ACHTUNG ERROR");
                 });
-
-                /*
-       alert($scope.username + ', ' + $scope.password + ', ' + $scope.remember);
-        if ($scope.remember) {
-            $cookies.put('user', $scope.username);
-        } else {
-            $cookies.remove('user');
-        }
-        $rootScope.user = $scope.username;
-        $scope.rootUser = $rootScope.user;*/
     }
 
-    $scope.removeCookie = function() {
+    $scope.logout = function() {
         $cookies.remove('user');
         $cookies.remove('cart');
         $rootScope.user = null;
-        $scope.rootUser = $rootScope.user;
+        $scope.rootUser = null;
+        $scope.username = null;
+        $scope.password = null;
+        $rootScope.$broadcast("user", { newValue: $rootScope.user});
     }
 }])

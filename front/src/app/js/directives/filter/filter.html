@@ -4,18 +4,17 @@
     </div>
     <div class="filter-content-horizontal">
         <div class="custom-select">
-            <select>
-              <option value="0">Bestseller</option>
-              <option value="1">Preis: aufsteigend</option>
-              <option value="2">Preis: absteigend</option>
-              <option value="3">Bewertungen</option>
-              <option value="4">Neueste</option>
+            <select class="test" ng-model="sort">
+              <option value="sold" class="select-items">Bestseller</option>
+              <option value="price" class="select-items">Preis: aufsteigend</option>
+              <option value="-price" class="select-items">Preis: absteigend</option>
+              <option value="rating" class="select-items">Bewertungen</option>
+              <option value="creation_date" class="select-items">Neueste</option>
             </select>
           </div>
     </div>
 </div>
-
-<script>
+<!-- <script>
     var x, i, j, l, ll, selElmnt, a, b, c;
     /*look for any elements with the class "custom-select":*/
     x = document.getElementsByClassName("custom-select");
@@ -94,7 +93,7 @@
     /*if the user clicks anywhere outside the select box,
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
-    </script>
+</script> -->
 
 <div class="filter-wrapper">
     <div class="filter-headline">
@@ -103,13 +102,13 @@
     <div class="filter-content-horizontal">
         <ul>
             <li>
-                <input type="checkbox-Price">
+                <input type="number" ng-change="setMinCost(minCost)" ng-model="minCost">
             </li>
             <li>
                 -
             </li>
             <li>
-                <input type="checkbox-Price">
+                <input type="number" ng-change="setMaxCost(maxCost)" ng-model="maxCost">
             </li>
             <li>
                 €
@@ -127,56 +126,56 @@
             <li>
                 <label class="container">
                     blue
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Blau', color)" ng-model="color">
                     <span class="checkmark-color blue"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     red
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Rot', color)" ng-model="color">
                     <span class="checkmark-color red"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     green
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Grün', color)" ng-model="color">
                     <span class="checkmark-color green"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     yellow
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Gelb', color)" ng-model="color">
                     <span class="checkmark-color yellow"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     pink
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Pink', color)" ng-model="color">
                     <span class="checkmark-color pink"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     multicolored
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor(null, color)" ng-model="color">
                     <span class="checkmark-color multicolored"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     black
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Schwarz', color)" ng-model="color">
                     <span class="checkmark-color black"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     white
-                    <input type="checkbox">
+                    <input type="checkbox" ng-change="setColor('Weiß', color)" ng-model="color">
                     <span class="checkmark-color white"></span>
                 </label>
             </li>

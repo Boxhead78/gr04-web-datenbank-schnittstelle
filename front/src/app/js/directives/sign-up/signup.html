@@ -1,47 +1,58 @@
-<div class="PageContent">
-    <div class="signUpContent">
+<div class="PageContent" ng-if="rootUser==null">
+    <div class="signUpContent" ng-if="!success">
 
         <h1>Registrierung</h1>
         <p>Jetzt registrieren und von den Vorteilen des Kundenkontos profitieren!</p>
         <hr>
-
-        <input type="text" placeholder="E-Mail" name="email" maxlength="30" required autofocus>
-        <input type="password" placeholder="Passwort" name="psw" maxlength="30" required>
-        <input type="password" placeholder="Passwort wiederholen" name="psw" maxlength="30" required>
+        <input type="text" placeholder="E-Mail" name="email" maxlength="30" required ng-model="request.email">
+        <input type="password" placeholder="Passwort" name="psw" maxlength="30" required ng-model="request.password">
+        <input type="password" placeholder="Passwort wiederholen" name="psw" maxlength="30" required ng-model="password">
         <hr>
 
-        <input type="text" placeholder="Vorname" name="Vorname" maxlength="30" required>
-        <input type="text" placeholder="Nachname" name="Nachname" maxlength="30" required>
+        <input type="text" placeholder="Vorname" name="Vorname" maxlength="30" required ng-model="request.first_name">
+        <input type="text" placeholder="Nachname" name="Nachname" maxlength="30" required ng-model="request.surname">
 
         <label class="geburtstagLbl" for="Geburtstag">Geburtstag</label>
-        <input type="date" max="1999-01-01" placeholder="Geburtstag" name="Geburtstag" required>
+        <input type="date" max="1999-01-01" placeholder="Geburtstag" name="Geburtstag" required ng-model="request.birthday">
 
-        <input type="straße" placeholder="Straße" name="Straße" maxlength="30" required>
-        <input type="Hausnr" placeholder="Hausnr." name="Hausnr" maxlength="4" required>
+        <input type="straße" placeholder="Straße" name="Straße" maxlength="30" required ng-model="request.street">
+        <input type="Hausnr" placeholder="Hausnr." name="Hausnr" maxlength="4" required ng-model="request.house_number">
 
-        <input type="plz" placeholder="PLZ" name="plz" maxlength="5" pattern="[0-9]{5}" required>
-        <input type="Stadt" placeholder="Stadt" name="Stadt" maxlength="30" required>
+        <input type="plz" placeholder="PLZ" name="plz" maxlength="5" pattern="[0-9]{5}" required ng-model="request.post_code">
+        <input type="Stadt" placeholder="Stadt" name="Stadt" maxlength="30" required ng-model="request.city">
         <input type="Land" placeholder="Land" name="Land" maxlength="30" required>
         <hr>
 
         <div class="paymentButtons">
-            <label for="Rechnung" class="container">Rechnung
-                <input type="radio" id="Rechnung" name="payment" value="Rechnung" required>
-                <span class="checkmark"></span>
-            </label>
             <label for="PayPal" class="container">PayPal
-                <input type="radio" id="PayPal" name="payment" value="PayPal">
+                <input type="radio" id="PayPal" name="payment" ng-value=1 ng-model="request.payment_method">
                 <span class="checkmark"></span>
             </label>
-            <label for="Kreditkarte" class="container">Lastschrift
-                <input type="radio" id="Kreditkarte" name="payment" value="Kreditkarte">
+            <label for="Rechnung" class="container">Rechnung
+                <input type="radio" id="Rechnung" name="payment" ng-value=2 required ng-model="request.payment_method">
+                <span class="checkmark"></span>
+            </label>
+            <label for="Lastschrift" class="container">Lastschrift
+                <input type="radio" id="Lastschrift" name="payment" ng-value=3 ng-model="request.payment_method">
+                <span class="checkmark"></span>
+            </label>
+            <label for="Kreditkarte" class="container">Kreditkarte
+                <input type="radio" id="Kreditkarte" name="payment" ng-value=4 ng-model="request.payment_method">
                 <span class="checkmark"></span>
             </label>
         </div>
         <hr>
 
         <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-        <button type="submitBtn">Jetzt Registrieren</button>
+        <button type="submitBtn" ng-click="submitRegistrationForm()">Jetzt Registrieren</button>
 
     </div>
+    <div ng-if="success">
+        Ihr Speichern war erfolgreich. Sie können sich nun einloggen
+    </div>
+</div>
+
+<div ng-if="rootUser!=null">
+    Sie sind bereits eingeloggt
+    <button ng-click="logout()">Logout</button>
 </div>

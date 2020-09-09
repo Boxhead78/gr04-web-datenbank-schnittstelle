@@ -18,7 +18,8 @@ var app = angular.module('baufuchs', ["ngRoute", "ngCookies"]);
                     controller: "cartController"
                 })
                 .when("/register", {
-                    templateUrl: "js/views/signUpView.html"
+                    templateUrl: "js/views/signUpView.html",
+                    controller: "registrationController"
                 })
                 .when("/profile", {
                     templateUrl: "js/views/profile.html"

@@ -1,5 +1,5 @@
 <div class="item-container">
-    <div class="item-card" ng-repeat="item in items.item">
+    <div class="item-card" ng-repeat="item in items.item | orderBy: sort">
         <a href="#!item/{{item.id}}">
             <div class="image-container">
                 <img ng-src="/front/src/assets/images/{{item.picture}}" alt="{{item.name}}">
