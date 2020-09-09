@@ -312,6 +312,8 @@ article {
   height: auto;
   margin: 10px;
   text-align: center;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .item-container .item-card:hover img {
@@ -332,8 +334,8 @@ article {
 }
 
 .item-container .item-card img {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: 1;
   -webkit-transition: .5s ease;
   transition: .5s ease;
@@ -429,6 +431,8 @@ article {
   margin: 10px;
   text-align: center;
   height: auto;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .item-container .item-first:hover img, .item-container .item-second:hover img {

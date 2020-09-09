@@ -12,6 +12,7 @@
       height: auto; //345px;
       margin: 10px;
       text-align: center;
+      box-shadow: 0 4px 8px 0 $gray_transparent;
 
       &:hover img {
         opacity: 0.3;
@@ -31,7 +32,7 @@
       }
 
       img {
-        object-fit: scale-down;
+        object-fit: cover;
         opacity: 1;
         transition: .5s ease;
         backface-visibility: hidden;
