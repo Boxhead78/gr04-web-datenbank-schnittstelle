@@ -8,6 +8,7 @@ Modules: Flask, mysql-connector-python
 # importing modules
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from re import match
 import argon2
 import sys
 import os
@@ -274,14 +275,19 @@ def api_login():
     # compare user data from db
     sql_con, sql_cur = sql_connect()
     if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
-        # TODO argon rehash
-        sql_cur.execute(
-            """SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
+        sql_cur.execute("""SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
         # return user id and success code
-        # front-end saves rest of the data entered in a cookie
-        resp["user_id"] = sql_cur.fetchone()[0]
-        resp["rc"] = int(1)
+        resp["user_id"] = int(sql_cur.fetchone()[0])
+        resp["rc"] = int(0)
         resp.update()
+        # check for argon rehash suggestion
+        sql_cur.execute("""SELECT password FROM user WHERE email = %s""", (str(req.get("email")),))
+        key = sql_cur.fetchone()[0]
+        if argon.check_needs_rehash(str(argonprefix + str(key))):
+            key = str(argon.hash(req.get("password")).split("=")[-1])
+            sql_cur.execute("""UPDATE user SET password = %s WHERE user_id = %s """, (
+                str(key), resp.get("user_id"),))
+            sql_cur.commit()
     sql_cur.close()
     sql_con.close()
     return jsonify(resp=resp)
@@ -293,8 +299,16 @@ def api_register():
     req = request.get_json().get("data")
     resp = {"rc": int(1),
             "id": int(0)}
-    # TODO handle exceptions in entered data
-
+    # catch exceptions in entered data using regex
+    if (match(r"^[a-z]([w-]*[a-z]|[w._]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w.]*[a-z]{2,}|[a-z]){2,}?.[a-z]{2,}$", str(req.get("email")))
+        and match(r"^[a-zA-Z]*$", str(req.get("first_name")))
+        and match(r"^[a-zA-Z]*$", str(req.get("surname")))
+        and match(r"^[\d]{2}.[\d]{2}.[\d]{4}$", str(req.get("birthday")))
+        and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("street")))
+        and match(r"^[\w ]+$", str(req.get("house_number")))
+        and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("city")))
+        and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("country"))):
+        return jsonify(resp=resp)
     # check for duplicate users
     sql_con, sql_cur = sql_connect()
     sql_cur.execute("""SELECT * FROM user
@@ -305,17 +319,40 @@ def api_register():
         sql_con.close()
         return jsonify(resp=resp)
     else:
-        # TODO confirm registration via oauth/mail
-
         # compile data
         req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
+        req_tmp = str(req.get("birthday").split("."))
+        req["birthday"] = str(req_tmp[2] + "-" + req_tmp[1] + "-" + req_tmp[0])
         req.update()
         # commit new data to sql db
+        # TODO check for country and country id in country table
+        # TODO check for duplicate addresses
+        sql_cur.execute("""SELECT address_id FROM address
+            WHERE street = %s
+            AND house_number = %s
+            AND post_code = %s
+            AND city = %s
+            AND country_id = %s""", (
+                str(req.get("street")),
+                str(req.get("house_number")),
+                str(req.get("post_code")),
+                str(req.get("city")),
+                str(req.get("country_id")),))
+        # TODO add new address if not existing
+        # TODO set address_id for next query
+        # TODO add other values for query
         sql_cur.execute("""INSERT INTO user (first_name, surname, email, gender, birthday, payment_method, password)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)""", (req.get("first_name"), req.get("surname"), req.get("email"), req.get("gender"), req.get("birthday"), req.get("payment_method"), req.get("password"),))
+            VALUES (%s, %s, %s, %s, %s, %s, %s)""", (
+                str(req.get("first_name")),
+                str(req.get("surname")),
+                str(req.get("email")),
+                int(req.get("gender")),
+                req.get("birthday"),
+                req.get("payment_method"),
+                str(req.get("password")),))
         sql_con.commit()
         resp["rc"] = int(0)
-        resp["id"] = sql_cur.lastrowid
+        resp["id"] = int(sql_cur.lastrowid)
         resp.update()
         sql_cur.close()
         sql_con.close()
