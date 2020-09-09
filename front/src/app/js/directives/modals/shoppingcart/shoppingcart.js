@@ -1,4 +1,4 @@
-app.directive('finishbuy', function() {
+app.directive('shoppingcart', function() {
     return {
         restrict: 'E',
         scope: {

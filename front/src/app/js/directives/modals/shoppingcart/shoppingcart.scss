@@ -6,7 +6,7 @@
   }
   
   /* The Modal (background) */
-  .addToCartModal {
+  .shoppingcart {
     display: none;
     position: fixed;
     z-index: 100;
@@ -19,11 +19,11 @@
   }
   
   /* Modal Content/Box */
-  .addToCartModal-content {
+  .shoppingcart-content {
     background-color: $white;
     margin: 5% auto 15% auto;
     border: 1px solid #888;
-    width: 15%;
+    width: 30%;
   }
    
   /* The Close Button (x) */
@@ -41,17 +41,31 @@
   color: $akzentFarbe;
   cursor: pointer;
 }
-  
+
+/* Set a style for all button */
+.addToCartModal button {
+  background-color: $akzentFarbe;
+  color: $white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+.addToCartModal button:hover {
+  opacity: 0.9;
+}
+
+/* Float left for home button */
+.homebtn {
+  float: left;
+}
+
   /* Clear floats */
   .clearfix::after {
     content: "";
     clear: both;
     display: table;
-  }
-  
-  /* Change styles for continue shopping button and add to cart button on extra small screens */
-  @media screen and (max-width: 300px) {
-    .weiterEinkaufenBtn, .zumWarenkorbBtn {
-       width: 50%;
-    }
   }

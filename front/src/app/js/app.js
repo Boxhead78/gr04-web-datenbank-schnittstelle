@@ -14,10 +14,14 @@ var app = angular.module('baufuchs', ["ngRoute", "ngCookies"]);
                     controller: "itemdetailController"
                 })
                 .when("/cart", {
-                    templateUrl: "js/views/cart.html"
+                    templateUrl: "js/views/cart.html",
+                    controller: "cartController"
                 })
                 .when("/register", {
                     templateUrl: "js/views/signUpView.html"
+                })
+                .when("/profile", {
+                    templateUrl: "js/views/profile.html"
                 })
                 .otherwise({
                     redirectTo: "/home"
@@ -26,4 +30,5 @@ var app = angular.module('baufuchs', ["ngRoute", "ngCookies"]);
 
         app.run(function($rootScope, $cookies) {
             $rootScope.user = $cookies.get('user') ? $cookies.get('user') : null;
+            $rootScope.cart = $cookies.getObject('cart') ? $cookies.getObject('cart') : [];
         });

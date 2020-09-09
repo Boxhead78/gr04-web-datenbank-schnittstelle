@@ -80,3 +80,11 @@
       opacity: 0.9;
     }
   }
+
+  .starRating {
+    float: right;
+  }
+  
+  .starRating .checked {
+    color: $akzentFarbe;
+  }
