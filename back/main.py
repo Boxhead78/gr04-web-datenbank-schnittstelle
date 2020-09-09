@@ -9,6 +9,7 @@ Modules: Flask, mysql-connector-python
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from re import match
+import datetime
 import argon2
 import sys
 import os
@@ -67,7 +68,7 @@ def sql_connect():
 def user_verfiy(email, password, sql_con, sql_cur):
     # get user hash
     sql_cur.execute("""SELECT password FROM user
-        WHERE email = %s""", (str(email),))
+        WHERE email_address = %s""", (str(email),))
     key = sql_cur.fetchone()
     if key != None:
         # use argon verify
@@ -93,18 +94,12 @@ def user_verfiy(email, password, sql_con, sql_cur):
 def addToAverage(average, size, value):
     return int((size * average + value) / (size + 1))
 
-# remove definied score from average_rating
-
-
-def subtractFromAverage(average, size, value):
-    return int((size * average - value) / (size - 1))
-
 
 # Routes
 # for quick return tests
 
 
-@app.route('/api/hello', methods=['GET'])
+@ app.route('/api/hello', methods=['GET'])
 def api_hello():
     data = {
         "username": "Test",
@@ -118,7 +113,7 @@ def api_hello():
 # for getting shop item details to the web-client
 
 
-@app.route('/api/item/details', methods=['GET', 'POST'])
+@ app.route('/api/item/details', methods=['GET', 'POST'])
 def api_item_details():
     req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
@@ -134,12 +129,11 @@ def api_item_details():
         "picture": data[5],
         "color": data[6],
         "creation_date": data[7],
-        "currency_id": data[8],
-        "weight": data[9],
-        "count": data[10],
-        "material": data[11],
-        "manufactorer_id": data[12],
-        "technical_details": data[13]
+        "weight": data[8],
+        "count": data[9],
+        "material": data[10],
+        "manufactorer_id": data[11],
+        "technical_details": data[12]
     }
     # TODO: make this get scores and each comment of the item
     sql_cur.execute("SELECT * FROM item LIMIT 0, 1")
@@ -158,7 +152,7 @@ def api_item_details():
 # item list returned after filter for items
 
 
-@app.route('/api/item/filter', methods=['GET', 'POST'])
+@ app.route('/api/item/filter', methods=['GET', 'POST'])
 def api_item_filter():
     # get filter information
     req = request.get_json().get("data")
@@ -199,13 +193,12 @@ def api_item_filter():
 
 # for recieving and applying score reviews from users
 # json input: item_id, user_id, new_rating_value, email, password
-# TODO integrate password hash in function
 
-@app.route('/api/item/score', methods=['POST'])
+@ app.route('/api/item/score', methods=['POST', 'GET'])
 def api_item_score():
     # get score value etc from request
     req = request.get_json().get("data")
-    resp = {"rc": int(1)}
+    resp = {"rc": int(0)}
     # frontend needs to check for user registration
     sql_con, sql_cur = sql_connect()
     if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
@@ -215,11 +208,11 @@ def api_item_score():
         sql_con.commit()
 
         # fetching new rating id
-        rating_id = sql_cur.lastrowid()
+        rating_id = sql_cur.lastrowid
 
         # connecing new rating with item in database
         sql_cur.execute("""INSERT INTO rating2item (rating_id, item_id, user_id)
-            VALUES (%s, %s, %s)""", (rating_id, req.get("user_id"), req.get("item_id"),))
+            VALUES (%s, %s, %s)""", (rating_id, req.get("item_id"), req.get("user_id"),))
         sql_con.commit()
 
         # fetching required data for calculating new_average_rating
@@ -241,11 +234,12 @@ def api_item_score():
         return jsonify(resp=resp)
 
 
-@app.route('/api/item/list', methods=['GET', 'POST'])
+@ app.route('/api/item/list', methods=['GET', 'POST'])
 def api_item_list():
+    req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
     sql_cur.execute(
-        """SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i""")
+        """SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i LIMIT 0, %s""", (req.get("limit"),))
     data = sql_cur.fetchall()
     item_list = []
     for i in data:
@@ -267,7 +261,7 @@ def api_item_list():
     return resp
 
 
-@app.route('/api/user/login', methods=['POST'])
+@ app.route('/api/user/login', methods=['POST'])
 def api_login():
     # get request json and login data
     req = request.get_json().get("data")
@@ -275,13 +269,15 @@ def api_login():
     # compare user data from db
     sql_con, sql_cur = sql_connect()
     if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
-        sql_cur.execute("""SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
+        sql_cur.execute(
+            """SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
         # return user id and success code
         resp["user_id"] = int(sql_cur.fetchone()[0])
         resp["rc"] = int(0)
         resp.update()
         # check for argon rehash suggestion
-        sql_cur.execute("""SELECT password FROM user WHERE email = %s""", (str(req.get("email")),))
+        sql_cur.execute(
+            """SELECT password FROM user WHERE email = %s""", (str(req.get("email")),))
         key = sql_cur.fetchone()[0]
         if argon.check_needs_rehash(str(argonprefix + str(key))):
             key = str(argon.hash(req.get("password")).split("=")[-1])
@@ -293,7 +289,7 @@ def api_login():
     return jsonify(resp=resp)
 
 
-@app.route('/api/user/register', methods=['POST'])
+@ app.route('/api/user/register', methods=['POST'])
 def api_register():
     # get request data
     req = request.get_json().get("data")
@@ -307,7 +303,7 @@ def api_register():
         and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("street")))
         and match(r"^[\w ]+$", str(req.get("house_number")))
         and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("city")))
-        and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("country"))):
+            and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("country")))):
         return jsonify(resp=resp)
     # check for duplicate users
     sql_con, sql_cur = sql_connect()
@@ -333,23 +329,23 @@ def api_register():
             AND post_code = %s
             AND city = %s
             AND country_id = %s""", (
-                str(req.get("street")),
-                str(req.get("house_number")),
-                str(req.get("post_code")),
-                str(req.get("city")),
-                str(req.get("country_id")),))
+            str(req.get("street")),
+            str(req.get("house_number")),
+            str(req.get("post_code")),
+            str(req.get("city")),
+            str(req.get("country_id")),))
         # TODO add new address if not existing
         # TODO set address_id for next query
         # TODO add other values for query
         sql_cur.execute("""INSERT INTO user (first_name, surname, email, gender, birthday, payment_method, password)
             VALUES (%s, %s, %s, %s, %s, %s, %s)""", (
-                str(req.get("first_name")),
-                str(req.get("surname")),
-                str(req.get("email")),
-                int(req.get("gender")),
-                req.get("birthday"),
-                req.get("payment_method"),
-                str(req.get("password")),))
+            str(req.get("first_name")),
+            str(req.get("surname")),
+            str(req.get("email")),
+            int(req.get("gender")),
+            req.get("birthday"),
+            req.get("payment_method"),
+            str(req.get("password")),))
         sql_con.commit()
         resp["rc"] = int(0)
         resp["id"] = int(sql_cur.lastrowid)
@@ -362,29 +358,78 @@ def api_register():
 # json input: email, password of user, item_ids, counts,
 
 
-@app.route('/api/order/place', methods=['POST'])
+@ app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
     req = request.get_json().get("data")
-    resp = {"rc": int(1)}
+    resp = {"rc": int(0)}
     sql_con, sql_cur = sql_connect()
     # check authority of user
     if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
-        # TODO compile order details
+
         # commit order to sql db
-        timestamp = datetime.timestamp(datetime.now())
-        sql_cur.execute(
-            """INSERT INTO order (user_id, booking_date, creation_date) VALUES (%s, timestamp, timestamp)""", (req.get("user_id"),))
+        now = datetime.datetime.now()
+        formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+        sql_cur.execute("""INSERT INTO baufuchs.`order` (user_id, booking_date, creation_date) VALUES (%s, %s, %s)""", (req.get(
+            "user_id"), formatted_date, formatted_date,))
         sql_con.commit()
-        order_id = sql.cur.lastrowid()
+        order_id = sql_cur.lastrowid
+        # compile order details
         for i in req.get("order_list"):
             sql_cur.execute("""INSERT INTO order_details (order_id, item_id, count) VALUES (%s, %s, %s)""",
-                            (i["order_id"], i["item_id"], i["count"],))
-            sql.con.commit()
+                            (order_id, i["item_id"], i["count"],))
+        sql_con.commit()
         sql_cur.close()
         sql_con.close()
         # return success code
         return jsonify(resp=resp)
+
+
+@ app.route('/api/user/details', methods=['POST', 'GET'])
+def api_user_details():
+    # get request data
+    # req = request.get_json().get("data")
+    sql_con, sql_cur = sql_connect()
+    # collecting all details of a user
+    sql_cur.execute(
+        """SELECT u.first_name, u.surname, u.birthday, u.email_address, a.street, a.post_code, l.name AS language,
+         p.name AS payment FROM user u JOIN address a ON a.address_id = u.address_id
+         JOIN language l ON l.language_id = u.language_id JOIN payment p ON p.payment_id = u.payment_id
+         WHERE u.user_id = %s""", (2,))
+    data = sql_cur.fetchone()
+    data_item = {
+        "first_name": data[0],
+        "surname": data[1],
+        "birthday": data[2],
+        "email_address": data[3],
+        "street": data[4],
+        "post_code": data[5],
+        "language": data[6],
+        "payment": data[7]
+    }
+
+    sql_cur.execute("""SELECT o.booking_date, i.name AS item_name, i.price, od.count FROM baufuchs.`order` o JOIN order_details od ON od.order_id = o.order_id JOIN item i ON i.item_id = od.item_id WHERE o.user_id = %s""", (2,))
+    data = sql_cur.fetchall()
+    # formatting result
+    order_list = []
+    for i in data:
+        order = []
+        if not any(d['booking_date'] == i[0] for d in order_list):
+            for x in data:
+                if (i[0] == x[0]):
+                    a = {
+                        "item_name": x[1],
+                        "price": x[2],
+                        "count": x[3]
+                    }
+                    order.append(a)
+            f = {
+                "booking_date": i[0],
+                "order": order
+            }
+            order_list.append(f)
+
+    return jsonify(user_details=data_item, order_list=order_list)
 
 
 if __name__ == '__main__':
