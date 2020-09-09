@@ -227,7 +227,8 @@ CREATE TABLE IF NOT EXISTS `payment` (
 INSERT INTO `payment` (`payment_id`, `name`) VALUES
 	(1, 'PayPal'),
 	(2, 'Rechnung'),
-	(3, 'Lastschrift');
+	(3, 'Lastschrift'),
+	(4, 'Kreditkarte');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.rating
