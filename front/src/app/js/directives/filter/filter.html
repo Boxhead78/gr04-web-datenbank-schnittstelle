@@ -126,63 +126,67 @@
             <li>
                 <label class="container">
                     blue
-                    <input type="checkbox" ng-change="setColor('Blau', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Blau', color)" ng-model="color">
                     <span class="checkmark-color blue"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     red
-                    <input type="checkbox" ng-change="setColor('Rot', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Rot', color)" ng-model="color">
                     <span class="checkmark-color red"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     green
-                    <input type="checkbox" ng-change="setColor('Grün', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Grün', color)" ng-model="color">
                     <span class="checkmark-color green"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     yellow
-                    <input type="checkbox" ng-change="setColor('Gelb', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Gelb', color)" ng-model="color">
                     <span class="checkmark-color yellow"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     pink
-                    <input type="checkbox" ng-change="setColor('Pink', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Pink', color)" ng-model="color">
                     <span class="checkmark-color pink"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
-                    multicolored
-                    <input type="checkbox" ng-change="setColor(null, color)" ng-model="color">
-                    <span class="checkmark-color multicolored"></span>
-                </label>
-            </li>
-            <li>
-                <label class="container">
                     black
-                    <input type="checkbox" ng-change="setColor('Schwarz', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Schwarz', color)" ng-model="color">
                     <span class="checkmark-color black"></span>
                 </label>
             </li>
             <li>
                 <label class="container">
                     white
-                    <input type="checkbox" ng-change="setColor('Weiß', color)" ng-model="color">
+                    <input type="radio" name="color" ng-change="setColor('Weiß', color)" ng-model="color">
                     <span class="checkmark-color white"></span>
+                </label>
+            </li>
+            <li>
+                <label class="container">
+                    multicolored
+                    <input type="radio" name="color" ng-change="setColor(null, color)" ng-model="color">
+                    <span class="checkmark-color multicolored"></span>
                 </label>
             </li>
         </ul>
     </div>
 </div>
 
+<label for="Lastschrift" class="container">Lastschrift
+    <input type="radio" id="Lastschrift" name="payment" ng-value=3 ng-model="request.payment_method">
+    <span class="checkmark"></span>
+</label>
 
 
 

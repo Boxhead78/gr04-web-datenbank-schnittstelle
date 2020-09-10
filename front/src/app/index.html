@@ -35,14 +35,13 @@
             </form>
             <a href="#!"><i class="fas fa-home"></i> Home</a>
             <a class="loginBtn" onclick="document.getElementById('loginModal').style.display='block'">
-                <div ng-if="rootUser==null"><i class="fas fa-user"></i> Login</div>
-                <div ng-if="rootUser!=null"><i class="fas fa-user"></i> Logout</div>
+                <div ng-if="user==null"><i class="fas fa-user"></i> Login</div>
+                <div ng-if="user!=null"><i class="fas fa-user"></i> Logout</div>
             </a>
             
             <a href="#!cart" class="notification">
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
-                <div ng-if="item.count!=null"><span class="badge">2</span></div>
-                <div ng-if="item.count==null"><span class="badge">2</span></div>
+                <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
             </a>
 
             <a href="#!profile" id="avatar-icon"><img src="/front/src/assets/images/avatar-icon.png" alt="profile" height="47"></a>
