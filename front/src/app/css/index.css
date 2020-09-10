@@ -792,15 +792,16 @@ button:hover {
   top: -15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color: #7ab91a;
+  opacity: 0.6;
   position: relative;
   float: right;
 }
 
 .loginClose:hover,
 .loginClose:focus {
-  color: #7ab91a;
   cursor: pointer;
+  opacity: 1;
 }
 
 /* Clear floats */

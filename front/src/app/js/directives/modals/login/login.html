@@ -16,7 +16,7 @@
           <!-- <label for="psw"><b>Passwort</b></label> -->
           <input type="password" placeholder="Passwort" name="psw" required ng-model="$parent.password">
 
-          <button type="submitBtn" ng-click="submitLoginForm(username, password)">Login</button>
+          <button type="submitBtn" onclick="document.getElementById('loginModal').style.display='none'" ng-click="submitLoginForm(username, password)">Login</button>
           <label>
             <input type="checkbox" ng-checked="true" name="remember" ng-model="$parent.remember"> Remember me
           </label>
@@ -28,11 +28,6 @@
           <button type="signUpBtn" onclick="document.getElementById('loginModal').style.display='none'"><a href="#!register">Registrieren</a></button>
           <span class="psw"><a href="#">Passwort</a> vergessen?</span>
         </div>
-      </div>
-
-      <div ng-if="rootUser!=null">
-        <h3 style="text-align:center;">Sie sind bereits eingeloggt</h3>
-        <button ng-click="logout()">Logout</button>
       </div>
     </form>
   </div>

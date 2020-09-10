@@ -34,16 +34,20 @@
                 <button ng-click="setName()"><i class="fa fa-search"></i></button>
             </form>
             <a href="#!"><i class="fas fa-home"></i> Home</a>
-            <a class="loginBtn" onclick="document.getElementById('loginModal').style.display='block'">
-                <div ng-if="user==null"><i class="fas fa-user"></i> Login</div>
-                <div ng-if="user!=null"><i class="fas fa-user"></i> Logout</div>
-            </a>
-
+            <div ng-if="user==null">
+                <a class="loginBtn" onclick="document.getElementById('loginModal').style.display='block'">
+                    <i class="fas fa-user"></i> Login
+                </a>
+            </div>
+            <div ng-if="user!=null">
+                <a class="loginBtn" ng-controller="loginController" ng-click="logout()">
+                    <i class="fas fa-user"></i> Logout
+                </a>
+            </div>              
             <a href="#!cart" class="notification">
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
                 <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
             </a>
-
             <a href="#!profile" id="avatar-icon"><img src="/front/src/assets/images/avatar-icon.png" alt="profile" height="47"></a>
         </div>
 
