@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server Version:               10.4.14-MariaDB - mariadb.org binary distribution
+-- Server Version:               10.4.11-MariaDB - mariadb.org binary distribution
 -- Server Betriebssystem:        Win64
 -- HeidiSQL Version:             11.0.0.5919
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY (`category_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.category: ~12 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.category: ~9 rows (ungefähr)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`category_id`, `name`, `category_parent_id`) VALUES
 	(1, 'Handwerkzeug', 12),
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `country` (
   PRIMARY KEY (`country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.country: ~1 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.country: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
 INSERT INTO `country` (`country_id`, `country_name`) VALUES
 	(1, 'Deutschland');
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `item2category` (
   KEY `FK_ittoct_items` (`item_id`),
   CONSTRAINT `FK_item2category_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`),
   CONSTRAINT `FK_item2category_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- Exportiere Daten aus Tabelle baufuchs.item2category: ~19 rows (ungefähr)
 /*!40000 ALTER TABLE `item2category` DISABLE KEYS */;
@@ -165,7 +165,8 @@ INSERT INTO `item2category` (`item2category_id`, `category_id`, `item_id`) VALUE
 	(16, 9, 16),
 	(17, 9, 17),
 	(18, 9, 18),
-	(19, 8, 19);
+	(19, 8, 19),
+	(20, 12, 5);
 /*!40000 ALTER TABLE `item2category` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.language
@@ -175,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.language: ~1 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.language: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
 INSERT INTO `language` (`language_id`, `name`) VALUES
 	(1, 'deutsch');
@@ -206,17 +207,17 @@ CREATE TABLE IF NOT EXISTS `order` (
   `creation_date` datetime DEFAULT NULL,
   PRIMARY KEY (`order_id`) USING BTREE,
   KEY `FK_order_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.order: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.order: ~6 rows (ungefähr)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`order_id`, `user_id`, `booking_date`, `deletion_date`, `creation_date`) VALUES
 	(1, 1, '2020-09-10 10:25:53', NULL, '2020-09-10 10:23:07'),
-  (2, 1, '2020-09-09 14:12:21', NULL, '2020-09-09 14:10:07'),
-  (3, 1, '2020-09-10 08:21:26', NULL, '2020-09-10 08:19:07'),
-  (4, 2, '2020-09-08 13:11:22', NULL, '2020-09-08 13:05:07'),
-  (5, 4, '2020-09-06 18:09:50', NULL, '2020-09-06 18:00:07'),
-  (6, 5, '2020-09-10 11:21:45', NULL, '2020-09-10 11:14:07');
+	(2, 1, '2020-09-09 14:12:21', NULL, '2020-09-09 14:10:07'),
+	(3, 1, '2020-09-10 08:21:26', NULL, '2020-09-10 08:19:07'),
+	(4, 2, '2020-09-08 13:11:22', NULL, '2020-09-08 13:05:07'),
+	(5, 4, '2020-09-06 18:09:50', NULL, '2020-09-06 18:00:07'),
+	(6, 5, '2020-09-10 11:21:45', NULL, '2020-09-10 11:14:07');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.order_details
@@ -229,22 +230,22 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`order_details_id`) USING BTREE,
   KEY `FK_rder_details_order` (`order_id`),
   KEY `FK_order_details_items` (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.order_details: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.order_details: ~11 rows (ungefähr)
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
 INSERT INTO `order_details` (`order_details_id`, `order_id`, `item_id`, `count`, `deletion_date`) VALUES
 	(1, 1, 13, 1, NULL),
-  (2, 1, 11, 2, NULL),
-  (3, 1, 12, 5, NULL),
-  (4, 2, 9, 100, NULL),
-  (5, 3, 16, 5, NULL),
-  (6, 3, 17, 1, NULL),
-  (7, 3, 19, 2, NULL),
-  (8, 3, 6, 64, NULL),
-  (9, 4, 7, 20, NULL),
-  (10, 5, 8, 10, NULL),
-  (11, 6, 4, 1, NULL);
+	(2, 1, 11, 2, NULL),
+	(3, 1, 12, 5, NULL),
+	(4, 2, 9, 100, NULL),
+	(5, 3, 16, 5, NULL),
+	(6, 3, 17, 1, NULL),
+	(7, 3, 19, 2, NULL),
+	(8, 3, 6, 64, NULL),
+	(9, 4, 7, 20, NULL),
+	(10, 5, 8, 10, NULL),
+	(11, 6, 4, 1, NULL);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.payment
@@ -269,61 +270,61 @@ CREATE TABLE IF NOT EXISTS `rating` (
   `description` varchar(50) NOT NULL DEFAULT '0',
   `rating_value` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`rating_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.rating: ~5 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.rating: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `rating` DISABLE KEYS */;
 INSERT INTO `rating` (`rating_id`, `description`, `rating_value`) VALUES
-(1,'',2),
-(2,'',2),
-(3,'',1),
-(4,'',1),
-(5,'',1),
-(6,'',3),
-(7,'',3),
-(8,'',4),
-(9,'',1),
-(10,'',1),
-(11,'',4),
-(12,'',3),
-(13,'',3),
-(14,'',1),
-(15,'',3),
-(16,'',1),
-(17,'',2),
-(18,'',1),
-(19,'',1),
-(20,'',2),
-(21,'',2),
-(22,'',3),
-(23,'',2),
-(24,'',2),
-(25,'',4),
-(26,'',2),
-(27,'',4),
-(28,'',4),
-(29,'',2),
-(30,'',4),
-(31,'',4),
-(32,'',2),
-(33,'',3),
-(34,'',2),
-(35,'',1),
-(36,'',3),
-(37,'',4),
-(38,'',3),
-(39,'',1),
-(40,'',4),
-(41,'',2),
-(42,'',4),
-(43,'',3),
-(44,'',4),
-(45,'',1),
-(46,'',3),
-(47,'',3),
-(48,'',1),
-(49,'',3),
-(50,'',1);
+	(1, '', 2),
+	(2, '', 2),
+	(3, '', 1),
+	(4, '', 1),
+	(5, '', 1),
+	(6, '', 3),
+	(7, '', 3),
+	(8, '', 4),
+	(9, '', 1),
+	(10, '', 1),
+	(11, '', 4),
+	(12, '', 3),
+	(13, '', 3),
+	(14, '', 1),
+	(15, '', 3),
+	(16, '', 1),
+	(17, '', 2),
+	(18, '', 1),
+	(19, '', 1),
+	(20, '', 2),
+	(21, '', 2),
+	(22, '', 3),
+	(23, '', 2),
+	(24, '', 2),
+	(25, '', 4),
+	(26, '', 2),
+	(27, '', 4),
+	(28, '', 4),
+	(29, '', 2),
+	(30, '', 4),
+	(31, '', 4),
+	(32, '', 2),
+	(33, '', 3),
+	(34, '', 2),
+	(35, '', 1),
+	(36, '', 3),
+	(37, '', 4),
+	(38, '', 3),
+	(39, '', 1),
+	(40, '', 4),
+	(41, '', 2),
+	(42, '', 4),
+	(43, '', 3),
+	(44, '', 4),
+	(45, '', 1),
+	(46, '', 3),
+	(47, '', 3),
+	(48, '', 1),
+	(49, '', 3),
+	(50, '', 1);
 /*!40000 ALTER TABLE `rating` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.rating2item
@@ -339,61 +340,61 @@ CREATE TABLE IF NOT EXISTS `rating2item` (
   CONSTRAINT `FK_ra2it_rating` FOREIGN KEY (`rating_id`) REFERENCES `rating` (`rating_id`),
   CONSTRAINT `FK_rating2item_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`),
   CONSTRAINT `FK_rating2item_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.rating2item: ~5 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.rating2item: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `rating2item` DISABLE KEYS */;
 INSERT INTO `rating2item` (`rating2item_id`, `rating_id`, `item_id`, `user_id`) VALUES
-(1,1,2,2),
-(2,2,7,1),
-(3,3,9,1),
-(4,4,17,5),
-(5,5,11,4),
-(6,6,6,4),
-(7,7,7,4),
-(8,8,9,4),
-(9,9,6,3),
-(10,10,1,4),
-(11,11,18,3),
-(12,12,16,1),
-(13,13,11,3),
-(14,14,11,5),
-(15,15,12,4),
-(16,16,17,2),
-(17,17,9,2),
-(18,18,9,2),
-(19,19,17,3),
-(20,20,11,5),
-(21,21,18,4),
-(22,22,4,2),
-(23,23,6,3),
-(24,24,12,5),
-(25,25,1,3),
-(26,26,17,4),
-(27,27,10,1),
-(28,28,7,4),
-(29,29,16,5),
-(30,30,7,3),
-(31,31,15,4),
-(32,32,18,3),
-(33,33,6,1),
-(34,34,12,4),
-(35,35,16,4),
-(36,36,15,5),
-(37,37,10,4),
-(38,38,1,3),
-(39,39,1,3),
-(40,40,11,1),
-(41,41,1,5),
-(42,42,5,3),
-(43,43,3,1),
-(44,44,1,5),
-(45,45,2,4),
-(46,46,13,1),
-(47,47,14,3),
-(48,48,8,5),
-(49,49,18,4),
-(50,50,6,2);
+	(1, 1, 2, 2),
+	(2, 2, 7, 1),
+	(3, 3, 9, 1),
+	(4, 4, 17, 5),
+	(5, 5, 11, 4),
+	(6, 6, 6, 4),
+	(7, 7, 7, 4),
+	(8, 8, 9, 4),
+	(9, 9, 6, 3),
+	(10, 10, 1, 4),
+	(11, 11, 18, 3),
+	(12, 12, 16, 1),
+	(13, 13, 11, 3),
+	(14, 14, 11, 5),
+	(15, 15, 12, 4),
+	(16, 16, 17, 2),
+	(17, 17, 9, 2),
+	(18, 18, 9, 2),
+	(19, 19, 17, 3),
+	(20, 20, 11, 5),
+	(21, 21, 18, 4),
+	(22, 22, 4, 2),
+	(23, 23, 6, 3),
+	(24, 24, 12, 5),
+	(25, 25, 1, 3),
+	(26, 26, 17, 4),
+	(27, 27, 10, 1),
+	(28, 28, 7, 4),
+	(29, 29, 16, 5),
+	(30, 30, 7, 3),
+	(31, 31, 15, 4),
+	(32, 32, 18, 3),
+	(33, 33, 6, 1),
+	(34, 34, 12, 4),
+	(35, 35, 16, 4),
+	(36, 36, 15, 5),
+	(37, 37, 10, 4),
+	(38, 38, 1, 3),
+	(39, 39, 1, 3),
+	(40, 40, 11, 1),
+	(41, 41, 1, 5),
+	(42, 42, 5, 3),
+	(43, 43, 3, 1),
+	(44, 44, 1, 5),
+	(45, 45, 2, 4),
+	(46, 46, 13, 1),
+	(47, 47, 14, 3),
+	(48, 48, 8, 5),
+	(49, 49, 18, 4),
+	(50, 50, 6, 2);
 /*!40000 ALTER TABLE `rating2item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.user
@@ -421,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `FK_user_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.user: ~6 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.user: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `first_name`, `gender_id`, `surname`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`, `address_id`, `email_address`) VALUES
 	(1, 'Fabian', 1, 'Hennemann', '1999-12-28', 1, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 1, 'fabian.hennemann@baufuchs.de'),
