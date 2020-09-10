@@ -1,4 +1,7 @@
 <div class="item-container" ng-controller="cartController">
+
+    <addtocart></addtocart>
+    
     <div class={{item.class}} ng-repeat="item in items.item_list">
         <a href="#!item/{{item.id}}">
             <div class="image-container">
@@ -12,6 +15,6 @@
             <h1>{{ item.name }}</h1>
             <p class="price">{{ item.price }} €</p>
         </a>
-        <button ng-click="addItem(item.id, item.name)">zum Warenkorb</button>
+        <button onclick="document.getElementById('addToCartModal').style.display='block'" ng-click="addItem(item.id, item.name)">zum Warenkorb</button>
     </div>
 </div>
