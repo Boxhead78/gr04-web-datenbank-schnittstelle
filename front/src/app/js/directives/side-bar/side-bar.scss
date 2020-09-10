@@ -25,23 +25,13 @@
     border: 2px solid $black;
   }
 
-  .dropdown-content {
-    display: none;
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  .dropdown-content a {
-    background-color: $gray_transparent;
-    transition: 0.6s;
-    border: 2px solid $black;
-  }
-
   .navbar a:hover, .dropdown:hover .dropbtn a {
     background: $lightBlack;
     color: $white;
     transition: 0.3s;
     border: 2px solid $black;
+  }
+
+  .fa-caret-down {
+    float: right;
   }
