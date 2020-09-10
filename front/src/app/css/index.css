@@ -267,11 +267,13 @@ input[type=number] {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.test {
+.sortierung {
   margin: 4px 10px;
   border-bottom: 2px solid rgba(51, 51, 51, 0.2);
   border-top: 2px solid rgba(51, 51, 51, 0.2);
   padding: 8px 16px;
+  width: 90%;
+  border: 0;
 }
 
 section {
@@ -1173,6 +1175,140 @@ table {
   content: "";
   clear: both;
   display: table;
+}
+
+.agbModal .zurueck {
+  margin-top: 50px;
+}
+
+.agbContainer {
+  padding: 70px;
+}
+
+/* The Modal (background) */
+.agbModal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 50px;
+  overflow: auto;
+}
+
+/* Modal Content/Box */
+.agbModal-content {
+  background-color: white;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 60%;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #7ab91a;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Set a style for all buttons */
+.passwordModal button {
+  background-color: #7ab91a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+.passwordModal button:hover {
+  opacity: 0.9;
+}
+
+.passwordModal-content h1 {
+  font-size: 25px;
+}
+
+.passwordModal-content h1, .passwordModal-content p {
+  padding: 5px;
+  text-align: center;
+}
+
+/* Add padding to container elements */
+.passwordModalContainer {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.passwordModal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.passwordModal-content {
+  background-color: white;
+  margin: 10% auto 15% auto;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #7ab91a;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for continue shopping button and add to cart button on extra small screens */
+@media screen and (max-width: 300px) {
+  .weiterEinkaufenBtn, .zumWarenkorbBtn {
+    width: 50%;
+  }
 }
 
 * {

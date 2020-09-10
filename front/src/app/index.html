@@ -48,7 +48,9 @@
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
                 <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
             </a>
-            <a href="#!profile" id="avatar-icon"><img src="/front/src/assets/images/avatar-icon.png" alt="profile" height="47"></a>
+            <div ng-if="user!=null">
+                <a href="#!profile" id="avatar-icon"><img src="/front/src/assets/images/avatar-icon.png" alt="profile" height="47"></a>
+            </div>
         </div>
 
         <!-- login Modal -->
@@ -96,7 +98,9 @@
         <script src="js/directives/modals/login/login.js"></script>
         <script src="js/directives/sign-up/signup.js"></script>
         <script src="js/directives/profile/profile.js"></script>
-        <script src="js/directives/modals/shoppingcart/shoppingcart.js"></script>
+        <script src="js/directives/modals/shoppingcart/shoppingcart.js"></script>        
+        <script src="js/directives/modals/AGB-Datenschutz/agbdatenschutz.js"></script>
+        <script src="js/directives/modals/forgotPassword/forgotpassword.js"></script>
 
         <!-- Controllers -->
         <script src="js/controllers/homeController.js"></script>

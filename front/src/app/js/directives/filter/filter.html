@@ -4,7 +4,7 @@
     </div>
     <div class="filter-content-horizontal">
         <div class="custom-select">
-            <select class="test" ng-model="sort">
+            <select class="sortierung" ng-model="sort">
               <option value="sold" class="select-items">Bestseller</option>
               <option value="price" class="select-items">Preis: aufsteigend</option>
               <option value="-price" class="select-items">Preis: absteigend</option>
@@ -25,13 +25,13 @@
                 <input type="number" ng-change="setMinCost(minCost)" ng-model="minCost">
             </li>
             <li>
-                -
+                <label>-</label>
             </li>
             <li>
                 <input type="number" ng-change="setMaxCost(maxCost)" ng-model="maxCost">
             </li>
             <li>
-                €
+                <label>€</label>
             </li>
         </ul>
     </div>

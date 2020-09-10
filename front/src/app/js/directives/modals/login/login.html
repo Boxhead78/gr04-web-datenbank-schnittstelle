@@ -1,5 +1,7 @@
 <div id="loginModal" class="loginModal" ng-controller="loginController">
 
+  <forgotpassword></forgotpassword>
+  
     <form class="loginModal-content animate">
 
       <div class="cartContainer">
@@ -26,7 +28,7 @@
       <div ng-if="rootUser==null">
         <div class="cartContainer login" style="background-color:#f1f1f1">
           <button type="signUpBtn" onclick="document.getElementById('loginModal').style.display='none'"><a href="#!register">Registrieren</a></button>
-          <span class="psw"><a href="#">Passwort</a> vergessen?</span>
+          <span class="psw"><span onclick="document.getElementById('passwordModal').style.display='block'" style="color:dodgerblue; cursor: pointer">Passwort</span> vergessen?</span>
         </div>
       </div>
     </form>

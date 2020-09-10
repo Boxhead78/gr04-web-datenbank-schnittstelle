@@ -252,9 +252,11 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  .test {
+  .sortierung {
     margin: 4px 10px;
     border-bottom: 2px solid $gray_3_transparent;
     border-top: 2px solid $gray_3_transparent;
     padding: 8px 16px;
+    width: 90%;
+    border: 0;
   }

@@ -1,0 +1,54 @@
+@import "../../../../scss/colors";
+
+  .agbModal .zurueck {
+    margin-top: 50px;
+  }
+  
+  .agbContainer {
+    padding: 70px;
+  }
+  
+  /* The Modal (background) */
+  .agbModal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 50px; 
+    overflow: auto;
+  }
+  
+  /* Modal Content/Box */
+  .agbModal-content {
+    background-color: $white;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 60%;
+  }
+   
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+
+.close:hover,
+.close:focus {
+  color: $akzentFarbe;
+  cursor: pointer;
+}
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
