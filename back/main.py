@@ -161,6 +161,9 @@ def api_item_filter():
     sql_con, sql_cur = sql_connect()
     # searching for name with wildcard in database
 
+    if req.get("itemName") is not None:
+        req["itemName"] = "%" + req.get("itemName") + "%"
+
     # build sql query using WHERE to match above infos
     sql_cur.execute("""SELECT DISTINCT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date, i.average_rating FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
@@ -173,7 +176,7 @@ def api_item_filter():
           AND (%s IS NULL OR m.name = %s )
           AND ( (%s IS NULL OR i2c.category_id = %s)
                 OR (%s IS NULL OR c.category_parent_id = %s))
-          LIMIT 0, %s""", (req.get("itemName"), "%" + req.get("itemName") + "%", req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
+          LIMIT 0, %s""", (req.get("itemName"), req.get("itemName"), req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
                            req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("manufactorer"), req.get("manufactorer"), req.get("category"), req.get("category"), req.get("category"), req.get("category"), req.get("limit"),)
                     )
     # fetch all returned items
@@ -192,6 +195,7 @@ def api_item_filter():
             "average_rating": i[7]
         }
         item_list.append(data_item)
+    print(item_list)
     # return the json object
     resp = jsonify(item=item_list
                    )
