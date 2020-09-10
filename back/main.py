@@ -181,9 +181,19 @@ def api_item_filter():
                     )
     # fetch all returned items
     data = sql_cur.fetchall()
+
     # loop over each item and build a json object with the general properties
     item_list = []
     for i in data:
+        print("item_id: ", i[0])
+        sql_cur.execute(
+            """SELECT sum(od.count) FROM item i JOIN order_details od ON od.item_id = i.item_id WHERE i.item_id = %s GROUP BY i.item_id""", (i[0], ))
+        result = sql_cur.fetchone()
+        if result is not None:
+            number_of_orders = int(result[0])
+        else:
+            number_of_orders = 0
+        print(number_of_orders)
         data_item = {
             "id": i[0],
             "name": i[1],
@@ -192,7 +202,8 @@ def api_item_filter():
             "price": i[4],
             "picture": i[5],
             "creation_date": i[6],
-            "average_rating": i[7]
+            "average_rating": i[7],
+            "number_of_orders": number_of_orders
         }
         item_list.append(data_item)
     print(item_list)
