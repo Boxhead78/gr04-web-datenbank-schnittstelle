@@ -65,7 +65,7 @@ def sql_connect():
 # verify authentification of user
 
 
-def user_verfiy(email, password, sql_con, sql_cur):
+def user_verfiy(email, password, sql_cur):
     # get user hash
     sql_cur.execute("""SELECT password FROM user
         WHERE email_address = %s""", (str(email),))
@@ -133,7 +133,9 @@ def api_item_details():
         "count": data[9],
         "material": data[10],
         "manufactorer_id": data[11],
-        "technical_details": data[12]
+        "technical_details": data[12],
+        "average_rating": data[13],
+        "rating_count": data[14]
     }
     # TODO: make this get scores and each comment of the item
     sql_cur.execute("SELECT * FROM item LIMIT 0, 1")
@@ -157,15 +159,22 @@ def api_item_filter():
     # get filter information
     req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
+    # searching for name with wildcard in database
+
     # build sql query using WHERE to match above infos
-    sql_cur.execute("""SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i
+    sql_cur.execute("""SELECT DISTINCT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date, i.average_rating FROM item i
          JOIN item2category i2c ON i2c.item_id = i.item_id
-        WHERE (%s IS NULL OR i.color LIKE %s)
+         JOIN category c ON c.category_id = i2c.category_id
+         JOIN manufactorer m ON m.manufactorer_id = i.manufactorer_id
+        WHERE (%s IS NULL OR i.name LIKE %s) 
+          AND (%s IS NULL OR i.color LIKE %s)
           AND (%s IS NULL OR i.price BETWEEN %s AND %s)
           AND (%s IS NULL OR i.value_stock >= %s)
-          AND (%s IS NULL OR i2c.category_id = %s)
-          LIMIT 0, %s""", (req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
-                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("category"), req.get("category"), req.get("limit"),)
+          AND (%s IS NULL OR m.name = %s )
+          AND ( (%s IS NULL OR i2c.category_id = %s)
+                OR (%s IS NULL OR c.category_parent_id = %s))
+          LIMIT 0, %s""", (req.get("itemName"), "%" + req.get("itemName") + "%", req.get("color"), req.get("color"), req.get("minCost"), req.get("minCost"),
+                           req.get("maxCost"), req.get("minStock"), req.get("minStock"), req.get("manufactorer"), req.get("manufactorer"), req.get("category"), req.get("category"), req.get("category"), req.get("category"), req.get("limit"),)
                     )
     # fetch all returned items
     data = sql_cur.fetchall()
@@ -180,6 +189,7 @@ def api_item_filter():
             "price": i[4],
             "picture": i[5],
             "creation_date": i[6],
+            "average_rating": i[7]
         }
         item_list.append(data_item)
     # return the json object
@@ -196,12 +206,14 @@ def api_item_filter():
 
 @ app.route('/api/item/score', methods=['POST', 'GET'])
 def api_item_score():
+    new_average_rating = 0
     # get score value etc from request
     req = request.get_json().get("data")
-    resp = {"rc": int(0)}
+    resp = {"rc": int(0),
+            "average_rating": new_average_rating}
     # frontend needs to check for user registration
     sql_con, sql_cur = sql_connect()
-    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+    if user_verfiy(req.get("email"), req.get("password"), sql_cur):
         # add score to score table
         sql_cur.execute("""INSERT INTO rating (rating_value)
             VALUES (%s)""", (req.get("new_rating_value"),))
@@ -228,10 +240,12 @@ def api_item_score():
         # update score data in item table
         sql_cur.execute("""UPDATE item SET average_rating = %s WHERE item_id = %s """, (
             new_average_rating, req.get("item_id"),))
-        sql_con.commit()
-        sql_cur.close()
-        sql_con.close()
-        return jsonify(resp=resp)
+    else:
+        resp["rc"] = int(1)
+    sql_con.commit()
+    sql_cur.close()
+    sql_con.close()
+    return jsonify(resp=resp)
 
 
 @ app.route('/api/item/list', methods=['GET', 'POST'])
@@ -239,7 +253,7 @@ def api_item_list():
     req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
     sql_cur.execute(
-        """SELECT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i LIMIT 0, %s""", (req.get("limit"),))
+        """SELECT DISTINCT i.item_id, i.name, i.description, i.value_stock, i.price, i.picture, i.creation_date FROM item i LIMIT 0, %s""", (req.get("limit"),))
     data = sql_cur.fetchall()
     item_list = []
     for i in data:
@@ -268,16 +282,16 @@ def api_login():
     resp = {"rc": int(1), "user_id": int(0)}
     # compare user data from db
     sql_con, sql_cur = sql_connect()
-    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+    if user_verfiy(req.get("email"), req.get("password"), sql_cur):
         sql_cur.execute(
-            """SELECT user_id FROM user WHERE email = %s""", (str(req.get("email")),))
+            """SELECT user_id FROM user WHERE email_address = %s""", (str(req.get("email")),))
         # return user id and success code
         resp["user_id"] = int(sql_cur.fetchone()[0])
         resp["rc"] = int(0)
         resp.update()
         # check for argon rehash suggestion
         sql_cur.execute(
-            """SELECT password FROM user WHERE email = %s""", (str(req.get("email")),))
+            """SELECT password FROM user WHERE email_address = %s""", (str(req.get("email")),))
         key = sql_cur.fetchone()[0]
         if argon.check_needs_rehash(str(argonprefix + str(key))):
             key = str(argon.hash(req.get("password")).split("=")[-1])
@@ -365,7 +379,7 @@ def api_order_place():
     resp = {"rc": int(0)}
     sql_con, sql_cur = sql_connect()
     # check authority of user
-    if user_verfiy(req.get("email"), req.get("password"), sql_con, sql_cur):
+    if user_verfiy(req.get("email"), req.get("password"), sql_cur):
 
         # commit order to sql db
         now = datetime.datetime.now()
@@ -378,24 +392,29 @@ def api_order_place():
         for i in req.get("order_list"):
             sql_cur.execute("""INSERT INTO order_details (order_id, item_id, count) VALUES (%s, %s, %s)""",
                             (order_id, i["item_id"], i["count"],))
+            # reduce value_stock of item by number of bought items
+            sql_cur.execute(
+                """UPDATE item i SET i.value_stock =  i.value_stock - %s WHERE i.item_id = %s""", (i["count"], i["item_id"],))
         sql_con.commit()
-        sql_cur.close()
-        sql_con.close()
-        # return success code
-        return jsonify(resp=resp)
+    else:
+        resp["rc"] = int(1)
+    sql_cur.close()
+    sql_con.close()
+    # return success code
+    return jsonify(resp=resp)
 
 
 @ app.route('/api/user/details', methods=['POST', 'GET'])
 def api_user_details():
     # get request data
-    # req = request.get_json().get("data")
+    req = request.get_json().get("data")
     sql_con, sql_cur = sql_connect()
     # collecting all details of a user
     sql_cur.execute(
-        """SELECT u.first_name, u.surname, u.birthday, u.email_address, a.street, a.post_code, l.name AS language,
+        """SELECT u.first_name, u.surname, u.birthday, u.email_address, a.street, a.house_number, a.post_code, a.city, c.country_name, l.name AS language,
          p.name AS payment FROM user u JOIN address a ON a.address_id = u.address_id
-         JOIN language l ON l.language_id = u.language_id JOIN payment p ON p.payment_id = u.payment_id
-         WHERE u.user_id = %s""", (2,))
+         JOIN language l ON l.language_id = u.language_id JOIN payment p ON p.payment_id = u.payment_id JOIN country c .country_id = a.country_id
+         WHERE u.user_id = %s""", (req.get("user_id"),))
     data = sql_cur.fetchone()
     data_item = {
         "first_name": data[0],
@@ -403,31 +422,34 @@ def api_user_details():
         "birthday": data[2],
         "email_address": data[3],
         "street": data[4],
-        "post_code": data[5],
-        "language": data[6],
-        "payment": data[7]
+        "house_number": data[5],
+        "post_code": data[6],
+        "city": data[7],
+        "country": data[8],
+        "language": data[9],
+        "payment": data[10]
     }
 
-    sql_cur.execute("""SELECT o.booking_date, i.name AS item_name, i.price, od.count FROM baufuchs.`order` o JOIN order_details od ON od.order_id = o.order_id JOIN item i ON i.item_id = od.item_id WHERE o.user_id = %s""", (2,))
+    sql_cur.execute("""SELECT o.booking_date, i.name AS item_name, i.price, od.count FROM baufuchs.`order` o JOIN order_details od ON od.order_id = o.order_id JOIN item i ON i.item_id = od.item_id WHERE o.user_id = %s""", (req.get("user_id"),))
     data = sql_cur.fetchall()
     # formatting result
     order_list = []
     for i in data:
         order = []
         if not any(d['booking_date'] == i[0] for d in order_list):
-            for x in data:
-                if (i[0] == x[0]):
-                    a = {
-                        "item_name": x[1],
-                        "price": x[2],
-                        "count": x[3]
+            for j in data:
+                if (i[0] == j[0]):
+                    item = {
+                        "item_name": j[1],
+                        "price": j[2],
+                        "count": j[3]
                     }
-                    order.append(a)
-            f = {
+                    order.append(item)
+            order = {
                 "booking_date": i[0],
                 "order": order
             }
-            order_list.append(f)
+            order_list.append(order)
 
     return jsonify(user_details=data_item, order_list=order_list)
 
