@@ -11,6 +11,8 @@
 @import "../js/directives/cart/cart";
 @import "../js/directives/profile/profile";
 @import "../js/directives/modals/shoppingcart/shoppingcart";
+@import "../js/directives/modals/logout/logout";
+
 
 
 // General Styles
@@ -160,3 +162,20 @@ html, body {
         }
     }
 }
+
+//cart notification
+.notification {
+    position: relative;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 50%;
+    color: $white;
+    background: $akzentFarbe;
+    width: 27px;
+    height: 27px;
+    padding: 1px 0 0 0;
+  }

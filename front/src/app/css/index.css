@@ -1346,4 +1346,20 @@ html, body {
     margin: 0;
   }
 }
+
+.notification {
+  position: relative;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  border-radius: 50%;
+  color: white;
+  background: #7ab91a;
+  width: 27px;
+  height: 27px;
+  padding: 1px 0 0 0;
+}
 /*# sourceMappingURL=index.css.map */
