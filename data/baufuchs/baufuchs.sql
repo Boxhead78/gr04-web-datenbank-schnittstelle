@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY (`category_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.category: ~9 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.category: ~12 rows (ungefähr)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`category_id`, `name`, `category_parent_id`) VALUES
 	(1, 'Handwerkzeug', 12),
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `country` (
   PRIMARY KEY (`country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.country: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.country: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
 INSERT INTO `country` (`country_id`, `country_name`) VALUES
 	(1, 'Deutschland');
@@ -115,7 +115,7 @@ INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `p
 	(2, 'Schraubendreher-Set', 'Das Schraubendreher-Set 810SPC/6 von Hazet', 15, 14.57, 'screwdriver.jpg', 'Schwarz', '2020-09-09 12:41:49', 520, 6, 'Kunststoff Griff', 2, 'Set bestehend aus 4 Schlitz- und 2 Kreuzschlitzsch', 1.5, 2),
 	(3, 'Bügelsäge', 'Die Handbügelsäge von Gardena', 3, 21.35, 'saege.jpg', 'Weiß', '2020-09-09 12:41:50', 870, 1, 'Kunststoff/Stahl', 3, NULL, 3, 1),
 	(4, 'Bolzenschneider', 'Der Bolzenschneider von Wisent eignet sich ideal zum Zerteilen von Metall', 10, 40.45, 'schneider.jpg', 'Rot', '2020-09-09 12:41:51', 2400, 1, 'Kunststoff überzogen', 1, 'Länge: 600 mm', 3, 1),
-	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-09 12:41:53', 2400, 1, 'Kunststoff', 9, 'XL Variante', 4, 1),
+	(5, 'Hammer "Bob-der-Baumeister"', 'Der neueste Hammer aus der "Bob-der-Baumeister" Sammlung', 5, 74.99, 'hammer02.jpg', 'Grün', '2020-09-10 21:06:08', 2400, 1, 'Kunststoff', 3, 'XL Variante', 4, 1),
 	(6, 'Erde', 'Ein Würfel Erde aus Minecraft-Kollektion', 5000, 0.99, 'mc_erde.jpg', 'Braun', '2020-09-09 12:41:54', 1000, 1, 'Dreck', 4, NULL, 2, 5),
 	(7, 'Stein', 'Ein Würfel Stein aus Minecraft-Kollektion', 2500, 1.49, 'mc_stein.jpg', 'Schwarz', '2020-09-09 12:41:57', 3000, 1, 'Stein', 4, NULL, 3.25, 4),
 	(8, 'Eisen', 'Ein Würfel Eisen aus Minecraft-Kollektion', 128, 3.49, 'mc_eisen.jpg', 'Schwarz', '2020-09-09 12:41:55', 3500, 1, 'Eisen', 4, NULL, 1, 1),
@@ -129,7 +129,7 @@ INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `p
 	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Blau', '2020-09-09 12:42:05', 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 2, 3),
 	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', 'Grün', '2020-09-09 12:42:06', 2000, 1, 'Kunststoff', 1, 'Mit Pipette, Messbecher & Co', 1.25, 4),
 	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball.jpg', 'Weiß', '2020-09-09 12:42:07', 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 2.75, 4),
-	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-09 12:42:09', 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, 0);
+	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-10 21:09:44', 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, 0);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item2category
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `item2category` (
   CONSTRAINT `FK_item2category_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.item2category: ~19 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.item2category: ~20 rows (ungefähr)
 /*!40000 ALTER TABLE `item2category` DISABLE KEYS */;
 INSERT INTO `item2category` (`item2category_id`, `category_id`, `item_id`) VALUES
 	(1, 1, 1),
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.language: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.language: ~1 rows (ungefähr)
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
 INSERT INTO `language` (`language_id`, `name`) VALUES
 	(1, 'deutsch');
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `rating` (
   PRIMARY KEY (`rating_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.rating: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.rating: ~50 rows (ungefähr)
 /*!40000 ALTER TABLE `rating` DISABLE KEYS */;
 INSERT INTO `rating` (`rating_id`, `description`, `rating_value`) VALUES
 	(1, '', 2),
@@ -342,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `rating2item` (
   CONSTRAINT `FK_rating2item_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.rating2item: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.rating2item: ~50 rows (ungefähr)
 /*!40000 ALTER TABLE `rating2item` DISABLE KEYS */;
 INSERT INTO `rating2item` (`rating2item_id`, `rating_id`, `item_id`, `user_id`) VALUES
 	(1, 1, 2, 2),
@@ -422,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `FK_user_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.user: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.user: ~6 rows (ungefähr)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `first_name`, `gender_id`, `surname`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`, `address_id`, `email_address`) VALUES
 	(1, 'Fabian', 1, 'Hennemann', '1999-12-28', 1, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 1, 'fabian.hennemann@baufuchs.de'),
