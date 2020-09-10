@@ -38,7 +38,7 @@
                 <div ng-if="user==null"><i class="fas fa-user"></i> Login</div>
                 <div ng-if="user!=null"><i class="fas fa-user"></i> Logout</div>
             </a>
-            
+
             <a href="#!cart" class="notification">
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
                 <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
@@ -50,9 +50,10 @@
         <!-- login Modal -->
             <login></login>
         <!-- dynamic content -->
-        <ng-view></ng-view>
-        </div>
+        <ng-view>
 
+        </ng-view>
+        </div>
 
         <!-- footer -->
         <div class="footer">
@@ -89,7 +90,6 @@
         <script src="js/directives/cart/cart.js"></script>
         <script src="js/directives/modals/addToCart/addtocart.js"></script>
         <script src="js/directives/modals/login/login.js"></script>
-        <script src="js/directives/modals/logout/logout.js"></script>
         <script src="js/directives/sign-up/signup.js"></script>
         <script src="js/directives/profile/profile.js"></script>
         <script src="js/directives/modals/shoppingcart/shoppingcart.js"></script>
@@ -102,9 +102,6 @@
         <script src="js/controllers/cartController.js"></script>
         <script src="js/controllers/itemfilterController.js"></script>
         <script src="js/controllers/registrationController.js"></script>
-
-        <!-- Services -->
-        <script src="js/services/itemListService.js"></script>
 
     </body>
 </html>

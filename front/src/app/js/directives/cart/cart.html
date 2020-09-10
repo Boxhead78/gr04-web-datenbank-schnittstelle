@@ -14,7 +14,7 @@
           <tr ng-repeat="item in cart">
             <td>{{item.name}}</td>
             <td><input type="number" value="1"></td>
-            <td>3,99</td>
+            <td>{{item.price}}</td>
             <td><i class="fas fa-trash" ng-click="removeItem(item)"></i></td>
           </tr>
         </tbody>
@@ -33,7 +33,7 @@
         <label class="labelGray" for="Name">Das ist Ihre Zahlungsmethode:</label>
         <br>
         <br>
-        <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" href="#!">Kaufen</button>
+        <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()">Kaufen</button>
       </div>
     </div>
     </article>
