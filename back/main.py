@@ -96,19 +96,6 @@ def addToAverage(average, size, value):
 
 
 # Routes
-# for quick return tests
-
-
-@ app.route('/api/hello', methods=['GET'])
-def api_hello():
-    data = {
-        "username": "Test",
-        "password": "Testkey"
-    }
-    resp = jsonify(item=data,
-                   scores=data)
-    resp.status_code = 200
-    return resp
 
 # for getting shop item details to the web-client
 
@@ -330,6 +317,7 @@ def api_register():
         and match(r"^[\w ]+$", str(req.get("house_number")))
         and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("city")))
             and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("country")))):
+        resp["rc"] = int(2)
         return jsonify(resp=resp)
     # check for duplicate users
     sql_con, sql_cur = sql_connect()
