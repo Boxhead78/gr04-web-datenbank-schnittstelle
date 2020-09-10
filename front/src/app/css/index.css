@@ -642,27 +642,16 @@ button:hover {
   border: 2px solid black;
 }
 
-.dropdown-content {
-  display: none;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown-content a {
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-transition: 0.6s;
-  transition: 0.6s;
-  border: 2px solid black;
-}
-
 .navbar a:hover, .dropdown:hover .dropbtn a {
   background: #333333;
   color: white;
   -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 2px solid black;
+}
+
+.fa-caret-down {
+  float: right;
 }
 
 /* Set a style for all buttons */
