@@ -96,19 +96,6 @@ def addToAverage(average, size, value):
 
 
 # Routes
-# for quick return tests
-
-
-@ app.route('/api/hello', methods=['GET'])
-def api_hello():
-    data = {
-        "username": "Test",
-        "password": "Testkey"
-    }
-    resp = jsonify(item=data,
-                   scores=data)
-    resp.status_code = 200
-    return resp
 
 # for getting shop item details to the web-client
 
@@ -333,11 +320,12 @@ def api_register():
         and match(r"^[\w ]+$", str(req.get("house_number")))
         and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("city")))
             and match(r"^[\w ßöäüÖÄÜ]+$", str(req.get("country")))):
+        resp["rc"] = int(2)
         return jsonify(resp=resp)
     # check for duplicate users
     sql_con, sql_cur = sql_connect()
     sql_cur.execute("""SELECT * FROM user
-        WHERE email = %s""", (req.get("email"),))
+        WHERE email_address = %s""", (req.get("email"),))
     res = sql_cur.fetchone()
     if res != None:
         sql_cur.close()
@@ -350,8 +338,19 @@ def api_register():
         req["birthday"] = str(req_tmp[2] + "-" + req_tmp[1] + "-" + req_tmp[0])
         req.update()
         # commit new data to sql db
-        # TODO check for country and country id in country table
-        # TODO check for duplicate addresses
+        # check for country and country id in country table
+        sql_cur.execute("""SELECT country_id FROM country
+            WHERE country_name = %s""", (str(req.get("country_name")),))
+        country_id = sql_cur.fetchone()
+        if country_id == None:
+            sql_cur.execute("""INSERT INTO country (country_name) VALUES (%s)""", (str(req.get("country_name")),))
+            sql_cur.commit()
+            country_id = sql_cur.lastrowid
+        else:
+            country_id = country_id[0]
+        # !DEBUG: hardcoded country - remove to allow for all countries
+        country_id = int(1)
+        # check for duplicate addresses
         sql_cur.execute("""SELECT address_id FROM address
             WHERE street = %s
             AND house_number = %s
@@ -362,18 +361,51 @@ def api_register():
             str(req.get("house_number")),
             str(req.get("post_code")),
             str(req.get("city")),
-            str(req.get("country_id")),))
-        # TODO add new address if not existing
-        # TODO set address_id for next query
-        # TODO add other values for query
-        sql_cur.execute("""INSERT INTO user (first_name, surname, email, gender, birthday, payment_method, password)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)""", (
+            str(country_id),))
+        address_id = sql_cur.fetchone()
+        if address_id == None
+            sql_cur.execute("""INSERT INTO address (street, house_number, post_code, city, country_id)
+                VALUES (%s, %s, %s, %s, %s)""", (
+                    str(req.get("street")),
+                    str(req.get("house_number")),
+                    str(req.get("post_code")),
+                    str(req.get("city")),
+                    str(country_id),))
+            sql_cur.commit()
+            address_id = sql_cur.lastrowid
+        else:
+            address_id = address_id[0]
+        # get gender id
+        # !DEBUG: can be commented if gender id is what json contains and not a gender name
+        sql_cur.execute("""SELECT gender_id FROM gender WHERE name = %s""", (str(req.get("gender")),))
+        gender_id = sql_cur.fetchone()
+        if gender_id == None:
+            sql_cur.execute("""INSERT INTO gender (name) VALUES (%s)""", (str(req.get("gender")),))
+            sql_cur.commit()
+            gender_id = sql_cur.lastrowid
+        else:
+            gender_id = gender_id[0]
+        # get payment id
+        # !DEBUG: same this here as above
+        sql_cur.execute("""SELECT payment_id FROM payment WHERE name = %s""", (str(req.get("payment")),))
+        payment_id = sql_cur.fetchone()
+        if payment_id == None:
+            sql_cur.execute("""INSERT INTO payment (name) VALUES (%s)""", (str(req.get("payment")),))
+            sql_cur.commit()
+            payment_id = sql_cur.lastrowid
+        else:
+            payment_id = payment_id[0]
+        # add other values for query
+        # !DEBUG: replace id vars with req-gets if above debug cases turn out true
+        sql_cur.execute("""INSERT INTO user (first_name, surname, email_address, gender_id, birthday, payment_id, address_id, password)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", (
             str(req.get("first_name")),
             str(req.get("surname")),
             str(req.get("email")),
-            int(req.get("gender")),
-            req.get("birthday"),
-            req.get("payment_method"),
+            str(gender_id),
+            str(req.get("birthday")),
+            str(payment_id),
+            str(address_id)
             str(req.get("password")),))
         sql_con.commit()
         resp["rc"] = int(0)
