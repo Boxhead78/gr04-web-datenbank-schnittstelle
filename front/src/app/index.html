@@ -43,7 +43,7 @@
                 <a class="loginBtn" ng-controller="loginController" ng-click="logout()">
                     <i class="fas fa-user"></i> Logout
                 </a>
-            </div>              
+            </div>
             <a href="#!cart" class="notification">
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
                 <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
@@ -56,9 +56,7 @@
         <!-- login Modal -->
             <login></login>
         <!-- dynamic content -->
-        <ng-view>
-
-        </ng-view>
+        <ng-view></ng-view>
         </div>
 
         <!-- footer -->

@@ -30,6 +30,6 @@ var app = angular.module('baufuchs', ["ngRoute", "ngCookies"]);
         });
 
         app.run(function($rootScope, $cookies) {
-            $rootScope.user = $cookies.get('user') ? $cookies.get('user') : null;
+            $rootScope.user = $cookies.getObject('user') ? $cookies.getObject('user') : null;
             $rootScope.cart = $cookies.getObject('cart') ? $cookies.getObject('cart') : [];
         });

@@ -15,6 +15,6 @@
             <h1>{{ item.name }}</h1>
             <p class="price">{{ item.price }} €</p>
         </a>
-        <button onclick="document.getElementById('addToCartModal').style.display='block'" ng-click="addItem(item.id, item.name)">zum Warenkorb</button>
+        <button onclick="document.getElementById('addToCartModal').style.display='block'" ng-click="addItem(item.id, item.name, 1, item.price)">zum Warenkorb</button>
     </div>
 </div>

@@ -4,12 +4,12 @@ app.controller('itemfilterController',
         //define default requestParams object
         $scope.requestParams = {
             limit: 20,
-            category: null,
-            itemName: null,
-            color: null,
-            minCost: null,
-            maxCost: null,
-            minStock: null
+            category: Number,
+            itemName: String,
+            color: String,
+            minCost: Number,
+            maxCost: Number,
+            minStock: Number
         };
 
         //setter for each filter criteria

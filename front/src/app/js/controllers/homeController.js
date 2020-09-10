@@ -36,8 +36,9 @@ app.controller( 'homeController',
     //function to add an item to the cart
     $scope.addItem = function(item_id, item_name, count, price) {
         $rootScope.cart.push({id: item_id, name: item_name, count: count, price});
+        console.log($rootScope.cart);
 
-        if ($cookies.get('user') ) {
+        if ($cookies.getObject('user') ) {
             $cookies.putObject('cart', $rootScope.cart);
         }
     }

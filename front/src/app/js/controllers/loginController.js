@@ -22,7 +22,7 @@ app.controller( 'loginController',
                            data: {email: $scope.username, password: $scope.password} })
                 .then(function successCallback(response) {
                     //if login data is correct (response_code (rc) = 1)
-                    if (response.data.resp.rc == 1) {
+                    if (response.data.resp.rc == 0) {
                         //when RememberMe is checked, save user login data & cart in cookie
                         if ($scope.remember) {
                             $cookies.putObject('user', {user_id: response.data.resp.user_id,
