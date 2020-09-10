@@ -210,6 +210,13 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 -- Exportiere Daten aus Tabelle baufuchs.order: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` (`order_id`, `user_id`, `booking_date`, `deletion_date`, `creation_date`) VALUES
+	(1, 1, '2020-09-10 10:25:53', NULL, '2020-09-10 10:23:07'),
+  (2, 1, '2020-09-09 14:12:21', NULL, '2020-09-09 14:10:07'),
+  (3, 1, '2020-09-10 08:21:26', NULL, '2020-09-10 08:19:07'),
+  (4, 2, '2020-09-08 13:11:22', NULL, '2020-09-08 13:05:07'),
+  (5, 4, '2020-09-06 18:09:50', NULL, '2020-09-06 18:00:07'),
+  (6, 5, '2020-09-10 11:21:45', NULL, '2020-09-10 11:14:07');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.order_details
@@ -226,6 +233,18 @@ CREATE TABLE IF NOT EXISTS `order_details` (
 
 -- Exportiere Daten aus Tabelle baufuchs.order_details: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
+INSERT INTO `order_details` (`order_details_id`, `order_id`, `item_id`, `count`, `deletion_date`) VALUES
+	(1, 1, 13, 1, NULL),
+  (2, 1, 11, 2, NULL),
+  (3, 1, 12, 5, NULL),
+  (4, 2, 9, 100, NULL),
+  (5, 3, 16, 5, NULL),
+  (6, 3, 17, 1, NULL),
+  (7, 3, 19, 2, NULL),
+  (8, 3, 6, 64, NULL),
+  (9, 4, 7, 20, NULL),
+  (10, 5, 8, 10, NULL),
+  (11, 6, 4, 1, NULL);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.payment
