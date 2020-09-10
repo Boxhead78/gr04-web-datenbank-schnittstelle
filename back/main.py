@@ -169,7 +169,7 @@ def api_item_filter():
          JOIN item2category i2c ON i2c.item_id = i.item_id
          JOIN category c ON c.category_id = i2c.category_id
          JOIN manufactorer m ON m.manufactorer_id = i.manufactorer_id
-        WHERE (%s IS NULL OR i.name LIKE %s) 
+        WHERE (%s IS NULL OR i.name LIKE %s)
           AND (%s IS NULL OR i.color LIKE %s)
           AND (%s IS NULL OR i.price BETWEEN %s AND %s)
           AND (%s IS NULL OR i.value_stock >= %s)
@@ -185,7 +185,6 @@ def api_item_filter():
     # loop over each item and build a json object with the general properties
     item_list = []
     for i in data:
-        print("item_id: ", i[0])
         sql_cur.execute(
             """SELECT sum(od.count) FROM item i JOIN order_details od ON od.item_id = i.item_id WHERE i.item_id = %s GROUP BY i.item_id""", (i[0], ))
         result = sql_cur.fetchone()
@@ -193,7 +192,6 @@ def api_item_filter():
             number_of_orders = int(result[0])
         else:
             number_of_orders = 0
-        print(number_of_orders)
         data_item = {
             "id": i[0],
             "name": i[1],
@@ -206,7 +204,6 @@ def api_item_filter():
             "number_of_orders": number_of_orders
         }
         item_list.append(data_item)
-    print(item_list)
     # return the json object
     resp = jsonify(item=item_list
                    )
@@ -318,14 +315,14 @@ def api_login():
     return jsonify(resp=resp)
 
 
-@ app.route('/api/user/register', methods=['POST'])
+@ app.route('/api/user/register', methods=['GET'])
 def api_register():
     # get request data
     req = request.get_json().get("data")
     resp = {"rc": int(1),
             "id": int(0)}
     # catch exceptions in entered data using regex
-    if (match(r"^[a-z]([w-]*[a-z]|[w._]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w.]*[a-z]{2,}|[a-z]){2,}?.[a-z]{2,}$", str(req.get("email")))
+    if (match(r"^[a-z]([w-]*[a-z]|[w._]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w.]*[a-z]{2,}|[a-z]){2,}?.[a-z]{2,}$", str(req.get("email_address")))
         and match(r"^[a-zA-Z]*$", str(req.get("first_name")))
         and match(r"^[a-zA-Z]*$", str(req.get("surname")))
         and match(r"^[\d]{2}.[\d]{2}.[\d]{4}$", str(req.get("birthday")))
@@ -337,21 +334,32 @@ def api_register():
     # check for duplicate users
     sql_con, sql_cur = sql_connect()
     sql_cur.execute("""SELECT * FROM user
-        WHERE email = %s""", (req.get("email"),))
+        WHERE email_address = %s""", (req.get("email_address"),))
     res = sql_cur.fetchone()
-    if res != None:
+    if res is not None:
         sql_cur.close()
         sql_con.close()
         return jsonify(resp=resp)
     else:
         # compile data
         req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
-        req_tmp = str(req.get("birthday").split("."))
-        req["birthday"] = str(req_tmp[2] + "-" + req_tmp[1] + "-" + req_tmp[0])
-        req.update()
+        req_tmp = req.get("birthday").split("-")
+        birthday = datetime.date(
+            int(req_tmp[2]), int(req_tmp[1]), int(req_tmp[0]))
         # commit new data to sql db
-        # TODO check for country and country id in country table
-        # TODO check for duplicate addresses
+        # check for country and country id in country table
+        sql_cur.execute(
+            """SELECT country_id FROM country  WHERE country_name = %s """, (req.get("country"),))
+        result = sql_cur.fetchone()
+        if result is not None:
+            country_id = result[0]
+        else:
+            # if country is not in datbase add and fetch id
+            sql_cur.execute(
+                """"INSERT INTO country (country_name) VALUES (%s)""", (req.get("country"),))
+            sql_con.commit()
+            country_id = sql_cur.lastrowid
+        # check for duplicate addresses
         sql_cur.execute("""SELECT address_id FROM address
             WHERE street = %s
             AND house_number = %s
@@ -362,19 +370,40 @@ def api_register():
             str(req.get("house_number")),
             str(req.get("post_code")),
             str(req.get("city")),
-            str(req.get("country_id")),))
-        # TODO add new address if not existing
-        # TODO set address_id for next query
-        # TODO add other values for query
-        sql_cur.execute("""INSERT INTO user (first_name, surname, email, gender, birthday, payment_method, password)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)""", (
+            str(country_id),))
+        result = sql_cur.fetchone()
+        if result is not None:
+            address_id = result[0]
+        else:
+            # add new address if not existing
+            sql_cur.execute("""INSERT INTO address (street, house_number, post_code, city, country_id) VALUES (%s, %s, %s, %s, %s)""", (req.get(
+                "street"), req.get("house_number"), req.get("post_code"), req.get("city"), country_id,))
+            sql_con.commit()
+            # set address_id for next query
+            address_id = sql_cur.lastrowid
+
+        # get gender Id
+        sql_cur.execute(
+            """SELECT gender_id from gender WHERE name = %s """, (req.get("gender"),))
+        gender_id = sql_cur.fetchone()[0]
+
+        # get payment id
+        sql_cur.execute(
+            """SELECT payment_id FROM payment WHERE name = %s """, (req.get("payment"),))
+        payment_id = sql_cur.fetchone()[0]
+
+        # add other values for query
+        sql_cur.execute("""INSERT INTO user (first_name, surname, gender_id, birthday, password, language_id, payment_id, address_id, email_address)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", (
             str(req.get("first_name")),
             str(req.get("surname")),
-            str(req.get("email")),
-            int(req.get("gender")),
-            req.get("birthday"),
-            req.get("payment_method"),
-            str(req.get("password")),))
+            int(gender_id),
+            birthday,
+            str(req.get("password")),
+            int(req.get("language_id")),
+            int(payment_id),
+            int(address_id),
+            str(req.get("email_address")),))
         sql_con.commit()
         resp["rc"] = int(0)
         resp["id"] = int(sql_cur.lastrowid)
@@ -384,9 +413,8 @@ def api_register():
         # return success code
         return jsonify(resp=resp)
 
-# json input: email, password of user, item_ids, counts,
 
-
+# commit new order in database
 @ app.route('/api/order/place', methods=['POST'])
 def api_order_place():
     # get request data
@@ -417,6 +445,8 @@ def api_order_place():
     sql_con.close()
     # return success code
     return jsonify(resp=resp)
+
+# fetching all user details for profile side
 
 
 @ app.route('/api/user/details', methods=['POST', 'GET'])
