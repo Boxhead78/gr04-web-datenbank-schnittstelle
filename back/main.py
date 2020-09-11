@@ -332,7 +332,8 @@ def api_register():
     else:
         # compile data
         req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
-        birthday = datetime.date(1999, 6, 8)
+        # birthday = datetime.date(1999, 6, 8)
+        birthday = str(req.get("birthday").split("T")[0])
         # commit new data to sql db
         # check for country and country id in country table
         sql_cur.execute(
