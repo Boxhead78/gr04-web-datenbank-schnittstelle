@@ -302,10 +302,11 @@ def api_login():
     return jsonify(resp=resp)
 
 
-@ app.route('/api/user/register', methods=['GET'])
+@ app.route('/api/user/register', methods=['GET', 'POST'])
 def api_register():
     # get request data
     req = request.get_json().get("data")
+    print(req)
     resp = {"rc": int(1),
             "id": int(0)}
     # catch exceptions in entered data using regex
@@ -331,9 +332,7 @@ def api_register():
     else:
         # compile data
         req["password"] = str(argon.hash(req.get("password")).split("=")[-1])
-        req_tmp = req.get("birthday").split("-")
-        birthday = datetime.date(
-            int(req_tmp[2]), int(req_tmp[1]), int(req_tmp[0]))
+        birthday = datetime.date(1999, 6, 8)
         # commit new data to sql db
         # check for country and country id in country table
         sql_cur.execute(
@@ -370,26 +369,16 @@ def api_register():
             # set address_id for next query
             address_id = sql_cur.lastrowid
 
-        # get gender Id
-        sql_cur.execute(
-            """SELECT gender_id from gender WHERE name = %s """, (req.get("gender"),))
-        gender_id = sql_cur.fetchone()[0]
-
-        # get payment id
-        sql_cur.execute(
-            """SELECT payment_id FROM payment WHERE name = %s """, (req.get("payment"),))
-        payment_id = sql_cur.fetchone()[0]
-
         # add other values for query
         sql_cur.execute("""INSERT INTO user (first_name, surname, gender_id, birthday, password, language_id, payment_id, address_id, email_address)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", (
             str(req.get("first_name")),
             str(req.get("surname")),
-            int(gender_id),
+            req.get("gender"),
             birthday,
             str(req.get("password")),
             int(req.get("language_id")),
-            int(payment_id),
+            req.get("payment"),
             int(address_id),
             str(req.get("email_address")),))
         sql_con.commit()
