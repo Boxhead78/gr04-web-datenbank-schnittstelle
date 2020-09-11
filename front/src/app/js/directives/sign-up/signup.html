@@ -14,7 +14,7 @@
         <input type="text" placeholder="Nachname" name="Nachname" maxlength="30" required ng-model="request.surname">
 
         <label class="geburtstagLbl" for="Geburtstag">Geburtstag</label>
-        <input type="date" max="1990-01-01" placeholder="Geburtstag" name="Geburtstag" required
+        <input type="date" min="1980-01-01" placeholder="Geburtstag" name="Geburtstag" required
             ng-model="request.birthday">
 
         <input type="straße" placeholder="Straße" name="Straße" maxlength="30" required ng-model="request.street">
