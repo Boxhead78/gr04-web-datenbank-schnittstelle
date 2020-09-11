@@ -16,7 +16,7 @@
             </div>
 
             <div class="profileRight">
-                <label class="labelGray" for="Name">{{user.first_name}}</label>
+                <label class="labelGray" for="Name">{{user.first_name + ' ' + user.surname}}</label>
                 <label class="labelGray" for="StraßeNr">{{user.street + ' ' + user.house_number}}</label>
                 <label class="labelGray" for="plzStadtLand">{{user.post_code + ' ' + user.city + ', ' + user.country}}</label>
                 <label class="labelGray" for="Geburtstag">{{user.birthday}}</label>
