@@ -589,7 +589,6 @@ article {
   position: relative;
 }
 
-/* Clear floats after the columns */
 .PageRow:after {
   content: "";
   display: table;
