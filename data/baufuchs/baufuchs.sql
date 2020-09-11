@@ -23,14 +23,15 @@ CREATE TABLE IF NOT EXISTS `address` (
   PRIMARY KEY (`address_id`),
   KEY `FK_address_country` (`country_id`),
   CONSTRAINT `FK_address_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.address: ~3 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.address: ~9 rows (ungefähr)
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`address_id`, `street`, `house_number`, `post_code`, `city`, `country_id`, `deletion_date`) VALUES
 	(1, 'Hauptstraße', '5', 22397, 'Hamburg', 1, NULL),
 	(2, 'Hamburger Straße', '19', 22083, 'Hamburg', 1, NULL),
-	(3, 'Dorf Straße', '21', 22365, 'Hamburg', 1, NULL);
+	(3, 'Dorf Straße', '21', 22365, 'Hamburg', 1, NULL),
+	(4, 'Tegelsbarg', '5', 22399, 'Hamburg', 1, NULL);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.category
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `country` (
   PRIMARY KEY (`country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.country: ~1 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.country: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
 INSERT INTO `country` (`country_id`, `country_name`) VALUES
 	(1, 'Deutschland');
@@ -129,7 +130,7 @@ INSERT INTO `item` (`item_id`, `name`, `description`, `value_stock`, `price`, `p
 	(16, 'Gummiball', 'Der neue sprunghafte Gummiball', 50, 0.29, 'gummiball.jpg', 'Blau', '2020-09-09 12:42:05', 50, 1, 'Gummi', 1, 'Durchmesser: 25cm', 2, 3),
 	(17, 'Big Fun Chemistry', 'Big Fun Chemistry Chemiebaukasten', 7, 30.49, 'chemistry.jpg', 'Grün', '2020-09-09 12:42:06', 2000, 1, 'Kunststoff', 1, 'Mit Pipette, Messbecher & Co', 1.25, 4),
 	(18, 'Fußball', 'Dies ist der ideale Fußball', 25, 14.99, 'fußball.jpg', 'Weiß', '2020-09-09 12:42:07', 400, 1, 'Leder', 3, 'Ultralange lebensdauer', 2.75, 4),
-	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-10 21:09:44', 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, 0);
+	(19, 'Diamant', 'Ein Diamant aus unserer Minecraft-Kollektion', 3, 79.99, 'mc_diamant.jpg', 'Blau', '2020-09-10 23:04:18', 700, 1, 'Diamant', 4, 'Unglaublich hohe Zähigkeit', 0, 0);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.item2category
@@ -144,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `item2category` (
   CONSTRAINT `FK_item2category_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.item2category: ~20 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.item2category: ~19 rows (ungefähr)
 /*!40000 ALTER TABLE `item2category` DISABLE KEYS */;
 INSERT INTO `item2category` (`item2category_id`, `category_id`, `item_id`) VALUES
 	(1, 1, 1),
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle baufuchs.language: ~1 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.language: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
 INSERT INTO `language` (`language_id`, `name`) VALUES
 	(1, 'deutsch');
@@ -230,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`order_details_id`) USING BTREE,
   KEY `FK_rder_details_order` (`order_id`),
   KEY `FK_order_details_items` (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- Exportiere Daten aus Tabelle baufuchs.order_details: ~11 rows (ungefähr)
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
@@ -245,7 +246,8 @@ INSERT INTO `order_details` (`order_details_id`, `order_id`, `item_id`, `count`,
 	(8, 3, 6, 64, NULL),
 	(9, 4, 7, 20, NULL),
 	(10, 5, 8, 10, NULL),
-	(11, 6, 4, 1, NULL);
+	(11, 6, 4, 1, NULL),
+	(12, 1, 8, 5, NULL);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle baufuchs.payment
@@ -401,8 +403,8 @@ INSERT INTO `rating2item` (`rating2item_id`, `rating_id`, `item_id`, `user_id`) 
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
-  `gender_id` int(11) DEFAULT NULL,
   `surname` varchar(50) DEFAULT NULL,
+  `gender_id` int(11) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   `session_id` int(11) DEFAULT NULL,
   `password` varchar(64) DEFAULT NULL,
@@ -420,17 +422,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `FK_user_gender` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`gender_id`),
   CONSTRAINT `FK_user_language` FOREIGN KEY (`language_id`) REFERENCES `language` (`language_id`),
   CONSTRAINT `FK_user_payment` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Exportiere Daten aus Tabelle baufuchs.user: ~6 rows (ungefähr)
+-- Exportiere Daten aus Tabelle baufuchs.user: ~8 rows (ungefähr)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`user_id`, `first_name`, `gender_id`, `surname`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`, `address_id`, `email_address`) VALUES
-	(1, 'Fabian', 1, 'Hennemann', '1999-12-28', 1, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 1, 'fabian.hennemann@baufuchs.de'),
-	(2, 'Maik', 1, 'Baumann', '1996-08-19', 2, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 3, 2, 'maik.baumann@baufuchs.de'),
-	(3, 'Jonas', 1, 'Leupolt', '1999-04-06', 3, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 3, 'jonas.leupolt@baufuchs.de'),
-	(4, 'Leon', 1, 'Laade', '1999-01-01', 4, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 4, 2, 'leon.laade@baufuchs.de'),
-	(5, 'Jan', 1, 'Schneider', '1999-02-02', 5, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 2, 3, 'jan.schneider@baufuchs.de'),
-	(6, 'Lena', 2, 'Renneberg', '1998-03-09', 6, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 4, 1, 'lena.renneberg@baufuchs.de');
+INSERT INTO `user` (`user_id`, `first_name`, `surname`, `gender_id`, `birthday`, `session_id`, `password`, `language_id`, `payment_id`, `address_id`, `email_address`) VALUES
+	(1, 'Fabian', 'Hennemann', 1, '1999-12-28', 1, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 1, 'fabian.hennemann@baufuchs.de'),
+	(2, 'Maik', 'Baumann', 1, '1996-08-19', 2, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 3, 2, 'maik.baumann@baufuchs.de'),
+	(3, 'Jonas', 'Leupolt', 1, '1999-04-06', 3, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 1, 3, 'jonas.leupolt@baufuchs.de'),
+	(4, 'Leon', 'Laade', 1, '1999-01-01', 4, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 4, 2, 'leon.laade@baufuchs.de'),
+	(5, 'Jan', 'Schneider', 1, '1999-02-02', 5, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 2, 3, 'jan.schneider@baufuchs.de'),
+	(6, 'Lena', 'Renneberg', 2, '1998-03-09', 6, '2$qhkDN3r9Blc$XEGBSY2z3G/exUfBbkZNZw', 1, 4, 1, 'lena.renneberg@baufuchs.de');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
