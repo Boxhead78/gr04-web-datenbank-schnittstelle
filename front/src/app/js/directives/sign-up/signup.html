@@ -13,14 +13,14 @@
         <input type="text" placeholder="Nachname" name="Nachname" maxlength="30" required ng-model="request.surname">
 
         <label class="geburtstagLbl" for="Geburtstag">Geburtstag</label>
-        <input type="date" max="1999-01-01" placeholder="Geburtstag" name="Geburtstag" required ng-model="request.birthday">
+        <input type="date" min="1980-01-01" placeholder="Geburtstag" name="Geburtstag" required ng-model="request.birthday">
 
         <input type="straße" placeholder="Straße" name="Straße" maxlength="30" required ng-model="request.street">
         <input type="Hausnr" placeholder="Hausnr." name="Hausnr" maxlength="4" required ng-model="request.house_number">
 
         <input type="plz" placeholder="PLZ" name="plz" maxlength="5" pattern="[0-9]{5}" required ng-model="request.post_code">
         <input type="Stadt" placeholder="Stadt" name="Stadt" maxlength="30" required ng-model="request.city">
-        <input type="Land" placeholder="Land" name="Land" maxlength="30" required>
+        <input type="Land" placeholder="Land" name="Land" maxlength="30" required ng-model="request.country">
         <hr>
 
         <div class="paymentButtons">
@@ -49,7 +49,7 @@
 
     </div>
     <div ng-if="success">
-        Ihr Speichern war erfolgreich. Sie können sich nun <span onclick="document.getElementById('loginModal').style.display='block'">einloggen</span>.
+        Ihr Speichern war erfolgreich. Sie können sich nun <span onclick="document.getElementById('loginModal').style.display='block'">hier</span> einloggen.
     </div>
 </div>
 

@@ -19,23 +19,22 @@
           </tr>
         </tbody>
         </table>
-      <div class="address">
+      <div class="address" ng-if="user" ng-controller="userController">
         <shoppingcart></shoppingcart>
         <br>
         <label class="labelGray" for="Name">Lieferadresse</label>
         <br>
-        <label class="labelGray" for="Name">Max Mustermann</label>
+        <label class="labelGray" for="Name">{{user.first_name + ' ' + user.surname}}</label>
         <br>
-        <label class="labelGray" for="Name">Beispielstraße 1</label>
+        <label class="labelGray" for="Name">{{user.street + ' ' + user.house_number}}</label>
         <br>
-        <label class="labelGray" for="Name">12345 Beispielhausen</label>
+        <label class="labelGray" for="Name">{{user.post_code + ' ' + user.city}}</label>
         <br>
-        <label class="labelGray" for="Name">Das ist Ihre Zahlungsmethode:</label>
+        <label class="labelGray" for="Name">Das ist Ihre Zahlungsmethode: {{user.payment}}</label>
         <br>
         <br>
-        <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()">Kaufen</button>
       </div>
-    </div>
+      <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()" ng-disabled="!user">Kaufen</button>
     </article>
 
 </section>

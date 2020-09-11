@@ -326,6 +326,7 @@ article {
 
 .item-container .item-card {
   width: 22%;
+  min-width: 200px;
   height: auto;
   margin: 10px;
   text-align: center;
@@ -393,6 +394,7 @@ article {
 }
 
 .item-container .item-card button {
+  display: block;
   border: none;
   outline: 0;
   padding: 12px;
@@ -1480,7 +1482,7 @@ html, body {
 .notification .badge {
   position: absolute;
   top: -5px;
-  right: -5px;
+  right: 0px;
   border-radius: 50%;
   color: white;
   background: #7ab91a;

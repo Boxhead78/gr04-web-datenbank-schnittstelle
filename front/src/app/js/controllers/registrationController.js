@@ -1,5 +1,5 @@
 app.controller( 'registrationController',
-                ['$scope', '$cookies', '$rootScope', '$http', function($scope, $cookies, $rootScope, $http) {
+                ['$scope', '$filter', '$cookies', '$rootScope', '$http', function($scope, $filter, $cookies, $rootScope, $http) {
 
     //define route and set some defaults in scope
     const route = 'http://localhost:5000/api/user/register';
@@ -14,23 +14,33 @@ app.controller( 'registrationController',
     //empty registrationForm
     $scope.request = { first_name: null,
                        surname: null,
-                       email: null,
                        gender: 1,
                        birthday: null,
-                       payment_method: null,
                        password: null,
+                       language_id: 1,
+                       payment: null,
                        street: null,
                        house_number: null,
                        post_code: null,
                        city: null,
-                       country_id: 1 };
+                       country: null,
+                       email: null,};
 
 
     $scope.submitRegistrationForm = function() {
-        console.log($scope.request);
 
         //TODO space for further validation of form
 
+        var requestParams = angular.copy($scope.request);
+        //format date so backend can work with it
+        // requestParams.birthday = $filter('date')($scope.request.birthday, 'dd-MM-yyyy').toString();
+        // requestParams.birthday = '12-09-2020';
+
+        mnth = ("0" + (requestParams.birthday.getMonth() + 1)).slice(-2);
+        day = ("0" + requestParams.birthday.getDate()).slice(-2);
+        requestParams.birthday = [requestParams.birthday.getFullYear(), mnth, day].join("-");
+
+        console.log(requestParams);
         //Backend Request
         $http.post(route, { headers: {'Content-Type': 'application/json;charset=UTF-8'},
                             data: $scope.request})
