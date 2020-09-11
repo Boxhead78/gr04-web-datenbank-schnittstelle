@@ -435,7 +435,7 @@ def api_user_details():
     sql_cur.execute(
         """SELECT u.first_name, u.surname, u.birthday, u.email_address, a.street, a.house_number, a.post_code, a.city, c.country_name, l.name AS language,
          p.name AS payment FROM user u JOIN address a ON a.address_id = u.address_id
-         JOIN language l ON l.language_id = u.language_id JOIN payment p ON p.payment_id = u.payment_id JOIN country c .country_id = a.country_id
+         JOIN language l ON l.language_id = u.language_id JOIN payment p ON p.payment_id = u.payment_id JOIN country c ON c.country_id = a.country_id
          WHERE u.user_id = %s""", (req.get("user_id"),))
     data = sql_cur.fetchone()
     data_item = {

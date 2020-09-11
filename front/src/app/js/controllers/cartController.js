@@ -30,7 +30,8 @@ app.controller( 'cartController',
                            data: requestParams
                           })
             .then(function successCallback(response) {
-                console.log(response.data);
+                $rootScope.cart = [];
+                $cookies.remove('cart');
 
             }, function errorCallback(response) {
                 console.log(response.data);
