@@ -23,6 +23,7 @@
 
         <!-- load the modal to use it later -->
         <shoppingcart></shoppingcart>
+        <login></login>
 
         <br>
         <label class="labelGray" for="Name">Lieferadresse</label>
@@ -37,9 +38,16 @@
         <br>
         <br>
       </div>
-      
+
       <!-- button to load the modal and add to cart -->
-      <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()" ng-disabled="!user">Kaufen</button>
+      <div ng-if="user!=null">
+        <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()">Kaufen</button>
+      </div>
+
+      <div ng-if="user==null">
+        <button class="shoppingcartbtn" onclick="document.getElementById('loginModal').style.display='block'">Kaufen</button>
+      </div>
+
     </article>
 
 </section>
