@@ -14,7 +14,6 @@ app.controller( 'userController',
         $http.post(route, {headers: {'Content-Type': 'application/json;charset=UTF-8'},
                            data: requestParams})
             .then(function successCallback(response) {
-                console.log(response.data);
                 $scope.user = response.data.user_details;
                 $scope.order_list = response.data.order_list;
 

@@ -20,7 +20,10 @@
         </tbody>
         </table>
       <div class="address" ng-if="user" ng-controller="userController">
+
+        <!-- load the modal to use it later -->
         <shoppingcart></shoppingcart>
+
         <br>
         <label class="labelGray" for="Name">Lieferadresse</label>
         <br>
@@ -34,6 +37,8 @@
         <br>
         <br>
       </div>
+      
+      <!-- button to load the modal and add to cart -->
       <button class="shoppingcartbtn" onclick="document.getElementById('shoppingcart').style.display='block'" ng-click="buy()" ng-disabled="!user">Kaufen</button>
     </article>
 

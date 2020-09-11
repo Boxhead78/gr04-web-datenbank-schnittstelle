@@ -58,13 +58,13 @@
     position: relative;
 }
 
-  /* Clear floats after the columns */
   .PageRow:after {
     content: "";
     display: table;
     clear: both;
   }
 
+  // styles the "zum Warenkorb" button
    button {
     border: none;
     outline: 0;
@@ -81,6 +81,7 @@
     }
   }
 
+  // styles the star Rating
   .starRating {
     float: right;
   }

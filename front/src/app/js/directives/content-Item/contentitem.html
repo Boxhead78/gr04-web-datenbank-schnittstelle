@@ -1,7 +1,9 @@
 <div class="PageContent">
 
+    <!-- load the modal to use it later -->
     <addtocart></addtocart>
 
+    <!-- content of the content Item -->
     <div class="PageRow">
         <div class="ItemPageColumn">
             <div>
@@ -32,7 +34,10 @@
                     <li>Farbe: {{item.color}}</li>
                     <li>Hersteller: {{item.manufactorer_id}}</li>
                 </ul>
+
+                <!-- button to load the modal and add to cart -->
                 <p><button onclick="document.getElementById('addToCartModal').style.display='block'" ng-click="addItem(item.id, item.name, 1, item.price)">zum Warenkorb</button></p>
+               
                 <p class="description">Beschreibung: <br>{{item.description}}</p>
             </div>
         </div>

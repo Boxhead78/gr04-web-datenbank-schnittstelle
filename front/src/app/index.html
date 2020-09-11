@@ -29,11 +29,15 @@
         <!-- horizontal nav-bar -->
         <div ng-controller="itemfilterController"> <!-- Define Scope for FilterController around menu and ng-view so that fiters can be set from both  -->
         <div class="menu">
+            <!-- search -->
             <form class="search">
                 <input type="search-input" name="search" placeholder="Search.." ng-model="searchInput">
                 <button ng-click="setName()"><i class="fa fa-search"></i></button>
             </form>
+            <!-- link to contentStartPage -->
             <a href="#!"><i class="fas fa-home"></i> Home</a>
+
+            <!-- Login / Logout -->
             <div ng-if="user==null">
                 <a class="loginBtn" onclick="document.getElementById('loginModal').style.display='block'">
                     <i class="fas fa-user"></i> Login
@@ -44,10 +48,14 @@
                     <i class="fas fa-user"></i> Logout
                 </a>
             </div>
+
+            <!-- shopping cart Page -->
             <a href="#!cart" class="notification">
                 <span><i class="fas fa-shopping-cart"></i> Warenkorb</span>
                 <div ng-if="cart.length>null"><span class="badge">{{cart.length}}</span></div>
             </a>
+
+            <!-- User profile -->
             <div ng-if="user!=null">
                 <a href="#!profile" id="avatar-icon"><img src="/front/src/assets/images/avatar-icon.png" alt="profile" height="47"></a>
             </div>
@@ -55,6 +63,7 @@
 
         <!-- login Modal -->
             <login></login>
+            
         <!-- dynamic content -->
         <ng-view></ng-view>
         </div>

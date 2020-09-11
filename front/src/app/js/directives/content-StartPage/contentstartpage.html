@@ -1,5 +1,6 @@
 <div class="item-container" ng-controller="cartController">
 
+    <!-- load the modal to use it later -->
     <addtocart></addtocart>
 
     <div class={{item.class}} ng-repeat="item in items.item_list">
@@ -15,6 +16,8 @@
             <h1>{{ item.name }}</h1>
             <p class="price">{{ item.price }} €</p>
         </a>
+
+        <!-- button to load the modal and add to cart -->
         <button onclick="document.getElementById('addToCartModal').style.display='block'" ng-click="addItem(item.id, item.name, 1, item.price)">zum Warenkorb</button>
     </div>
 </div>
